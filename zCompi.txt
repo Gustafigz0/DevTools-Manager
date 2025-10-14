@@ -1,0 +1,4 @@
+ cd .\build\
+  qmake ../projeto.pro
+  mingw32-make -j
+  .\projeto.exe
