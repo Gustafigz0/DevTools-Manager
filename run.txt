@@ -1,0 +1,5 @@
+cd .\build\
+qmake ../projeto.pro
+mingw32-make -j
+cd .\bin\
+.\catalogo.exe
