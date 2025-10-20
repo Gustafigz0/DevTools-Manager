@@ -1,30 +1,25 @@
-TEMPLATE = app
-TARGET = catalogo
+QT += widgets
+CONFIG += c++17
 
-CONFIG += cmdline c++17 warn_on
-CONFIG -= qt
+# Diretórios principais
+INCLUDEPATH += frontend/include
+INCLUDEPATH += frontend/widgets
+INCLUDEPATH += frontend/dialogs
 
-INCLUDEPATH += $$PWD/include
+# Arquivos fonte
+SOURCES += \
+    frontend/scr/main.cpp \
+    frontend/scr/mainwindow.cpp \
+    frontend/widgets/ProductWidget.cpp \
+    frontend/dialogs/AddProductDialog.cpp \
+    frontend/scr/sidebarwidget.cpp \
+    # Adicione outros .cpp conforme criar
 
-SOURCES += $$PWD/scr/main.cpp \
-           $$PWD/scr/Ansi.cpp \
-           $$PWD/scr/CatalogUI.cpp \
-           $$PWD/scr/CSV.cpp \
-           $$PWD/scr/Product.cpp \
-           $$PWD/scr/ProductRepository.cpp
+HEADERS += \
+    frontend/include/mainwindow.h \
+    frontend/widgets/ProductWidget.h \
+    frontend/dialogs/AddProductDialog.h \
+    frontend/include/productwidget.h \
+    frontend/include/sidebarwidget.h \
+    # Adicione outros .h conforme criar
 
-HEADERS += $$PWD/include/Ansi.hpp \
-           $$PWD/include/CatalogUI.hpp \
-           $$PWD/include/CSV.hpp \
-           $$PWD/include/Product.hpp \
-           $$PWD/include/ProductRepository.hpp
-
-DESTDIR     = $$OUT_PWD/bin
-OBJECTS_DIR = $$OUT_PWD/obj
-
-# Força C++17 caso o kit não respeite só CONFIG
-win32:!msvc: QMAKE_CXXFLAGS += -std=c++17
-unix|macx:   QMAKE_CXXFLAGS += -std=c++17
-win32:msvc:  QMAKE_CXXFLAGS += /std:c++17
-
-# Remove execução automática inválida após build
