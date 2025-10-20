@@ -25,5 +25,13 @@ AddProductDialog::AddProductDialog(QWidget *parent) : QDialog(parent) {
 }
 
 Product AddProductDialog::product() const {
-    return Product{title->text(), category->text(), location->text(), "", stock->text().toInt(), date->text()};
+    Product p;
+    p.name = title->text();
+    p.category = category->text();
+    p.location = location->text();
+    p.image = "";
+    p.stock = stock->text().toInt();
+    p.lastUse = date->text();
+    // Adicione outros campos conforme necessário
+    return p;
 }

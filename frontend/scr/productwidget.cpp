@@ -1,33 +1,87 @@
+
 #include "productwidget.h"
+#include "productcard.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QGridLayout>
+#include <QScrollArea>
 #include <QLabel>
 #include <QFrame>
 
-ProductWidget::ProductWidget(Product prod, QWidget *parent)
-    : QWidget(parent), m_prod(prod)
+#include "AnimationHelper.h"
+
+ProductWidget::ProductWidget(QWidget *parent)
+    : QWidget(parent)
 {
-    QHBoxLayout *mainLayout = new QHBoxLayout(this);
-
-    QLabel *img = new QLabel;
-    img->setFixedSize(50,50);
-    img->setPixmap(QPixmap(":/resources/icons/motor.png").scaled(50,50));
-    img->setStyleSheet("background: #fff; border-radius: 8px; border: 1px solid #eee;");
-
-    QVBoxLayout *info = new QVBoxLayout;
-    QLabel *top = new QLabel(prod.title);
-    top->setStyleSheet("font-weight: bold; font-size: 16px;");
-    QLabel *cat = new QLabel(prod.category + QString(" • Estoque: %1").arg(prod.stock));
-    QLabel *date = new QLabel("Último uso: " + prod.lastUse);
-    QLabel *loc = new QLabel("Depósito: " + prod.location);
-
-    info->addWidget(top);
-    info->addWidget(cat);
-    info->addWidget(date);
-    info->addWidget(loc);
-
-    mainLayout->addWidget(img);
-    mainLayout->addLayout(info);
-    mainLayout->addStretch();
+    mainLayout = new QVBoxLayout(this);
+    createProductGrid();
     setStyleSheet("background: #fff; border-radius: 12px; margin-bottom: 8px;");
+}
+
+void ProductWidget::createProductGrid()
+{
+    QWidget *gridWidget = new QWidget();
+    productGrid = new QGridLayout(gridWidget);
+    productGrid->setSpacing(20);
+    
+    QScrollArea *scrollArea = new QScrollArea();
+    scrollArea->setWidget(gridWidget);
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setObjectName("contentCard");
+    
+    mainLayout->addWidget(scrollArea);
+}
+
+void ProductWidget::updateGrid()
+{
+    // Clear existing grid
+    QLayoutItem *item;
+    while ((item = productGrid->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+    
+    // Add cards
+    int row = 0, col = 0;
+    const int maxColumns = 3;
+    
+    for (const auto &product : filteredProducts) {
+        ProductCard *card = new ProductCard(product);
+        
+        connect(card, &ProductCard::editClicked, [this](int id) {
+            onEditProduct(id);
+        });
+        
+        connect(card, &ProductCard::deleteClicked, [this](int id) {
+            onDeleteProduct(id);
+        });
+        
+        productGrid->addWidget(card, row, col);
+        
+        col++;
+        if (col >= maxColumns) {
+            col = 0;
+            row++;
+        }
+        
+        // Add animation
+        AnimationHelper::fadeIn(card, 200);
+    }
+    
+    // Add flexible space at the end
+    productGrid->setRowStretch(row + 1, 1);
+}
+
+void ProductWidget::onEditProduct(int id)
+{
+    // Implement edit functionality
+    // Aqui você pode buscar o Product pelo id e emitir editRequested
+    // Exemplo: emit editRequested(product);
+}
+
+void ProductWidget::onDeleteProduct(int id)
+{
+    // Implement delete functionality
+    // Aqui você pode buscar o Product pelo id e emitir removeRequested
+    // Exemplo: emit removeRequested(product);
 }

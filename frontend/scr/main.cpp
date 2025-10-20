@@ -6,10 +6,9 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
     // Aplica o estilo QSS global, se existir
-    QFile styleFile("frontend/styles/style.qss");
-    if(styleFile.open(QFile::ReadOnly)) {
-        QString style = styleFile.readAll();
-        app.setStyleSheet(style);
+    QFile styleFile("frontend/resources/styles.qss");
+    if (styleFile.open(QFile::ReadOnly)) {
+        qApp->setStyleSheet(styleFile.readAll());
     }
 
     MainWindow window;

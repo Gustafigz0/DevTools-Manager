@@ -13,6 +13,9 @@ SOURCES += \
     frontend/scr/sidebarwidget.cpp \
     frontend/scr/addproductdialog.cpp \
     frontend/scr/productwidget.cpp \
+    frontend/scr/ProductCard.cpp \
+    frontend/scr/ProductDialog.cpp \
+    frontend/scr/animationhelper.cpp \
     # Adicione outros .cpp conforme criar
 
 HEADERS += \
@@ -22,6 +25,8 @@ HEADERS += \
     frontend/include/sidebarwidget.h \
     frontend/include/addproductdialog.h \
     frontend/include/product.h \
-    frontend/widgets/ProductWidget.h \
+    frontend/include/ProductCard.h \
+    frontend/include/ProductDialog.h \
+    frontend/include/AnimationHelper.h \
     # Adicione outros .h conforme criar
 

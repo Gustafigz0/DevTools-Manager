@@ -9,7 +9,7 @@ ProductListWidget::ProductListWidget(QWidget *parent): QWidget(parent) {
 }
 
 void ProductListWidget::addProduct(Product prod) {
-    ProductWidget *w = new ProductWidget(prod, this);
+    ProductWidget *w = new ProductWidget(this);
     connect(w, &ProductWidget::removeRequested, this, [this](Product p){ removeProduct(p); });
     // Aqui pode conectar editar também
     listLayout->insertWidget(listLayout->count()-1, w);
