@@ -2,14 +2,24 @@
 #include "productwidget.h"
 #include <QVBoxLayout>
 
-ProductListWidget::ProductListWidget(QWidget *parent)
-    : QWidget(parent)
-{
-    QVBoxLayout *layout = new QVBoxLayout(this);
+ProductListWidget::ProductListWidget(QWidget *parent): QWidget(parent) {
+    listLayout = new QVBoxLayout(this);
+    listLayout->setSpacing(12);
+    listLayout->addStretch();
+}
 
-    layout->addWidget(new ProductWidget("Motor", "Categoria Motor", 120, "20 Out 2026", "Depo A"));
-    layout->addWidget(new ProductWidget("Bujji", "Categoria Bujji", 500, "20 Out 2026", "Depo A"));
-    // ...adicione demais produtos aqui
+void ProductListWidget::addProduct(Product prod) {
+    ProductWidget *w = new ProductWidget(prod, this);
+    connect(w, &ProductWidget::removeRequested, this, [this](Product p){ removeProduct(p); });
+    // Aqui pode conectar editar também
+    listLayout->insertWidget(listLayout->count()-1, w);
+    products.append(prod);
+}
 
-    layout->addStretch();
+void ProductListWidget::removeProduct(const Product &prod) {
+    // Simples: remove último, ou implemente busca por igualdade
+    if(QWidget *w = listLayout->itemAt(listLayout->count()-2)->widget()) {
+        w->deleteLater();
+    }
+    if(!products.isEmpty()) products.removeLast();
 }

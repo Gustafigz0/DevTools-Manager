@@ -5,32 +5,24 @@
 #include <QFrame>
 
 SidebarWidget::SidebarWidget(QWidget *parent): QWidget(parent) {
+    setObjectName("sidebar");
     QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->setSpacing(12);
-
-    QLabel *title = new QLabel("Malzeme"); // Nome da seção
-    title->setStyleSheet("font-weight: bold; font-size: 22px;");
-
-    QLabel *countLabel = new QLabel("6000");
-    countLabel->setStyleSheet("border-radius: 8px; background-color: #eee; padding: 4px 12px; font-weight: bold;");
+    QLabel *title = new QLabel("<b>Malzeme</b>");
+    title->setStyleSheet("font-size:22px;margin-top:12px;");
+    QLabel *count = new QLabel("6000");
+    count->setStyleSheet("padding:4px 15px;background:#eee;border-radius:8px;font-weight:600;");
 
     layout->addWidget(title);
-    layout->addWidget(countLabel);
+    layout->addWidget(count);
+    layout->addSpacing(20);
 
-    // Filtros
-    QLabel *filtersTitle = new QLabel("MALZEME DURUMU");
-    filtersTitle->setStyleSheet("font-weight: bold; margin-top: 18px;");
-    layout->addWidget(filtersTitle);
-
-    QPushButton *btnAll = new QPushButton("Tudo");
-    QPushButton *btnActive = new QPushButton("Ativo");
-    QPushButton *btnInactive = new QPushButton("Inativo");
-    btnAll->setStyleSheet("border-radius: 8px; padding: 4px 12px; background: #eee;");
-    btnActive->setStyleSheet("border-radius: 8px; padding: 4px 12px; background: #eee;");
-    btnInactive->setStyleSheet("border-radius: 8px; padding: 4px 12px; background: #eee;");
-    layout->addWidget(btnAll);
-    layout->addWidget(btnActive);
-    layout->addWidget(btnInactive);
+    // Exemplo de filtros
+    QLabel *lblStatus = new QLabel("Status");
+    lblStatus->setStyleSheet("font-weight:700;");
+    layout->addWidget(lblStatus);
+    layout->addWidget(new QPushButton("Tudo"));
+    layout->addWidget(new QPushButton("Ativo"));
+    layout->addWidget(new QPushButton("Inativo"));
 
     layout->addStretch();
 }

@@ -4,8 +4,8 @@
 #include <QLabel>
 #include <QFrame>
 
-ProductWidget::ProductWidget(const QString &nome, const QString &categoria, int qtd, const QString &data, const QString &deposito, QWidget *parent)
-    : QWidget(parent)
+ProductWidget::ProductWidget(Product prod, QWidget *parent)
+    : QWidget(parent), m_prod(prod)
 {
     QHBoxLayout *mainLayout = new QHBoxLayout(this);
 
@@ -15,11 +15,11 @@ ProductWidget::ProductWidget(const QString &nome, const QString &categoria, int 
     img->setStyleSheet("background: #fff; border-radius: 8px; border: 1px solid #eee;");
 
     QVBoxLayout *info = new QVBoxLayout;
-    QLabel *top = new QLabel(nome);
+    QLabel *top = new QLabel(prod.title);
     top->setStyleSheet("font-weight: bold; font-size: 16px;");
-    QLabel *cat = new QLabel(categoria + QString(" • Estoque: %1").arg(qtd));
-    QLabel *date = new QLabel("Último uso: " + data);
-    QLabel *loc = new QLabel("Depósito: " + deposito);
+    QLabel *cat = new QLabel(prod.category + QString(" • Estoque: %1").arg(prod.stock));
+    QLabel *date = new QLabel("Último uso: " + prod.lastUse);
+    QLabel *loc = new QLabel("Depósito: " + prod.location);
 
     info->addWidget(top);
     info->addWidget(cat);

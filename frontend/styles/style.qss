@@ -1,19 +1,10 @@
-QWidget {
-    background: #f4f4f4;
-    font-family: 'Segoe UI', Arial, Sans-serif;
+QMainWindow { background: #F3F4F5; }
+#sidebar { background: #FBFBFB; border-top-left-radius: 20px; border-bottom-left-radius: 20px; }
+QFrame#prod-card {
+    background: #FFF; border-radius: 18px; border: 1.2px solid #ecedef;
+    padding: 13px 14px; margin-bottom: 16px;
 }
-
-QPushButton {
-    border-radius: 8px;
-    background: #eee;
-    color: #222;
-    font-size: 14px;
+QPushButton#adicionar {
+    background: #222; color: #fff; border-radius: 12px; padding: 14px 32px; font-size: 15px; font-weight: 700;
 }
-
-QLineEdit {
-    border-radius: 8px;
-    background: #fff;
-    border: 1px solid #ddd;
-    font-size: 14px;
-    padding: 6px 14px;
-}
+QLabel { color: #23272f; }

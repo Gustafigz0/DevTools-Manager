@@ -1,9 +1,7 @@
 #pragma once
-
 #include <QMainWindow>
-
 class SidebarWidget;
-// ...existing code...
+class ProductListWidget;
 class QPushButton;
 class QLineEdit;
 
@@ -12,9 +10,12 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow(QWidget *parent = nullptr);
 
+private slots:
+    void showAddDialog();
+
 private:
     SidebarWidget *sidebar;
-    // ...existing code...
+    ProductListWidget *productList;
     QPushButton *addProductButton;
     QLineEdit *searchBar;
 };
