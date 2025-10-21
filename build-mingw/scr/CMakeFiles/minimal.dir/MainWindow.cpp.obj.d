@@ -398,31 +398,4 @@ scr/CMakeFiles/minimal.dir/MainWindow.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtGui/qpicture.h \
  C:/msys64/mingw64/include/qt6/QtCore/qiodevice.h \
  C:/msys64/mingw64/include/qt6/QtGui/qtextdocument.h \
- C:/msys64/mingw64/include/qt6/QtCore/qurl.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/QLineEdit \
- C:/msys64/mingw64/include/qt6/QtWidgets/qlineedit.h \
- C:/msys64/mingw64/include/qt6/QtGui/qtextcursor.h \
- C:/msys64/mingw64/include/qt6/QtGui/qtextformat.h \
- C:/msys64/mingw64/include/qt6/QtGui/qpen.h \
- C:/msys64/mingw64/include/qt6/QtGui/qtextoption.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/QComboBox \
- C:/msys64/mingw64/include/qt6/QtWidgets/qcombobox.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/qabstractitemdelegate.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/qstyleoption.h \
- C:/msys64/mingw64/include/qt6/QtCore/qlocale.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/qabstractspinbox.h \
- C:/msys64/mingw64/include/qt6/QtGui/qvalidator.h \
- C:/msys64/mingw64/include/qt6/QtCore/qregularexpression.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/qslider.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/qabstractslider.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/qstyle.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/qtabbar.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/qrubberband.h \
- C:/msys64/mingw64/include/qt6/QtCore/qabstractitemmodel.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/QPushButton \
- C:/msys64/mingw64/include/qt6/QtWidgets/qpushbutton.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/qabstractbutton.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/QFrame \
- C:/msys64/mingw64/include/qt6/QtWidgets/qframe.h \
- C:/msys64/mingw64/include/qt6/QtCore/QStringList \
- C:/msys64/mingw64/include/qt6/QtCore/qstringlist.h
+ C:/msys64/mingw64/include/qt6/QtCore/qurl.h
