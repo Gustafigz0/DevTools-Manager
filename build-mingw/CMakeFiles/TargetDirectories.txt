@@ -1,0 +1,7 @@
+C:/Users/a40297/Documents/Testes/build-mingw/CMakeFiles/edit_cache.dir
+C:/Users/a40297/Documents/Testes/build-mingw/CMakeFiles/rebuild_cache.dir
+C:/Users/a40297/Documents/Testes/build-mingw/scr/CMakeFiles/minimal.dir
+C:/Users/a40297/Documents/Testes/build-mingw/scr/CMakeFiles/edit_cache.dir
+C:/Users/a40297/Documents/Testes/build-mingw/scr/CMakeFiles/rebuild_cache.dir
+C:/Users/a40297/Documents/Testes/build-mingw/scr/CMakeFiles/minimal_autogen_timestamp_deps.dir
+C:/Users/a40297/Documents/Testes/build-mingw/scr/CMakeFiles/minimal_autogen.dir

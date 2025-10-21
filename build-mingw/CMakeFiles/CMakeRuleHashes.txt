@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+9a83eb3bf6afef514e88bc59704e897f scr/CMakeFiles/minimal_autogen
+2b8f0b1b9264f7f79ee9a98f58f0272c scr/minimal_autogen/timestamp
