@@ -1,33 +1,33 @@
 {
 	"AUTOGEN_COMMAND_LINE_LENGTH_MAX" : 32000,
-	"BUILD_DIR" : "C:/Users/a40297/Documents/Testes/build-mingw/scr/minimal_autogen",
-	"CMAKE_BINARY_DIR" : "C:/Users/a40297/Documents/Testes/build-mingw",
-	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/a40297/Documents/Testes/build-mingw/scr",
-	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/a40297/Documents/Testes/scr",
+	"BUILD_DIR" : "C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/minimal_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/Guts/Documents/GitHub/Gui/build-mingw",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/Guts/Documents/GitHub/Gui/scr",
 	"CMAKE_EXECUTABLE" : "C:/Program Files/CMake/bin/cmake.exe",
-	"CMAKE_LIST_FILES" : [ "C:/Users/a40297/Documents/Testes/scr/CMakeLists.txt" ],
-	"CMAKE_SOURCE_DIR" : "C:/Users/a40297/Documents/Testes",
+	"CMAKE_LIST_FILES" : [ "C:/Users/Guts/Documents/GitHub/Gui/scr/CMakeLists.txt" ],
+	"CMAKE_SOURCE_DIR" : "C:/Users/Guts/Documents/GitHub/Gui",
 	"CROSS_CONFIG" : false,
-	"DEP_FILE" : "C:/Users/a40297/Documents/Testes/build-mingw/scr/minimal_autogen/deps",
+	"DEP_FILE" : "C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/minimal_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "minimal_autogen/timestamp",
 	"HEADERS" : 
 	[
 		[
-			"C:/Users/a40297/Documents/Testes/include/MainWindow.h",
+			"C:/Users/Guts/Documents/GitHub/Gui/include/MainWindow.h",
 			"MU",
 			"DGKZTCOIDE/moc_MainWindow.cpp",
 			null
 		],
 		[
-			"C:/Users/a40297/Documents/Testes/include/Theme.h",
+			"C:/Users/Guts/Documents/GitHub/Gui/include/Theme.h",
 			"MU",
 			"DGKZTCOIDE/moc_Theme.cpp",
 			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "C:/Users/a40297/Documents/Testes/build-mingw/scr/minimal_autogen/include",
-	"MOC_COMPILATION_FILE" : "C:/Users/a40297/Documents/Testes/build-mingw/scr/minimal_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/minimal_autogen/include",
+	"MOC_COMPILATION_FILE" : "C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/minimal_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
 		"MINGW_HAS_SECURE_API=1",
@@ -38,8 +38,10 @@
 		"UNICODE",
 		"WIN32",
 		"WIN64",
+		"WINVER=0x0A00",
 		"_ENABLE_EXTENDED_ALIGNED_STORAGE",
 		"_UNICODE",
+		"_WIN32_WINNT=0x0A00",
 		"_WIN64"
 	],
 	"MOC_DEPEND_FILTERS" : 
@@ -51,18 +53,18 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"C:/Users/a40297/Documents/Testes/include",
-		"C:/Qt/6.9.3/mingw_64/include/QtWidgets",
-		"C:/Qt/6.9.3/mingw_64/include",
-		"C:/Qt/6.9.3/mingw_64/include/QtCore",
-		"C:/Qt/6.9.3/mingw_64/mkspecs/win32-g++",
-		"C:/Qt/6.9.3/mingw_64/include/QtGui",
-		"C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++",
-		"C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32",
-		"C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward",
-		"C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include",
-		"C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed",
-		"C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include"
+		"C:/Users/Guts/Documents/GitHub/Gui/include",
+		"C:/msys64/mingw64/include/qt6/QtWidgets",
+		"C:/msys64/mingw64/include/qt6",
+		"C:/msys64/mingw64/include/qt6/QtCore",
+		"C:/msys64/mingw64/share/qt6/mkspecs/win32-g++",
+		"C:/msys64/mingw64/include/qt6/QtGui",
+		"C:/msys64/mingw64/include/c++/15.2.0",
+		"C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32",
+		"C:/msys64/mingw64/include/c++/15.2.0/backward",
+		"C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include",
+		"C:/msys64/mingw64/include",
+		"C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed"
 	],
 	"MOC_MACRO_NAMES" : 
 	[
@@ -77,29 +79,29 @@
 	"MOC_PATH_PREFIX" : false,
 	"MOC_PREDEFS_CMD" : 
 	[
-		"C:/Qt/Tools/mingw1310_64/bin/c++.exe",
+		"C:/msys64/mingw64/bin/c++.exe",
 		"-std=gnu++17",
 		"-w",
 		"-dM",
 		"-E",
-		"C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp"
+		"C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "C:/Users/a40297/Documents/Testes/build-mingw/scr/minimal_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/minimal_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : [],
 	"MULTI_CONFIG" : false,
-	"PARALLEL" : 16,
-	"PARSE_CACHE_FILE" : "C:/Users/a40297/Documents/Testes/build-mingw/scr/CMakeFiles/minimal_autogen.dir/ParseCache.txt",
-	"QT_MOC_EXECUTABLE" : "C:/Qt/6.9.3/mingw_64/bin/moc.exe",
-	"QT_UIC_EXECUTABLE" : "C:/Qt/6.9.3/mingw_64/bin/uic.exe",
+	"PARALLEL" : 10,
+	"PARSE_CACHE_FILE" : "C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/CMakeFiles/minimal_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "C:/msys64/mingw64/share/qt6/bin/moc.exe",
+	"QT_UIC_EXECUTABLE" : "C:/msys64/mingw64/share/qt6/bin/uic.exe",
 	"QT_VERSION_MAJOR" : 6,
 	"QT_VERSION_MINOR" : 9,
-	"SETTINGS_FILE" : "C:/Users/a40297/Documents/Testes/build-mingw/scr/CMakeFiles/minimal_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/CMakeFiles/minimal_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
-		[ "C:/Users/a40297/Documents/Testes/scr/MainWindow.cpp", "MU", null ],
-		[ "C:/Users/a40297/Documents/Testes/scr/Theme.cpp", "MU", null ],
-		[ "C:/Users/a40297/Documents/Testes/scr/main.cpp", "MU", null ]
+		[ "C:/Users/Guts/Documents/GitHub/Gui/scr/MainWindow.cpp", "MU", null ],
+		[ "C:/Users/Guts/Documents/GitHub/Gui/scr/Theme.cpp", "MU", null ],
+		[ "C:/Users/Guts/Documents/GitHub/Gui/scr/main.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

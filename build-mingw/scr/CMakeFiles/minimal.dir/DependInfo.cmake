@@ -8,10 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/a40297/Documents/Testes/scr/MainWindow.cpp" "scr/CMakeFiles/minimal.dir/MainWindow.cpp.obj" "gcc" "scr/CMakeFiles/minimal.dir/MainWindow.cpp.obj.d"
-  "C:/Users/a40297/Documents/Testes/scr/Theme.cpp" "scr/CMakeFiles/minimal.dir/Theme.cpp.obj" "gcc" "scr/CMakeFiles/minimal.dir/Theme.cpp.obj.d"
-  "C:/Users/a40297/Documents/Testes/scr/main.cpp" "scr/CMakeFiles/minimal.dir/main.cpp.obj" "gcc" "scr/CMakeFiles/minimal.dir/main.cpp.obj.d"
-  "C:/Users/a40297/Documents/Testes/build-mingw/scr/minimal_autogen/mocs_compilation.cpp" "scr/CMakeFiles/minimal.dir/minimal_autogen/mocs_compilation.cpp.obj" "gcc" "scr/CMakeFiles/minimal.dir/minimal_autogen/mocs_compilation.cpp.obj.d"
+  "C:/Users/Guts/Documents/GitHub/Gui/scr/MainWindow.cpp" "scr/CMakeFiles/minimal.dir/MainWindow.cpp.obj" "gcc" "scr/CMakeFiles/minimal.dir/MainWindow.cpp.obj.d"
+  "C:/Users/Guts/Documents/GitHub/Gui/scr/Theme.cpp" "scr/CMakeFiles/minimal.dir/Theme.cpp.obj" "gcc" "scr/CMakeFiles/minimal.dir/Theme.cpp.obj.d"
+  "C:/Users/Guts/Documents/GitHub/Gui/scr/main.cpp" "scr/CMakeFiles/minimal.dir/main.cpp.obj" "gcc" "scr/CMakeFiles/minimal.dir/main.cpp.obj.d"
+  "C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/minimal_autogen/mocs_compilation.cpp" "scr/CMakeFiles/minimal.dir/minimal_autogen/mocs_compilation.cpp.obj" "gcc" "scr/CMakeFiles/minimal.dir/minimal_autogen/mocs_compilation.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

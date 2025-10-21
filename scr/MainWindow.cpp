@@ -24,7 +24,7 @@ void MainWindow::setupUi() {
   auto* header = new QHBoxLayout();
   header->setSpacing(8);
   auto* title = new QLabel("Catálogo");
-  title->setStyleSheet("font-size: 18px; font-weight: 600; color: #111111;");
+  title->setProperty("role", "title");  
   search_ = new QLineEdit();
   search_->setPlaceholderText("Pesquisar...");
 
@@ -56,7 +56,7 @@ void MainWindow::setupUi() {
   root->addLayout(actions);
 
   setCentralWidget(central);
-  setWindowTitle("Minimal Qt Widgets");
+  setWindowTitle("DevTools Manager");
   resize(720, 480);
 }
 
