@@ -405,13 +405,8 @@ scr/CMakeFiles/minimal.dir/MainWindow.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtGui/qtextformat.h \
  C:/msys64/mingw64/include/qt6/QtGui/qpen.h \
  C:/msys64/mingw64/include/qt6/QtGui/qtextoption.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/QListWidget \
- C:/msys64/mingw64/include/qt6/QtWidgets/qlistwidget.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/qlistview.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/qabstractitemview.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/qabstractscrollarea.h \
- C:/msys64/mingw64/include/qt6/QtCore/qabstractitemmodel.h \
- C:/msys64/mingw64/include/qt6/QtCore/qitemselectionmodel.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/QComboBox \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qcombobox.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qabstractitemdelegate.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qstyleoption.h \
  C:/msys64/mingw64/include/qt6/QtCore/qlocale.h \
@@ -423,6 +418,7 @@ scr/CMakeFiles/minimal.dir/MainWindow.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtWidgets/qstyle.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qtabbar.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qrubberband.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qabstractitemmodel.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/QPushButton \
  C:/msys64/mingw64/include/qt6/QtWidgets/qpushbutton.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qabstractbutton.h \
