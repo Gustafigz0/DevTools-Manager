@@ -6,8 +6,10 @@ set(CMAKE_AUTOUIC ON)
 add_executable(minimal
   ../include/MainWindow.h
   ../include/Theme.h
+  ../include/Product.h
   MainWindow.cpp
   Theme.cpp
+  Product.cpp
   main.cpp
 )
 
