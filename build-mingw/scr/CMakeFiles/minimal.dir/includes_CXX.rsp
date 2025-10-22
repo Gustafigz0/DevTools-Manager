@@ -1,1 +1,0 @@
--I"C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/minimal_autogen/include" -IC:/Users/Guts/Documents/GitHub/Gui/scr/../include -isystem C:/msys64/mingw64/include/qt6/QtWidgets -isystem C:/msys64/mingw64/include/qt6 -isystem C:/msys64/mingw64/include/qt6/QtCore -isystem "C:/msys64/mingw64/share/qt6/mkspecs/win32-g++" -isystem C:/msys64/mingw64/include/qt6/QtGui

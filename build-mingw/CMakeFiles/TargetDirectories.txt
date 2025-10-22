@@ -1,7 +1,0 @@
-C:/Users/Guts/Documents/GitHub/Gui/build-mingw/CMakeFiles/edit_cache.dir
-C:/Users/Guts/Documents/GitHub/Gui/build-mingw/CMakeFiles/rebuild_cache.dir
-C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/CMakeFiles/minimal.dir
-C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/CMakeFiles/edit_cache.dir
-C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/CMakeFiles/rebuild_cache.dir
-C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/CMakeFiles/minimal_autogen_timestamp_deps.dir
-C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/CMakeFiles/minimal_autogen.dir
