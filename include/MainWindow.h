@@ -17,12 +17,15 @@ public:
 private slots:
     void onAddProductClicked();
     void onSearchTextChanged(const QString& text);
+    void onEditProduct(const QString& productId);      // ← NOVO
+    void onDeleteProduct(const QString& productId);    // ← NOVO
     
 private:
     void setupUi();
     void loadSampleProducts();
     void displayProducts();
     void createProductCard(const Product& product);
+    Product* findProductById(const QString& id);       // ← NOVO
     
     // Widgets
     QWidget* sidebarBox_;
