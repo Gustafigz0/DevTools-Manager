@@ -7,7 +7,6 @@
 #include <QLineEdit>
 #include <QScrollArea>
 #include <QMessageBox>
-#include "AddProductDialog.h"
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     setupUi();
@@ -280,107 +279,19 @@ void MainWindow::createProductCard(const Product& product) {
     cardLayout->addWidget(idLabel);
     
     // Preço
-    QLabel* priceLabel = new QLabel(product.getPriceFormatted());
-    priceLabel->setStyleSheet("color: #2ecc71; font-size: 16px; font-weight: bold; background: transparent;");
+    QLabel* priceLabel = new QLabel(QString("€ %1").arg(product.getPrice()));
+    priceLabel->setStyleSheet("color: #2ecc71; font-size: 15px; font-weight: bold; background: transparent;");
     priceLabel->setMinimumWidth(100);
     cardLayout->addWidget(priceLabel);
     
-    // Quantidade
-    QLabel* qtyLabel = new QLabel(product.getQuantityText());
-    qtyLabel->setStyleSheet("color: #fff; font-size: 14px; background: transparent;");
-    qtyLabel->setMinimumWidth(90);
-    cardLayout->addWidget(qtyLabel);
-    
-    // Status estoque
-    QLabel* stockStatus = new QLabel(product.isInStock() ? "✓ Em estoque" : "✗ Sem estoque");
-    stockStatus->setStyleSheet(product.isInStock() ? 
-        "color: #2ecc71; font-size: 13px; background: transparent;" : 
-        "color: #e74c3c; font-size: 13px; background: transparent;");
-    stockStatus->setMinimumWidth(100);
-    cardLayout->addWidget(stockStatus);
-    
-    cardLayout->addStretch();
-    
-    // ========== BOTÕES DE AÇÃO (NOVO) ==========
-    
-    // Botão Editar
-    QPushButton* btnEdit = new QPushButton("✏️");
-    btnEdit->setFixedSize(40, 40);
-    btnEdit->setToolTip("Editar produto");
-    btnEdit->setStyleSheet(R"(
-        QPushButton {
-            background: #3498db;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-        }
-        QPushButton:hover {
-            background: #2980b9;
-        }
-        QPushButton:pressed {
-            background: #1f6ba6;
-        }
-    )");
-    connect(btnEdit, &QPushButton::clicked, this, [this, product]() {
-        onEditProduct(product.getId());
-    });
-    cardLayout->addWidget(btnEdit);
-    
-    // Botão Deletar
-    QPushButton* btnDelete = new QPushButton("🗑️");
-    btnDelete->setFixedSize(40, 40);
-    btnDelete->setToolTip("Deletar produto");
-    btnDelete->setStyleSheet(R"(
-        QPushButton {
-            background: #e74c3c;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-        }
-        QPushButton:hover {
-            background: #c0392b;
-        }
-        QPushButton:pressed {
-            background: #a93226;
-        }
-    )");
-    connect(btnDelete, &QPushButton::clicked, this, [this, product]() {
-        onDeleteProduct(product.getId());
-    });
-    cardLayout->addWidget(btnDelete);
-    
+    // Adicionar o card ao layout principal
     productsCardsLayout_->addWidget(card);
 }
 
 void MainWindow::onAddProductClicked() {
-    AddProductDialog dialog(this);
-    
-    if (dialog.exec() == QDialog::Accepted) {
-        Product newProduct = dialog.getProduct();
-        
-        // Verifica se o ID já existe
-        for (const Product& p : allProducts_) {
-            if (p.getId() == newProduct.getId()) {
-                QMessageBox::warning(this, "Erro", 
-                    QString("Já existe um produto com o ID '%1'!").arg(newProduct.getId()));
-                return;
-            }
-        }
-        
-        // Adiciona o produto
-        allProducts_.append(newProduct);
-        filteredProducts_.append(newProduct);
-        
-        // Atualiza a exibição
-        displayProducts();
-        
-        QMessageBox::information(this, "Sucesso", 
-            QString("Produto '%1' adicionado com sucesso!").arg(newProduct.getName()));
-    }
+    QMessageBox::information(this, "Adicionar Produto",
+        "Funcionalidade em desenvolvimento!\n\nEm breve você poderá adicionar novos produtos aqui.");
 }
-
 
 void MainWindow::onSearchTextChanged(const QString& text) {
     // Filtra produtos baseado no texto de busca
@@ -394,91 +305,7 @@ void MainWindow::onSearchTextChanged(const QString& text) {
             filteredProducts_.append(product);
         }
     }
-    // Atualiza a exibição com os resultados filtrados
+    
+    // Atualiza a exibição
     displayProducts();
 }
-
-Product* MainWindow::findProductById(const QString& id) {
-    for (int i = 0; i < allProducts_.size(); ++i) {
-        if (allProducts_[i].getId() == id) {
-            return &allProducts_[i];
-        }
-    }
-    return nullptr;
-}
-
-void MainWindow::onEditProduct(const QString& productId) {
-    Product* product = findProductById(productId);
-    if (!product) {
-        QMessageBox::warning(this, "Erro", "Produto não encontrado!");
-        return;
-    }
-    
-    AddProductDialog dialog(*product, this);
-    
-    if (dialog.exec() == QDialog::Accepted) {
-        Product updatedProduct = dialog.getProduct();
-        
-        // Atualiza o produto
-        *product = updatedProduct;
-        
-        // Atualiza filteredProducts_ também
-        for (int i = 0; i < filteredProducts_.size(); ++i) {
-            if (filteredProducts_[i].getId() == productId) {
-                filteredProducts_[i] = updatedProduct;
-                break;
-            }
-        }
-        
-        // Atualiza a exibição
-        displayProducts();
-        
-        QMessageBox::information(this, "Sucesso", 
-            QString("Produto '%1' atualizado com sucesso!").arg(updatedProduct.getName()));
-    }
-}
-
-void MainWindow::onDeleteProduct(const QString& productId) {
-    Product* product = findProductById(productId);
-    if (!product) {
-        QMessageBox::warning(this, "Erro", "Produto não encontrado!");
-        return;
-    }
-    
-    // Confirmação
-    QMessageBox::StandardButton reply = QMessageBox::question(
-        this,
-        "Confirmar Exclusão",
-        QString("Tem certeza que deseja deletar o produto '%1'?\n\nEsta ação não pode ser desfeita!")
-            .arg(product->getName()),
-        QMessageBox::Yes | QMessageBox::No,
-        QMessageBox::No
-    );
-    
-    if (reply == QMessageBox::Yes) {
-        QString productName = product->getName();
-        
-        // Remove de allProducts_
-        for (int i = 0; i < allProducts_.size(); ++i) {
-            if (allProducts_[i].getId() == productId) {
-                allProducts_.removeAt(i);
-                break;
-            }
-        }
-        
-        // Remove de filteredProducts_
-        for (int i = 0; i < filteredProducts_.size(); ++i) {
-            if (filteredProducts_[i].getId() == productId) {
-                filteredProducts_.removeAt(i);
-                break;
-            }
-        }
-        
-        // Atualiza a exibição
-        displayProducts();
-        
-        QMessageBox::information(this, "Sucesso", 
-            QString("Produto '%1' deletado com sucesso!").arg(productName));
-    }
-}
-

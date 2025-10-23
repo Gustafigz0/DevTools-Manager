@@ -1,3 +1,3 @@
 # Hashes of file build rules.
-0dd4a73a747a7327cc5acc109fd6fd47 CMakeFiles/DevToolsManager_autogen
-844bfb1d088f2257c0636af0732b4f12 DevToolsManager_autogen/timestamp
+bb7262091dd5a4b81c423ea7625c0d53 scr/CMakeFiles/minimal_autogen
+72e9e1d94d325f1c512cba1cef21ffa6 scr/minimal_autogen/timestamp

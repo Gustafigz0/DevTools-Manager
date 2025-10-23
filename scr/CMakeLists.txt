@@ -7,8 +7,6 @@ add_executable(minimal
   ../include/MainWindow.h
   ../include/Theme.h
   ../include/Product.h
-  ../include/AddProductDialog.h
-  AddProductDialog.cpp
   MainWindow.cpp
   Theme.cpp
   Product.cpp
