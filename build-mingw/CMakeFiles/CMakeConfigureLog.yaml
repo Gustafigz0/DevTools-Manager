@@ -27,6 +27,7 @@ events:
     names:
       - "mingw32-make.exe"
     candidate_directories:
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -51,6 +52,8 @@ events:
       - "/MinGW/bin/"
       - "/REGISTRY-NOTFOUND/MinGW/bin/"
     searched_directories:
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/mingw32-make.exe.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/mingw32-make.exe"
       - "C:/Windows/System32/mingw32-make.exe.com"
       - "C:/Windows/System32/mingw32-make.exe"
       - "C:/Windows/mingw32-make.exe.com"
@@ -75,6 +78,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -119,6 +123,7 @@ events:
       - "icx"
       - "clang++"
     candidate_directories:
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -139,6 +144,24 @@ events:
       - "C:/Users/a40297/AppData/Local/Programs/Git/cmd/"
       - "C:/Users/a40297/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
     searched_directories:
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/c++.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/c++.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/c++"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/g++.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/g++.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/g++"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/cl.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/cl.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/cl"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/bcc.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/bcc.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/bcc"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/icx.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/icx.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/icx"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/clang++.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/clang++.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/clang++"
       - "C:/Windows/System32/c++.com"
       - "C:/Windows/System32/c++.exe"
       - "C:/Windows/System32/c++"
@@ -323,6 +346,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/c++.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -369,6 +393,7 @@ events:
     found: "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerId.cpp.in"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -431,6 +456,7 @@ events:
       - "ar"
     candidate_directories:
       - "C:/Qt/Tools/mingw1310_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -454,6 +480,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/ar.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -494,6 +521,7 @@ events:
       - "ranlib"
     candidate_directories:
       - "C:/Qt/Tools/mingw1310_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -517,6 +545,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/ranlib.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -557,6 +586,7 @@ events:
       - "strip"
     candidate_directories:
       - "C:/Qt/Tools/mingw1310_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -580,6 +610,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/strip.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -620,6 +651,7 @@ events:
       - "ld"
     candidate_directories:
       - "C:/Qt/Tools/mingw1310_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -643,6 +675,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/ld.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -683,6 +716,7 @@ events:
       - "nm"
     candidate_directories:
       - "C:/Qt/Tools/mingw1310_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -706,6 +740,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/nm.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -746,6 +781,7 @@ events:
       - "objdump"
     candidate_directories:
       - "C:/Qt/Tools/mingw1310_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -769,6 +805,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/objdump.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -809,6 +846,7 @@ events:
       - "objcopy"
     candidate_directories:
       - "C:/Qt/Tools/mingw1310_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -832,6 +870,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/objcopy.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -872,6 +911,7 @@ events:
       - "readelf"
     candidate_directories:
       - "C:/Qt/Tools/mingw1310_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -895,6 +935,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/readelf.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -935,6 +976,7 @@ events:
       - "dlltool"
     candidate_directories:
       - "C:/Qt/Tools/mingw1310_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -958,6 +1000,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/dlltool.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -998,6 +1041,7 @@ events:
       - "addr2line"
     candidate_directories:
       - "C:/Qt/Tools/mingw1310_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -1021,6 +1065,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/addr2line.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -1061,6 +1106,7 @@ events:
       - "tapi"
     candidate_directories:
       - "C:/Qt/Tools/mingw1310_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -1083,6 +1129,9 @@ events:
       - "C:/Qt/Tools/mingw1310_64/bin/tapi.com"
       - "C:/Qt/Tools/mingw1310_64/bin/tapi.exe"
       - "C:/Qt/Tools/mingw1310_64/bin/tapi"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/tapi.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/tapi.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/tapi"
       - "C:/Windows/System32/tapi.com"
       - "C:/Windows/System32/tapi.exe"
       - "C:/Windows/System32/tapi"
@@ -1140,6 +1189,7 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -1183,6 +1233,7 @@ events:
       - "gcc-ar"
     candidate_directories:
       - "C:/Qt/Tools/mingw1310_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -1205,6 +1256,9 @@ events:
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ar-13.1.com"
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ar-13.1.exe"
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ar-13.1"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ar-13.1.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ar-13.1.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ar-13.1"
       - "C:/Windows/System32/gcc-ar-13.1.com"
       - "C:/Windows/System32/gcc-ar-13.1.exe"
       - "C:/Windows/System32/gcc-ar-13.1"
@@ -1262,6 +1316,9 @@ events:
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ar-13.com"
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ar-13.exe"
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ar-13"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ar-13.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ar-13.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ar-13"
       - "C:/Windows/System32/gcc-ar-13.com"
       - "C:/Windows/System32/gcc-ar-13.exe"
       - "C:/Windows/System32/gcc-ar-13"
@@ -1319,6 +1376,9 @@ events:
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ar13.com"
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ar13.exe"
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ar13"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ar13.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ar13.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ar13"
       - "C:/Windows/System32/gcc-ar13.com"
       - "C:/Windows/System32/gcc-ar13.exe"
       - "C:/Windows/System32/gcc-ar13"
@@ -1377,6 +1437,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/gcc-ar.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -1420,6 +1481,7 @@ events:
       - "gcc-ranlib"
     candidate_directories:
       - "C:/Qt/Tools/mingw1310_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -1442,6 +1504,9 @@ events:
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ranlib-13.1.com"
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ranlib-13.1.exe"
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ranlib-13.1"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ranlib-13.1.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ranlib-13.1.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ranlib-13.1"
       - "C:/Windows/System32/gcc-ranlib-13.1.com"
       - "C:/Windows/System32/gcc-ranlib-13.1.exe"
       - "C:/Windows/System32/gcc-ranlib-13.1"
@@ -1499,6 +1564,9 @@ events:
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ranlib-13.com"
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ranlib-13.exe"
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ranlib-13"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ranlib-13.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ranlib-13.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ranlib-13"
       - "C:/Windows/System32/gcc-ranlib-13.com"
       - "C:/Windows/System32/gcc-ranlib-13.exe"
       - "C:/Windows/System32/gcc-ranlib-13"
@@ -1556,6 +1624,9 @@ events:
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ranlib13.com"
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ranlib13.exe"
       - "C:/Qt/Tools/mingw1310_64/bin/gcc-ranlib13"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ranlib13.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ranlib13.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/gcc-ranlib13"
       - "C:/Windows/System32/gcc-ranlib13.com"
       - "C:/Windows/System32/gcc-ranlib13.exe"
       - "C:/Windows/System32/gcc-ranlib13"
@@ -1614,6 +1685,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/gcc-ranlib.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -1656,6 +1728,7 @@ events:
       - "windres"
       - "windres"
     candidate_directories:
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -1688,6 +1761,9 @@ events:
       - "C:/Program Files (x86)/DevToolsManager/sbin/"
       - "C:/Program Files (x86)/DevToolsManager/"
     searched_directories:
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/windres.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/windres.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/windres"
       - "C:/Windows/System32/windres.com"
       - "C:/Windows/System32/windres.exe"
       - "C:/Windows/System32/windres"
@@ -1722,6 +1798,7 @@ events:
     found: "C:/Qt/Tools/mingw1310_64/bin/windres.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -1756,8 +1833,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-aclj4h"
-      binary: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-aclj4h"
+      source: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-6wvnux"
+      binary: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-6wvnux"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -1767,13 +1844,13 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-aclj4h'
+        Change Dir: 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-6wvnux'
         
-        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe -f Makefile cmTC_1dfd8/fast
-        C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_1dfd8.dir\\build.make CMakeFiles/cmTC_1dfd8.dir/build
-        mingw32-make.exe[1]: Entering directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-aclj4h'
-        Building CXX object CMakeFiles/cmTC_1dfd8.dir/CMakeCXXCompilerABI.cpp.obj
-        C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe   -v -o CMakeFiles\\cmTC_1dfd8.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe -f Makefile cmTC_85ac0/fast
+        C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_85ac0.dir\\build.make CMakeFiles/cmTC_85ac0.dir/build
+        mingw32-make.exe[1]: Entering directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-6wvnux'
+        Building CXX object CMakeFiles/cmTC_85ac0.dir/CMakeCXXCompilerABI.cpp.obj
+        C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe   -v -o CMakeFiles\\cmTC_85ac0.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
         Using built-in specs.
         COLLECT_GCC=C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe
         Target: x86_64-w64-mingw32
@@ -1781,8 +1858,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib
         gcc version 13.1.0 (x86_64-posix-seh-rev1, Built by MinGW-Builds project) 
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_1dfd8.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_1dfd8.dir\\'
-         C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1plus.exe -quiet -v -iprefix C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_1dfd8.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=core2 -march=nocona -version -o C:\\Users\\a40297\\AppData\\Local\\Temp\\ccNXbGM0.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_85ac0.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_85ac0.dir\\'
+         C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1plus.exe -quiet -v -iprefix C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_85ac0.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=core2 -march=nocona -version -o C:\\Users\\a40297\\AppData\\Local\\Temp\\cc1FiJFx.s
         GNU C++17 (x86_64-posix-seh-rev1, Built by MinGW-Builds project) version 13.1.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 13.1.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.25-GMP
         
@@ -1805,14 +1882,14 @@ events:
          C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include
         End of search list.
         Compiler executable checksum: b3d236387f35294e2a73c51628039e05
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_1dfd8.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_1dfd8.dir\\'
-         C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_1dfd8.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\a40297\\AppData\\Local\\Temp\\ccNXbGM0.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_85ac0.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_85ac0.dir\\'
+         C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_85ac0.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\a40297\\AppData\\Local\\Temp\\cc1FiJFx.s
         GNU assembler version 2.39 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.39
         COMPILER_PATH=C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/;C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/;C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/;C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_1dfd8.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_1dfd8.dir\\CMakeCXXCompilerABI.cpp.'
-        Linking CXX executable cmTC_1dfd8.exe
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_1dfd8.dir\\link.txt --verbose=1
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_85ac0.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_85ac0.dir\\CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_85ac0.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_85ac0.dir\\link.txt --verbose=1
         Using built-in specs.
         COLLECT_GCC=C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe
         COLLECT_LTO_WRAPPER=C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe
@@ -1823,16 +1900,16 @@ events:
         gcc version 13.1.0 (x86_64-posix-seh-rev1, Built by MinGW-Builds project) 
         COMPILER_PATH=C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/;C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/;C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/;C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_1dfd8.exe' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'cmTC_1dfd8.'
-         C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -plugin C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/liblto_plugin.dll -plugin-opt=C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\a40297\\AppData\\Local\\Temp\\ccX6oZj8.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-liconv -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=C:/buildroot/x86_64-1310-posix-seh-msvcrt-rt_v11-rev1/mingw64 -m i386pep -Bdynamic -o cmTC_1dfd8.exe C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. -v --whole-archive CMakeFiles\\cmTC_1dfd8.dir/objects.a --no-whole-archive --out-implib libcmTC_1dfd8.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_85ac0.exe' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'cmTC_85ac0.'
+         C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -plugin C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/liblto_plugin.dll -plugin-opt=C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\a40297\\AppData\\Local\\Temp\\cchiAeiF.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-liconv -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=C:/buildroot/x86_64-1310-posix-seh-msvcrt-rt_v11-rev1/mingw64 -m i386pep -Bdynamic -o cmTC_85ac0.exe C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. -v --whole-archive CMakeFiles\\cmTC_85ac0.dir/objects.a --no-whole-archive --out-implib libcmTC_85ac0.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o
         collect2 version 13.1.0
-        C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/liblto_plugin.dll -plugin-opt=C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\a40297\\AppData\\Local\\Temp\\ccX6oZj8.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-liconv -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=C:/buildroot/x86_64-1310-posix-seh-msvcrt-rt_v11-rev1/mingw64 -m i386pep -Bdynamic -o cmTC_1dfd8.exe C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. -v --whole-archive CMakeFiles\\cmTC_1dfd8.dir/objects.a --no-whole-archive --out-implib libcmTC_1dfd8.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o
+        C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/liblto_plugin.dll -plugin-opt=C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\a40297\\AppData\\Local\\Temp\\cchiAeiF.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-liconv -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=C:/buildroot/x86_64-1310-posix-seh-msvcrt-rt_v11-rev1/mingw64 -m i386pep -Bdynamic -o cmTC_85ac0.exe C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. -v --whole-archive CMakeFiles\\cmTC_85ac0.dir/objects.a --no-whole-archive --out-implib libcmTC_85ac0.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o
         GNU ld (GNU Binutils) 2.39
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_1dfd8.exe' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'cmTC_1dfd8.'
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_1dfd8.dir/objects.a
-        C:\\Qt\\Tools\\mingw1310_64\\bin\\ar.exe qc CMakeFiles\\cmTC_1dfd8.dir/objects.a @CMakeFiles\\cmTC_1dfd8.dir\\objects1.rsp
-        C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_1dfd8.dir/objects.a -Wl,--no-whole-archive -o cmTC_1dfd8.exe -Wl,--out-implib,libcmTC_1dfd8.dll.a -Wl,--major-image-version,0,--minor-image-version,0
-        mingw32-make.exe[1]: Leaving directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-aclj4h'
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_85ac0.exe' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'cmTC_85ac0.'
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_85ac0.dir/objects.a
+        C:\\Qt\\Tools\\mingw1310_64\\bin\\ar.exe qc CMakeFiles\\cmTC_85ac0.dir/objects.a @CMakeFiles\\cmTC_85ac0.dir\\objects1.rsp
+        C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_85ac0.dir/objects.a -Wl,--no-whole-archive -o cmTC_85ac0.exe -Wl,--out-implib,libcmTC_85ac0.dll.a -Wl,--major-image-version,0,--minor-image-version,0
+        mingw32-make.exe[1]: Leaving directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-6wvnux'
         
       exitCode: 0
   -
@@ -1871,13 +1948,13 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-aclj4h']
+        ignore line: [Change Dir: 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-6wvnux']
         ignore line: []
-        ignore line: [Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe -f Makefile cmTC_1dfd8/fast]
-        ignore line: [C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_1dfd8.dir\\build.make CMakeFiles/cmTC_1dfd8.dir/build]
-        ignore line: [mingw32-make.exe[1]: Entering directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-aclj4h']
-        ignore line: [Building CXX object CMakeFiles/cmTC_1dfd8.dir/CMakeCXXCompilerABI.cpp.obj]
-        ignore line: [C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe   -v -o CMakeFiles\\cmTC_1dfd8.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"]
+        ignore line: [Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe -f Makefile cmTC_85ac0/fast]
+        ignore line: [C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_85ac0.dir\\build.make CMakeFiles/cmTC_85ac0.dir/build]
+        ignore line: [mingw32-make.exe[1]: Entering directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-6wvnux']
+        ignore line: [Building CXX object CMakeFiles/cmTC_85ac0.dir/CMakeCXXCompilerABI.cpp.obj]
+        ignore line: [C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe   -v -o CMakeFiles\\cmTC_85ac0.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe]
         ignore line: [Target: x86_64-w64-mingw32]
@@ -1885,8 +1962,8 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib]
         ignore line: [gcc version 13.1.0 (x86_64-posix-seh-rev1  Built by MinGW-Builds project) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_1dfd8.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_1dfd8.dir\\']
-        ignore line: [ C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1plus.exe -quiet -v -iprefix C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_1dfd8.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=core2 -march=nocona -version -o C:\\Users\\a40297\\AppData\\Local\\Temp\\ccNXbGM0.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_85ac0.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_85ac0.dir\\']
+        ignore line: [ C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1plus.exe -quiet -v -iprefix C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_85ac0.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=core2 -march=nocona -version -o C:\\Users\\a40297\\AppData\\Local\\Temp\\cc1FiJFx.s]
         ignore line: [GNU C++17 (x86_64-posix-seh-rev1  Built by MinGW-Builds project) version 13.1.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 13.1.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.25-GMP]
         ignore line: []
@@ -1909,8 +1986,8 @@ events:
         ignore line: [ C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: b3d236387f35294e2a73c51628039e05]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_1dfd8.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_1dfd8.dir\\']
-        ignore line: [ C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_1dfd8.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\a40297\\AppData\\Local\\Temp\\ccNXbGM0.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_85ac0.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_85ac0.dir\\']
+        ignore line: [ C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_85ac0.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\a40297\\AppData\\Local\\Temp\\cc1FiJFx.s]
         ignore line: [GNU assembler version 2.39 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.39]
         ignore line: [COMPILER_PATH=C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/]
         ignore line: [C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/]
@@ -1921,9 +1998,9 @@ events:
         ignore line: [C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/]
         ignore line: [C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_1dfd8.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_1dfd8.dir\\CMakeCXXCompilerABI.cpp.']
-        ignore line: [Linking CXX executable cmTC_1dfd8.exe]
-        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_1dfd8.dir\\link.txt --verbose=1]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_85ac0.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_85ac0.dir\\CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_85ac0.exe]
+        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_85ac0.dir\\link.txt --verbose=1]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe]
         ignore line: [COLLECT_LTO_WRAPPER=C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe]
@@ -1941,13 +2018,13 @@ events:
         ignore line: [C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/]
         ignore line: [C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_1dfd8.exe' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'cmTC_1dfd8.']
-        link line: [ C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -plugin C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/liblto_plugin.dll -plugin-opt=C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\a40297\\AppData\\Local\\Temp\\ccX6oZj8.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-liconv -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=C:/buildroot/x86_64-1310-posix-seh-msvcrt-rt_v11-rev1/mingw64 -m i386pep -Bdynamic -o cmTC_1dfd8.exe C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. -v --whole-archive CMakeFiles\\cmTC_1dfd8.dir/objects.a --no-whole-archive --out-implib libcmTC_1dfd8.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_85ac0.exe' '-shared-libgcc' '-mtune=core2' '-march=nocona' '-dumpdir' 'cmTC_85ac0.']
+        link line: [ C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -plugin C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/liblto_plugin.dll -plugin-opt=C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\a40297\\AppData\\Local\\Temp\\cchiAeiF.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-liconv -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=C:/buildroot/x86_64-1310-posix-seh-msvcrt-rt_v11-rev1/mingw64 -m i386pep -Bdynamic -o cmTC_85ac0.exe C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. -v --whole-archive CMakeFiles\\cmTC_85ac0.dir/objects.a --no-whole-archive --out-implib libcmTC_85ac0.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o]
           arg [C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe] ==> ignore
           arg [-plugin] ==> ignore
           arg [C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/liblto_plugin.dll] ==> ignore
           arg [-plugin-opt=C:/Qt/Tools/mingw1310_64/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\a40297\\AppData\\Local\\Temp\\ccX6oZj8.res] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\a40297\\AppData\\Local\\Temp\\cchiAeiF.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
@@ -1973,7 +2050,7 @@ events:
           arg [i386pep] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_1dfd8.exe] ==> ignore
+          arg [cmTC_85ac0.exe] ==> ignore
           arg [C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> obj [C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o]
           arg [C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o] ==> obj [C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o]
           arg [-LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0] ==> dir [C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0]
@@ -1984,10 +2061,10 @@ events:
           arg [-LC:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../..] ==> dir [C:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../..]
           arg [-v] ==> ignore
           arg [--whole-archive] ==> ignore
-          arg [CMakeFiles\\cmTC_1dfd8.dir/objects.a] ==> ignore
+          arg [CMakeFiles\\cmTC_85ac0.dir/objects.a] ==> ignore
           arg [--no-whole-archive] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_1dfd8.dll.a] ==> ignore
+          arg [libcmTC_85ac0.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore
@@ -2077,8 +2154,8 @@ events:
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-xbqw0e"
-      binary: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-xbqw0e"
+      source: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-iwcsjs"
+      binary: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-iwcsjs"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -2088,19 +2165,19 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-xbqw0e'
+        Change Dir: 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-iwcsjs'
         
-        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe -f Makefile cmTC_193f0/fast
-        C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_193f0.dir\\build.make CMakeFiles/cmTC_193f0.dir/build
-        mingw32-make.exe[1]: Entering directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-xbqw0e'
-        Building CXX object CMakeFiles/cmTC_193f0.dir/src.cxx.obj
-        C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe -DCMAKE_HAVE_LIBC_PTHREAD  -std=gnu++17 -o CMakeFiles\\cmTC_193f0.dir\\src.cxx.obj -c C:\\Users\\a40297\\Documents\\GitHub\\DevTools-Manager\\build-mingw\\CMakeFiles\\CMakeScratch\\TryCompile-xbqw0e\\src.cxx
-        Linking CXX executable cmTC_193f0.exe
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_193f0.dir\\link.txt --verbose=1
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_193f0.dir/objects.a
-        C:\\Qt\\Tools\\mingw1310_64\\bin\\ar.exe qc CMakeFiles\\cmTC_193f0.dir/objects.a @CMakeFiles\\cmTC_193f0.dir\\objects1.rsp
-        C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe -Wl,--whole-archive CMakeFiles\\cmTC_193f0.dir/objects.a -Wl,--no-whole-archive -o cmTC_193f0.exe -Wl,--out-implib,libcmTC_193f0.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_193f0.dir\\linkLibs.rsp
-        mingw32-make.exe[1]: Leaving directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-xbqw0e'
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe -f Makefile cmTC_2780d/fast
+        C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_2780d.dir\\build.make CMakeFiles/cmTC_2780d.dir/build
+        mingw32-make.exe[1]: Entering directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-iwcsjs'
+        Building CXX object CMakeFiles/cmTC_2780d.dir/src.cxx.obj
+        C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe -DCMAKE_HAVE_LIBC_PTHREAD  -std=gnu++17 -o CMakeFiles\\cmTC_2780d.dir\\src.cxx.obj -c C:\\Users\\a40297\\Documents\\GitHub\\DevTools-Manager\\build-mingw\\CMakeFiles\\CMakeScratch\\TryCompile-iwcsjs\\src.cxx
+        Linking CXX executable cmTC_2780d.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_2780d.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_2780d.dir/objects.a
+        C:\\Qt\\Tools\\mingw1310_64\\bin\\ar.exe qc CMakeFiles\\cmTC_2780d.dir/objects.a @CMakeFiles\\cmTC_2780d.dir\\objects1.rsp
+        C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe -Wl,--whole-archive CMakeFiles\\cmTC_2780d.dir/objects.a -Wl,--no-whole-archive -o cmTC_2780d.exe -Wl,--out-implib,libcmTC_2780d.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_2780d.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-iwcsjs'
         
       exitCode: 0
   -
@@ -2118,8 +2195,8 @@ events:
     checks:
       - "Performing Test HAVE_STDATOMIC"
     directories:
-      source: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-xjld3n"
-      binary: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-xjld3n"
+      source: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-vt6jbl"
+      binary: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-vt6jbl"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -2129,19 +2206,19 @@ events:
       variable: "HAVE_STDATOMIC"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-xjld3n'
+        Change Dir: 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-vt6jbl'
         
-        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe -f Makefile cmTC_110bf/fast
-        C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_110bf.dir\\build.make CMakeFiles/cmTC_110bf.dir/build
-        mingw32-make.exe[1]: Entering directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-xjld3n'
-        Building CXX object CMakeFiles/cmTC_110bf.dir/src.cxx.obj
-        C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe -DHAVE_STDATOMIC  -std=gnu++17 -o CMakeFiles\\cmTC_110bf.dir\\src.cxx.obj -c C:\\Users\\a40297\\Documents\\GitHub\\DevTools-Manager\\build-mingw\\CMakeFiles\\CMakeScratch\\TryCompile-xjld3n\\src.cxx
-        Linking CXX executable cmTC_110bf.exe
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_110bf.dir\\link.txt --verbose=1
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_110bf.dir/objects.a
-        C:\\Qt\\Tools\\mingw1310_64\\bin\\ar.exe qc CMakeFiles\\cmTC_110bf.dir/objects.a @CMakeFiles\\cmTC_110bf.dir\\objects1.rsp
-        C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe -Wl,--whole-archive CMakeFiles\\cmTC_110bf.dir/objects.a -Wl,--no-whole-archive -o cmTC_110bf.exe -Wl,--out-implib,libcmTC_110bf.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_110bf.dir\\linkLibs.rsp
-        mingw32-make.exe[1]: Leaving directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-xjld3n'
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe -f Makefile cmTC_fa163/fast
+        C:/Qt/Tools/mingw1310_64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_fa163.dir\\build.make CMakeFiles/cmTC_fa163.dir/build
+        mingw32-make.exe[1]: Entering directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-vt6jbl'
+        Building CXX object CMakeFiles/cmTC_fa163.dir/src.cxx.obj
+        C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe -DHAVE_STDATOMIC  -std=gnu++17 -o CMakeFiles\\cmTC_fa163.dir\\src.cxx.obj -c C:\\Users\\a40297\\Documents\\GitHub\\DevTools-Manager\\build-mingw\\CMakeFiles\\CMakeScratch\\TryCompile-vt6jbl\\src.cxx
+        Linking CXX executable cmTC_fa163.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_fa163.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_fa163.dir/objects.a
+        C:\\Qt\\Tools\\mingw1310_64\\bin\\ar.exe qc CMakeFiles\\cmTC_fa163.dir/objects.a @CMakeFiles\\cmTC_fa163.dir\\objects1.rsp
+        C:\\Qt\\Tools\\mingw1310_64\\bin\\c++.exe -Wl,--whole-archive CMakeFiles\\cmTC_fa163.dir/objects.a -Wl,--no-whole-archive -o cmTC_fa163.exe -Wl,--out-implib,libcmTC_fa163.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_fa163.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/CMakeScratch/TryCompile-vt6jbl'
         
       exitCode: 0
   -
@@ -2194,6 +2271,14 @@ events:
         reason: "no_exist"
       -
         path: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/pkgRedirects/qt6coretools-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/Qt6CoreToolsConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/qt6coretools-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
@@ -2282,6 +2367,7 @@ events:
       version: "6.9.3"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -2374,6 +2460,7 @@ events:
       version: "6.9.3"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -2466,6 +2553,7 @@ events:
       version: "6.9.3"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -2555,6 +2643,7 @@ events:
       version: "6.9.3"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -2603,6 +2692,7 @@ events:
       - "windeployqt"
     candidate_directories:
       - "C:/Qt/6.9.3/mingw_64/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -2638,6 +2728,7 @@ events:
     found: "C:/Qt/6.9.3/mingw_64/bin/windeployqt.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -2723,6 +2814,7 @@ events:
       version: "6.9.3"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -2801,6 +2893,14 @@ events:
         reason: "no_exist"
       -
         path: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/pkgRedirects/qt6guitools-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/Qt6GuiToolsConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/qt6guitools-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
@@ -2889,6 +2989,7 @@ events:
       version: "6.9.3"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -2964,6 +3065,14 @@ events:
         reason: "no_exist"
       -
         path: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/pkgRedirects/qt6widgetstools-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/Qt6WidgetsToolsConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/qt6widgetstools-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
@@ -3052,6 +3161,7 @@ events:
       version: "6.9.3"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -3106,6 +3216,7 @@ events:
       - "vulkan/vulkan.h"
     candidate_directories:
       - "/include/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -3135,6 +3246,7 @@ events:
       - "C:/Program Files (x86)/DevToolsManager/"
     searched_directories:
       - "/include/vulkan/vulkan.h"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/vulkan/vulkan.h"
       - "C:/Windows/System32/vulkan/vulkan.h"
       - "C:/Windows/vulkan/vulkan.h"
       - "C:/Windows/System32/wbem/vulkan/vulkan.h"
@@ -3165,6 +3277,7 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -3220,6 +3333,7 @@ events:
     candidate_directories:
       - "/lib/"
       - "/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -3251,6 +3365,7 @@ events:
     searched_directories:
       - "/lib/"
       - "/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -3282,6 +3397,7 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -3340,6 +3456,7 @@ events:
       - "glslc"
     candidate_directories:
       - "/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -3375,6 +3492,9 @@ events:
       - "/bin/glslc.com"
       - "/bin/glslc.exe"
       - "/bin/glslc"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/glslc.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/glslc.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/glslc"
       - "C:/Windows/System32/glslc.com"
       - "C:/Windows/System32/glslc.exe"
       - "C:/Windows/System32/glslc"
@@ -3471,6 +3591,7 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -3525,6 +3646,7 @@ events:
       - "glslangValidator"
     candidate_directories:
       - "/bin/"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -3560,6 +3682,9 @@ events:
       - "/bin/glslangValidator.com"
       - "/bin/glslangValidator.exe"
       - "/bin/glslangValidator"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/glslangValidator.com"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/glslangValidator.exe"
+      - "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/glslangValidator"
       - "C:/Windows/System32/glslangValidator.com"
       - "C:/Windows/System32/glslangValidator.exe"
       - "C:/Windows/System32/glslangValidator"
@@ -3656,6 +3781,7 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -3749,6 +3875,7 @@ events:
       version: "6.9.3"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -3841,6 +3968,7 @@ events:
       version: "6.9.3"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -3930,6 +4058,7 @@ events:
       version: "6.9.3"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -4015,6 +4144,7 @@ events:
       version: "6.9.3"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
@@ -4090,6 +4220,14 @@ events:
         reason: "no_exist"
       -
         path: "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/pkgRedirects/qt6-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/Qt6Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/a40297/AppData/Local/Perplexity/Comet/Application/qt6-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
@@ -4178,6 +4316,7 @@ events:
       version: "6.9.3"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\a40297\\AppData\\Local\\Perplexity\\Comet\\Application"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
