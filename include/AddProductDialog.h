@@ -11,10 +11,9 @@ class QPushButton;
 class AddProductDialog : public QDialog {
     Q_OBJECT
 public:
-    // Novo construtor para criar (passa lista de categorias!)
+    // Para adicionar produto (recebe lista dinâmica de categorias)
     explicit AddProductDialog(const QStringList& categorias, QWidget* parent = nullptr);
-
-    // Novo construtor para editar (produto e lista de categorias)
+    // Para editar produto (recebe produto e lista dinâmica de categorias)
     AddProductDialog(const Product& product, const QStringList& categorias, QWidget* parent = nullptr);
 
     Product getProduct() const;
@@ -25,7 +24,7 @@ private slots:
     void validateFields();
 
 private:
-    void setupUi(const QStringList& categorias); // setupUi agora recebe lista
+    void setupUi(const QStringList& categorias); // agora recebe a lista dinâmica
     void populateFields(const Product& product);
 
     QLineEdit* idEdit_;

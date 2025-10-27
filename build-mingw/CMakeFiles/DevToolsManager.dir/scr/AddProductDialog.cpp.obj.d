@@ -385,10 +385,19 @@ CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: \
  C:/Users/Guts/Documents/GitHub/DevTools-Manager/include/Product.h \
  C:/msys64/mingw64/include/qt6/QtCore/QString \
  C:/msys64/mingw64/include/qt6/QtCore/qstring.h \
- C:/msys64/mingw64/include/qt6/QtCore/QDateTime \
+ C:/msys64/mingw64/include/qt6/QtCore/QJsonObject \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonobject.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonvalue.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qcborvalue.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qcborcommon.h \
  C:/msys64/mingw64/include/qt6/QtCore/qdatetime.h \
  C:/msys64/mingw64/include/qt6/QtCore/qcalendar.h \
  C:/msys64/mingw64/include/qt6/QtCore/qlocale.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qregularexpression.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qurl.h \
+ C:/msys64/mingw64/include/qt6/QtCore/quuid.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsondocument.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonparseerror.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/QVBoxLayout \
  C:/msys64/mingw64/include/qt6/QtWidgets/qboxlayout.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qlayout.h \
@@ -402,7 +411,6 @@ CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtGui/qpicture.h \
  C:/msys64/mingw64/include/qt6/QtCore/qiodevice.h \
  C:/msys64/mingw64/include/qt6/QtGui/qtextdocument.h \
- C:/msys64/mingw64/include/qt6/QtCore/qurl.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/QLineEdit \
  C:/msys64/mingw64/include/qt6/QtWidgets/qlineedit.h \
  C:/msys64/mingw64/include/qt6/QtGui/qtextcursor.h \
@@ -415,7 +423,6 @@ CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtWidgets/qstyleoption.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qabstractspinbox.h \
  C:/msys64/mingw64/include/qt6/QtGui/qvalidator.h \
- C:/msys64/mingw64/include/qt6/QtCore/qregularexpression.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qslider.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qabstractslider.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qstyle.h \

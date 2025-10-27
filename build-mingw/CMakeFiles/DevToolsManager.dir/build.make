@@ -93,20 +93,20 @@ CMakeFiles/DevToolsManager.dir/DevToolsManager_autogen/mocs_compilation.cpp.s: c
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DevToolsManager.dir/DevToolsManager_autogen/mocs_compilation.cpp.s"
 	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\DevToolsManager_autogen\mocs_compilation.cpp -o CMakeFiles\DevToolsManager.dir\DevToolsManager_autogen\mocs_compilation.cpp.s
 
-CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj: CMakeFiles/DevToolsManager.dir/flags.make
-CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj: CMakeFiles/DevToolsManager.dir/includes_CXX.rsp
-CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj: C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/main.cpp
-CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj: CMakeFiles/DevToolsManager.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj -MF CMakeFiles\DevToolsManager.dir\scr\main.cpp.obj.d -o CMakeFiles\DevToolsManager.dir\scr\main.cpp.obj -c C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\main.cpp
+CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: CMakeFiles/DevToolsManager.dir/flags.make
+CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: CMakeFiles/DevToolsManager.dir/includes_CXX.rsp
+CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/AddProductDialog.cpp
+CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: CMakeFiles/DevToolsManager.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj -MF CMakeFiles\DevToolsManager.dir\scr\AddProductDialog.cpp.obj.d -o CMakeFiles\DevToolsManager.dir\scr\AddProductDialog.cpp.obj -c C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\AddProductDialog.cpp
 
-CMakeFiles/DevToolsManager.dir/scr/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DevToolsManager.dir/scr/main.cpp.i"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\main.cpp > CMakeFiles\DevToolsManager.dir\scr\main.cpp.i
+CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\AddProductDialog.cpp > CMakeFiles\DevToolsManager.dir\scr\AddProductDialog.cpp.i
 
-CMakeFiles/DevToolsManager.dir/scr/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DevToolsManager.dir/scr/main.cpp.s"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\main.cpp -o CMakeFiles\DevToolsManager.dir\scr\main.cpp.s
+CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\AddProductDialog.cpp -o CMakeFiles\DevToolsManager.dir\scr\AddProductDialog.cpp.s
 
 CMakeFiles/DevToolsManager.dir/scr/MainWindow.cpp.obj: CMakeFiles/DevToolsManager.dir/flags.make
 CMakeFiles/DevToolsManager.dir/scr/MainWindow.cpp.obj: CMakeFiles/DevToolsManager.dir/includes_CXX.rsp
@@ -123,26 +123,11 @@ CMakeFiles/DevToolsManager.dir/scr/MainWindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DevToolsManager.dir/scr/MainWindow.cpp.s"
 	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\MainWindow.cpp -o CMakeFiles\DevToolsManager.dir\scr\MainWindow.cpp.s
 
-CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj: CMakeFiles/DevToolsManager.dir/flags.make
-CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj: CMakeFiles/DevToolsManager.dir/includes_CXX.rsp
-CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj: C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/Theme.cpp
-CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj: CMakeFiles/DevToolsManager.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj -MF CMakeFiles\DevToolsManager.dir\scr\Theme.cpp.obj.d -o CMakeFiles\DevToolsManager.dir\scr\Theme.cpp.obj -c C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\Theme.cpp
-
-CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.i"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\Theme.cpp > CMakeFiles\DevToolsManager.dir\scr\Theme.cpp.i
-
-CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.s"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\Theme.cpp -o CMakeFiles\DevToolsManager.dir\scr\Theme.cpp.s
-
 CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj: CMakeFiles/DevToolsManager.dir/flags.make
 CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj: CMakeFiles/DevToolsManager.dir/includes_CXX.rsp
 CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj: C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/Product.cpp
 CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj: CMakeFiles/DevToolsManager.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj"
 	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj -MF CMakeFiles\DevToolsManager.dir\scr\Product.cpp.obj.d -o CMakeFiles\DevToolsManager.dir\scr\Product.cpp.obj -c C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\Product.cpp
 
 CMakeFiles/DevToolsManager.dir/scr/Product.cpp.i: cmake_force
@@ -153,26 +138,11 @@ CMakeFiles/DevToolsManager.dir/scr/Product.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DevToolsManager.dir/scr/Product.cpp.s"
 	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\Product.cpp -o CMakeFiles\DevToolsManager.dir\scr\Product.cpp.s
 
-CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: CMakeFiles/DevToolsManager.dir/flags.make
-CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: CMakeFiles/DevToolsManager.dir/includes_CXX.rsp
-CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/AddProductDialog.cpp
-CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: CMakeFiles/DevToolsManager.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj -MF CMakeFiles\DevToolsManager.dir\scr\AddProductDialog.cpp.obj.d -o CMakeFiles\DevToolsManager.dir\scr\AddProductDialog.cpp.obj -c C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\AddProductDialog.cpp
-
-CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.i"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\AddProductDialog.cpp > CMakeFiles\DevToolsManager.dir\scr\AddProductDialog.cpp.i
-
-CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.s"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\AddProductDialog.cpp -o CMakeFiles\DevToolsManager.dir\scr\AddProductDialog.cpp.s
-
 CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj: CMakeFiles/DevToolsManager.dir/flags.make
 CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj: CMakeFiles/DevToolsManager.dir/includes_CXX.rsp
 CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj: C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/ProductManager.cpp
 CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj: CMakeFiles/DevToolsManager.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj"
 	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj -MF CMakeFiles\DevToolsManager.dir\scr\ProductManager.cpp.obj.d -o CMakeFiles\DevToolsManager.dir\scr\ProductManager.cpp.obj -c C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\ProductManager.cpp
 
 CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.i: cmake_force
@@ -183,35 +153,81 @@ CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.s"
 	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\ProductManager.cpp -o CMakeFiles\DevToolsManager.dir\scr\ProductManager.cpp.s
 
+CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj: CMakeFiles/DevToolsManager.dir/flags.make
+CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj: CMakeFiles/DevToolsManager.dir/includes_CXX.rsp
+CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj: C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/Theme.cpp
+CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj: CMakeFiles/DevToolsManager.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj -MF CMakeFiles\DevToolsManager.dir\scr\Theme.cpp.obj.d -o CMakeFiles\DevToolsManager.dir\scr\Theme.cpp.obj -c C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\Theme.cpp
+
+CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\Theme.cpp > CMakeFiles\DevToolsManager.dir\scr\Theme.cpp.i
+
+CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\Theme.cpp -o CMakeFiles\DevToolsManager.dir\scr\Theme.cpp.s
+
+CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.obj: CMakeFiles/DevToolsManager.dir/flags.make
+CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.obj: CMakeFiles/DevToolsManager.dir/includes_CXX.rsp
+CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.obj: C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/ToastNotification.cpp
+CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.obj: CMakeFiles/DevToolsManager.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.obj -MF CMakeFiles\DevToolsManager.dir\scr\ToastNotification.cpp.obj.d -o CMakeFiles\DevToolsManager.dir\scr\ToastNotification.cpp.obj -c C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\ToastNotification.cpp
+
+CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\ToastNotification.cpp > CMakeFiles\DevToolsManager.dir\scr\ToastNotification.cpp.i
+
+CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\ToastNotification.cpp -o CMakeFiles\DevToolsManager.dir\scr\ToastNotification.cpp.s
+
+CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj: CMakeFiles/DevToolsManager.dir/flags.make
+CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj: CMakeFiles/DevToolsManager.dir/includes_CXX.rsp
+CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj: C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/main.cpp
+CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj: CMakeFiles/DevToolsManager.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj -MF CMakeFiles\DevToolsManager.dir\scr\main.cpp.obj.d -o CMakeFiles\DevToolsManager.dir\scr\main.cpp.obj -c C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\main.cpp
+
+CMakeFiles/DevToolsManager.dir/scr/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DevToolsManager.dir/scr/main.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\main.cpp > CMakeFiles\DevToolsManager.dir\scr\main.cpp.i
+
+CMakeFiles/DevToolsManager.dir/scr/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DevToolsManager.dir/scr/main.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Guts\Documents\GitHub\DevTools-Manager\scr\main.cpp -o CMakeFiles\DevToolsManager.dir\scr\main.cpp.s
+
 # Object files for target DevToolsManager
 DevToolsManager_OBJECTS = \
 "CMakeFiles/DevToolsManager.dir/DevToolsManager_autogen/mocs_compilation.cpp.obj" \
-"CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj" \
-"CMakeFiles/DevToolsManager.dir/scr/MainWindow.cpp.obj" \
-"CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj" \
-"CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj" \
 "CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj" \
-"CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj"
+"CMakeFiles/DevToolsManager.dir/scr/MainWindow.cpp.obj" \
+"CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj" \
+"CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj" \
+"CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj" \
+"CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.obj" \
+"CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj"
 
 # External object files for target DevToolsManager
 DevToolsManager_EXTERNAL_OBJECTS =
 
 DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/DevToolsManager_autogen/mocs_compilation.cpp.obj
-DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj
-DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/scr/MainWindow.cpp.obj
-DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj
-DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj
 DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj
+DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/scr/MainWindow.cpp.obj
+DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj
 DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj
+DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj
+DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.obj
+DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj
 DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/build.make
 DevToolsManager.exe: C:/msys64/mingw64/lib/libQt6Widgets.dll.a
 DevToolsManager.exe: C:/msys64/mingw64/lib/libQt6Gui.dll.a
 DevToolsManager.exe: C:/msys64/mingw64/lib/libQt6Core.dll.a
-DevToolsManager.exe: C:/msys64/mingw64/lib/libQt6EntryPoint.a
 DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/linkLibs.rsp
 DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/objects1.rsp
 DevToolsManager.exe: CMakeFiles/DevToolsManager.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable DevToolsManager.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable DevToolsManager.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\DevToolsManager.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

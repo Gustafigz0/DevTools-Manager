@@ -14,6 +14,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj.d"
   "CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj"
   "CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj.d"
+  "CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.obj"
+  "CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.obj.d"
   "CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj"
   "CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj.d"
   "DevToolsManager.exe"

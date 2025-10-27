@@ -1,39 +1,35 @@
 #pragma once
 #include <QString>
-#include <QDateTime>
+#include <QJsonObject>
 
 class Product {
 public:
-    // Construtores
     Product();
-    Product(QString id, QString name, QString category, 
-            double price, int quantity);
-    
-    // Getters
-    QString getId() const { return id_; }
-    QString getName() const { return name_; }
-    QString getCategory() const { return category_; }
-    double getPrice() const { return price_; }
-    int getQuantity() const { return quantity_; }
-    QDateTime getCreatedAt() const { return createdAt_; }
-    
-    // Setters
-    void setId(const QString& id) { id_ = id; }
-    void setName(const QString& name) { name_ = name; }
-    void setCategory(const QString& category) { category_ = category; }
-    void setPrice(double price) { price_ = price; }
-    void setQuantity(int quantity) { quantity_ = quantity; }
-    
-    // Métodos auxiliares
+    Product(const QString& id, const QString& name, const QString& category, double price, int quantity);
+
+    QString getId() const;
+    QString getName() const;
+    QString getCategory() const;
+    double getPrice() const;
+    int getQuantity() const;
     QString getPriceFormatted() const;
     QString getQuantityText() const;
-    bool isInStock() const { return quantity_ > 0; }
-    
+    bool isInStock() const;
+
+    // Serialização/Deserialização
+    QJsonObject toJsonObject() const;
+    static Product fromJsonObject(const QJsonObject& obj);
+
+    void setId(const QString&);
+    void setName(const QString&);
+    void setCategory(const QString&);
+    void setPrice(double);
+    void setQuantity(int);
+
 private:
     QString id_;
     QString name_;
     QString category_;
     double price_;
     int quantity_;
-    QDateTime createdAt_;
 };

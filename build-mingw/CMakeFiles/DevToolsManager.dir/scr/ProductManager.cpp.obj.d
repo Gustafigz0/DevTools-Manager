@@ -326,7 +326,11 @@ CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtCore/QString \
  C:/msys64/mingw64/include/qt6/QtCore/qstring.h \
  C:/Users/Guts/Documents/GitHub/DevTools-Manager/include/Product.h \
- C:/msys64/mingw64/include/qt6/QtCore/QDateTime \
+ C:/msys64/mingw64/include/qt6/QtCore/QJsonObject \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonobject.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonvalue.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qcborvalue.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qcborcommon.h \
  C:/msys64/mingw64/include/qt6/QtCore/qdatetime.h \
  C:/msys64/mingw64/include/qt6/QtCore/qcalendar.h \
  C:/msys64/mingw64/include/qt6/QtCore/qlocale.h \
@@ -351,6 +355,12 @@ CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtCore/q23utility.h \
  C:/msys64/mingw64/include/qt6/QtCore/q20utility.h \
  C:/msys64/mingw64/include/qt6/QtCore/qobject.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qregularexpression.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qurl.h \
+ C:/msys64/mingw64/include/qt6/QtCore/quuid.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qendian.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsondocument.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonparseerror.h \
  C:/msys64/mingw64/include/qt6/QtCore/QFile \
  C:/msys64/mingw64/include/qt6/QtCore/qfile.h \
  C:/msys64/mingw64/include/qt6/QtCore/qfiledevice.h \
@@ -390,18 +400,6 @@ CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/fs_dir.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/fs_ops.h \
  C:/msys64/mingw64/include/qt6/QtCore/QJsonDocument \
- C:/msys64/mingw64/include/qt6/QtCore/qjsondocument.h \
- C:/msys64/mingw64/include/qt6/QtCore/qjsonparseerror.h \
- C:/msys64/mingw64/include/qt6/QtCore/QJsonObject \
- C:/msys64/mingw64/include/qt6/QtCore/qjsonobject.h \
- C:/msys64/mingw64/include/qt6/QtCore/qjsonvalue.h \
- C:/msys64/mingw64/include/qt6/QtCore/qcborvalue.h \
- C:/msys64/mingw64/include/qt6/QtCore/qcborcommon.h \
- C:/msys64/mingw64/include/qt6/QtCore/qdatetime.h \
- C:/msys64/mingw64/include/qt6/QtCore/qregularexpression.h \
- C:/msys64/mingw64/include/qt6/QtCore/qurl.h \
- C:/msys64/mingw64/include/qt6/QtCore/quuid.h \
- C:/msys64/mingw64/include/qt6/QtCore/qendian.h \
  C:/msys64/mingw64/include/qt6/QtCore/qjsondocument.h \
  C:/msys64/mingw64/include/qt6/QtCore/QJsonArray \
  C:/msys64/mingw64/include/qt6/QtCore/qjsonarray.h \

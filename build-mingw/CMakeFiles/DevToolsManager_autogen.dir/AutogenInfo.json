@@ -380,6 +380,12 @@
 			"MU",
 			"6YEA5652QU/moc_Theme.cpp",
 			null
+		],
+		[
+			"C:/Users/Guts/Documents/GitHub/DevTools-Manager/include/ToastNotification.h",
+			"MU",
+			"6YEA5652QU/moc_ToastNotification.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -390,7 +396,6 @@
 		"MINGW_HAS_SECURE_API=1",
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
-		"QT_NEEDS_QMAIN",
 		"QT_NO_DEBUG",
 		"QT_WIDGETS_LIB",
 		"UNICODE",
@@ -412,11 +417,12 @@
 	"MOC_INCLUDES" : 
 	[
 		"C:/Users/Guts/Documents/GitHub/DevTools-Manager/include",
+		"C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr",
 		"C:/msys64/mingw64/include/qt6/QtCore",
 		"C:/msys64/mingw64/include/qt6",
 		"C:/msys64/mingw64/share/qt6/mkspecs/win32-g++",
-		"C:/msys64/mingw64/include/qt6/QtWidgets",
 		"C:/msys64/mingw64/include/qt6/QtGui",
+		"C:/msys64/mingw64/include/qt6/QtWidgets",
 		"C:/msys64/mingw64/include/c++/15.2.0",
 		"C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32",
 		"C:/msys64/mingw64/include/c++/15.2.0/backward",
@@ -479,6 +485,11 @@
 		],
 		[
 			"C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/Theme.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/ToastNotification.cpp",
 			"MU",
 			null
 		],

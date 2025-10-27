@@ -382,7 +382,6 @@ CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtCore/qhash.h \
  C:/msys64/mingw64/include/qt6/QtCore/qvarlengtharray.h \
  C:/msys64/mingw64/include/qt6/QtGui/qguiapplication_platform.h \
- C:/Users/Guts/Documents/GitHub/DevTools-Manager/include/Theme.h \
  C:/Users/Guts/Documents/GitHub/DevTools-Manager/include/MainWindow.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/QMainWindow \
  C:/msys64/mingw64/include/qt6/QtWidgets/qmainwindow.h \
@@ -399,13 +398,39 @@ CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtGui/qfontvariableaxis.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qsizepolicy.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qtabwidget.h \
- C:/msys64/mingw64/include/qt6/QtCore/QList \
- C:/msys64/mingw64/include/qt6/QtCore/qlist.h \
  C:/msys64/mingw64/include/qt6/QtCore/QSet \
  C:/msys64/mingw64/include/qt6/QtCore/qset.h \
+ C:/msys64/mingw64/include/qt6/QtCore/QMap \
+ C:/msys64/mingw64/include/qt6/QtCore/qmap.h \
+ C:/msys64/mingw64/include/qt6/QtCore/QList \
+ C:/msys64/mingw64/include/qt6/QtCore/qlist.h \
  C:/Users/Guts/Documents/GitHub/DevTools-Manager/include/Product.h \
  C:/msys64/mingw64/include/qt6/QtCore/QString \
  C:/msys64/mingw64/include/qt6/QtCore/qstring.h \
- C:/msys64/mingw64/include/qt6/QtCore/QDateTime \
+ C:/msys64/mingw64/include/qt6/QtCore/QJsonObject \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonobject.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonvalue.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qcborvalue.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qcborcommon.h \
  C:/msys64/mingw64/include/qt6/QtCore/qdatetime.h \
- C:/msys64/mingw64/include/qt6/QtCore/qcalendar.h
+ C:/msys64/mingw64/include/qt6/QtCore/qcalendar.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qregularexpression.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qurl.h \
+ C:/msys64/mingw64/include/qt6/QtCore/quuid.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsondocument.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonparseerror.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/QComboBox \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qcombobox.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qabstractitemdelegate.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qstyleoption.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qabstractspinbox.h \
+ C:/msys64/mingw64/include/qt6/QtGui/qvalidator.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qslider.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qabstractslider.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qstyle.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qtabbar.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qrubberband.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qframe.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qabstractitemmodel.h \
+ C:/msys64/mingw64/include/qt6/QtCore/QEvent \
+ C:/msys64/mingw64/include/qt6/QtCore/qcoreevent.h

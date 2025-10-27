@@ -283,11 +283,14 @@ CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtCore/qstring.h \
  C:/msys64/mingw64/include/qt6/QtCore/qstringconverter.h \
  C:/msys64/mingw64/include/qt6/QtCore/qstringconverter_base.h \
- C:/msys64/mingw64/include/qt6/QtCore/QDateTime \
- C:/msys64/mingw64/include/qt6/QtCore/qdatetime.h \
- C:/msys64/mingw64/include/qt6/QtCore/qcalendar.h \
- C:/msys64/mingw64/include/qt6/QtCore/qlocale.h \
- C:/msys64/mingw64/include/qt6/QtCore/qvariant.h \
+ C:/msys64/mingw64/include/qt6/QtCore/QJsonObject \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonobject.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonvalue.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qcborvalue.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qcborcommon.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qobjectdefs.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qobjectdefs_impl.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qfunctionaltools_impl.h \
  C:/msys64/mingw64/include/qt6/QtCore/qmetatype.h \
  C:/msys64/mingw64/include/qt6/QtCore/qdatastream.h \
  C:/msys64/mingw64/include/qt6/QtCore/qscopedpointer.h \
@@ -304,9 +307,6 @@ CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtCore/qmetacontainer.h \
  C:/msys64/mingw64/include/qt6/QtCore/qcontainerinfo.h \
  C:/msys64/mingw64/include/qt6/QtCore/qtaggedpointer.h \
- C:/msys64/mingw64/include/qt6/QtCore/qobjectdefs.h \
- C:/msys64/mingw64/include/qt6/QtCore/qobjectdefs_impl.h \
- C:/msys64/mingw64/include/qt6/QtCore/qfunctionaltools_impl.h \
  C:/msys64/mingw64/include/qt6/QtCore/qscopeguard.h \
  C:/msys64/mingw64/include/c++/15.2.0/list \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_list.h \
@@ -315,6 +315,10 @@ CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_tree.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_map.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_multimap.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qdatetime.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qcalendar.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qlocale.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qvariant.h \
  C:/msys64/mingw64/include/qt6/QtCore/qdebug.h \
  C:/msys64/mingw64/include/qt6/QtCore/qtextstream.h \
  C:/msys64/mingw64/include/qt6/QtCore/qcontiguouscache.h \
@@ -345,4 +349,10 @@ CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtCore/q20utility.h \
  C:/msys64/mingw64/include/qt6/QtCore/qobject.h \
  C:/msys64/mingw64/include/qt6/QtCore/qobject_impl.h \
- C:/msys64/mingw64/include/qt6/QtCore/qbindingstorage.h
+ C:/msys64/mingw64/include/qt6/QtCore/qbindingstorage.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qregularexpression.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qurl.h \
+ C:/msys64/mingw64/include/qt6/QtCore/quuid.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qendian.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsondocument.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonparseerror.h

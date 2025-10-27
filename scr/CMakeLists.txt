@@ -1,26 +1,29 @@
-# src/CMakeLists.txt
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
-add_executable(minimal
-  ../include/MainWindow.h
-  ../include/Theme.h
-  ../include/Product.h
-  ../include/AddProductDialog.h
-  AddProductDialog.cpp
-  MainWindow.cpp
-  Theme.cpp
-  Product.cpp
-  main.cpp
+# Busca todos os arquivos da pasta src/scr automaticamente
+file(GLOB SRC_FILES *.cpp)
+file(GLOB HEADER_FILES ../include/*.h)
+
+# Nome do executável será herdado do projeto raiz
+add_executable(${PROJECT_NAME}
+    ${SRC_FILES}
+    ${HEADER_FILES}
 )
 
-target_include_directories(minimal PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../include)
-target_link_libraries(minimal PRIVATE Qt6::Widgets)
+# Inclui o diretório de headers
+target_include_directories(${PROJECT_NAME}
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../include
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
 
-# Ensure C++17 and MSVC reports __cplusplus correctly
-target_compile_features(minimal PRIVATE cxx_std_17)
+# Linka com Qt6
+find_package(Qt6 REQUIRED COMPONENTS Widgets Core Gui)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets Qt6::Core Qt6::Gui)
+
+# Garante C++17 em todos
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 if(MSVC)
-  # Force MSVC to set a correct __cplusplus value as required by modern Qt
-  target_compile_options(minimal PRIVATE /Zc:__cplusplus /permissive-)
-endif()
+    target_compile_options(${PROJECT_NAME} PRIVATE

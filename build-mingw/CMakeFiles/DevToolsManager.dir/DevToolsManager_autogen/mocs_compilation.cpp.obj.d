@@ -386,10 +386,19 @@ CMakeFiles/DevToolsManager.dir/DevToolsManager_autogen/mocs_compilation.cpp.obj:
  C:/Users/Guts/Documents/GitHub/DevTools-Manager/include/Product.h \
  C:/msys64/mingw64/include/qt6/QtCore/QString \
  C:/msys64/mingw64/include/qt6/QtCore/qstring.h \
- C:/msys64/mingw64/include/qt6/QtCore/QDateTime \
+ C:/msys64/mingw64/include/qt6/QtCore/QJsonObject \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonobject.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonvalue.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qcborvalue.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qcborcommon.h \
  C:/msys64/mingw64/include/qt6/QtCore/qdatetime.h \
  C:/msys64/mingw64/include/qt6/QtCore/qcalendar.h \
  C:/msys64/mingw64/include/qt6/QtCore/qlocale.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qregularexpression.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qurl.h \
+ C:/msys64/mingw64/include/qt6/QtCore/quuid.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsondocument.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qjsonparseerror.h \
  C:/msys64/mingw64/include/qt6/QtCore/qtmochelpers.h \
  C:/msys64/mingw64/include/qt6/QtCore/qtmocconstants.h \
  C:/msys64/mingw64/include/qt6/QtCore/q20algorithm.h \
@@ -399,11 +408,50 @@ CMakeFiles/DevToolsManager.dir/DevToolsManager_autogen/mocs_compilation.cpp.obj:
  C:/msys64/mingw64/include/qt6/QtWidgets/QMainWindow \
  C:/msys64/mingw64/include/qt6/QtWidgets/qmainwindow.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qtabwidget.h \
- C:/msys64/mingw64/include/qt6/QtCore/QList \
- C:/msys64/mingw64/include/qt6/QtCore/qlist.h \
  C:/msys64/mingw64/include/qt6/QtCore/QSet \
  C:/msys64/mingw64/include/qt6/QtCore/qset.h \
+ C:/msys64/mingw64/include/qt6/QtCore/QMap \
+ C:/msys64/mingw64/include/qt6/QtCore/qmap.h \
+ C:/msys64/mingw64/include/qt6/QtCore/QList \
+ C:/msys64/mingw64/include/qt6/QtCore/qlist.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/QComboBox \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qcombobox.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qabstractitemdelegate.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qstyleoption.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qabstractspinbox.h \
+ C:/msys64/mingw64/include/qt6/QtGui/qvalidator.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qslider.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qabstractslider.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qstyle.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qtabbar.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qrubberband.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qframe.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qabstractitemmodel.h \
+ C:/msys64/mingw64/include/qt6/QtCore/QEvent \
+ C:/msys64/mingw64/include/qt6/QtCore/qcoreevent.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qbasictimer.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qabstracteventdispatcher.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qeventloop.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qdeadlinetimer.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qelapsedtimer.h \
  C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\DevToolsManager_autogen\6YEA5652QU/moc_ProductManager.cpp \
  C:/Users/Guts/Documents/GitHub/DevTools-Manager/include/ProductManager.h \
  C:/msys64/mingw64/include/qt6/QtCore/QObject \
- C:/msys64/mingw64/include/qt6/QtCore/qobject.h
+ C:/msys64/mingw64/include/qt6/QtCore/qobject.h \
+ C:\Users\Guts\Documents\GitHub\DevTools-Manager\build-mingw\DevToolsManager_autogen\6YEA5652QU/moc_ToastNotification.cpp \
+ C:/Users/Guts/Documents/GitHub/DevTools-Manager/include/ToastNotification.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/QWidget \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qwidget.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/QLabel \
+ C:/msys64/mingw64/include/qt6/QtWidgets/qlabel.h \
+ C:/msys64/mingw64/include/qt6/QtGui/qpicture.h \
+ C:/msys64/mingw64/include/qt6/QtCore/qiodevice.h \
+ C:/msys64/mingw64/include/qt6/QtGui/qtextdocument.h \
+ C:/msys64/mingw64/include/qt6/QtCore/QTimer \
+ C:/msys64/mingw64/include/qt6/QtCore/qtimer.h \
+ C:/msys64/mingw64/include/qt6/QtGui/QColor \
+ C:/msys64/mingw64/include/qt6/QtGui/qcolor.h \
+ C:/msys64/mingw64/include/qt6/QtGui/qtextcursor.h \
+ C:/msys64/mingw64/include/qt6/QtGui/qtextformat.h \
+ C:/msys64/mingw64/include/qt6/QtGui/qpen.h \
+ C:/msys64/mingw64/include/qt6/QtGui/qtextoption.h

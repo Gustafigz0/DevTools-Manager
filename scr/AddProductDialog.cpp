@@ -105,7 +105,7 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
         }
     )");
 
-    // Cabeçalho visualmente moderno e destacado
+    // Cabeçalho visual moderno
     auto* headerWidget = new QWidget;
     headerWidget->setStyleSheet(R"(
         background: #181b20;
@@ -119,10 +119,7 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
     iconLabel->setStyleSheet("font-size: 27px; color: #58abfa; font-weight: bold; background: transparent;");
     QLabel* titleLabel = new QLabel(isEditMode_ ? "Editar Produto" : "Novo Produto");
     titleLabel->setObjectName("TitleLabel");
-    titleLabel->setStyleSheet(
-        "font-size: 21px; font-weight: 800; color: #fff; "
-        "letter-spacing: 1px; background: transparent;"
-    );
+    titleLabel->setStyleSheet("font-size: 21px; font-weight: 800; color: #fff; letter-spacing: 1px; background: transparent;");
     headerLayout->addWidget(iconLabel, 0, Qt::AlignVCenter);
     headerLayout->addSpacing(7);
     headerLayout->addWidget(titleLabel, 0, Qt::AlignVCenter);
@@ -157,7 +154,7 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
     formRow("Categoria:", categoryCombo_);
 
     priceSpinBox_ = new QDoubleSpinBox;
-    priceSpinBox_->setPrefix("€ ");
+    priceSpinBox_->setPrefix("R$ ");
     priceSpinBox_->setRange(0.01, 999999.99);
     priceSpinBox_->setDecimals(2);
     priceSpinBox_->setValue(0.01);

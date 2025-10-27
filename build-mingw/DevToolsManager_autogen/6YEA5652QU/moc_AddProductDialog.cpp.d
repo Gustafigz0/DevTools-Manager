@@ -195,7 +195,7 @@ C:/Users/Guts/Documents/GitHub/DevTools-Manager/build-mingw/DevToolsManager_auto
   C:/msys64/mingw64/include/pthread_signal.h \
   C:/msys64/mingw64/include/pthread_time.h \
   C:/msys64/mingw64/include/pthread_unistd.h \
-  C:/msys64/mingw64/include/qt6/QtCore/QDateTime \
+  C:/msys64/mingw64/include/qt6/QtCore/QJsonObject \
   C:/msys64/mingw64/include/qt6/QtCore/QString \
   C:/msys64/mingw64/include/qt6/QtCore/q17memory.h \
   C:/msys64/mingw64/include/qt6/QtCore/q20functional.h \
@@ -219,6 +219,8 @@ C:/Users/Guts/Documents/GitHub/DevTools-Manager/build-mingw/DevToolsManager_auto
   C:/msys64/mingw64/include/qt6/QtCore/qbytearraylist.h \
   C:/msys64/mingw64/include/qt6/QtCore/qbytearrayview.h \
   C:/msys64/mingw64/include/qt6/QtCore/qcalendar.h \
+  C:/msys64/mingw64/include/qt6/QtCore/qcborcommon.h \
+  C:/msys64/mingw64/include/qt6/QtCore/qcborvalue.h \
   C:/msys64/mingw64/include/qt6/QtCore/qchar.h \
   C:/msys64/mingw64/include/qt6/QtCore/qcompare.h \
   C:/msys64/mingw64/include/qt6/QtCore/qcompare_impl.h \
@@ -249,6 +251,10 @@ C:/Users/Guts/Documents/GitHub/DevTools-Manager/build-mingw/DevToolsManager_auto
   C:/msys64/mingw64/include/qt6/QtCore/qiodevicebase.h \
   C:/msys64/mingw64/include/qt6/QtCore/qiterable.h \
   C:/msys64/mingw64/include/qt6/QtCore/qiterator.h \
+  C:/msys64/mingw64/include/qt6/QtCore/qjsondocument.h \
+  C:/msys64/mingw64/include/qt6/QtCore/qjsonobject.h \
+  C:/msys64/mingw64/include/qt6/QtCore/qjsonparseerror.h \
+  C:/msys64/mingw64/include/qt6/QtCore/qjsonvalue.h \
   C:/msys64/mingw64/include/qt6/QtCore/qlatin1stringview.h \
   C:/msys64/mingw64/include/qt6/QtCore/qline.h \
   C:/msys64/mingw64/include/qt6/QtCore/qlist.h \
@@ -273,6 +279,7 @@ C:/Users/Guts/Documents/GitHub/DevTools-Manager/build-mingw/DevToolsManager_auto
   C:/msys64/mingw64/include/qt6/QtCore/qprocessordetection.h \
   C:/msys64/mingw64/include/qt6/QtCore/qrect.h \
   C:/msys64/mingw64/include/qt6/QtCore/qrefcount.h \
+  C:/msys64/mingw64/include/qt6/QtCore/qregularexpression.h \
   C:/msys64/mingw64/include/qt6/QtCore/qscopedpointer.h \
   C:/msys64/mingw64/include/qt6/QtCore/qscopeguard.h \
   C:/msys64/mingw64/include/qt6/QtCore/qset.h \
@@ -319,7 +326,9 @@ C:/Users/Guts/Documents/GitHub/DevTools-Manager/build-mingw/DevToolsManager_auto
   C:/msys64/mingw64/include/qt6/QtCore/qtversionchecks.h \
   C:/msys64/mingw64/include/qt6/QtCore/qtypeinfo.h \
   C:/msys64/mingw64/include/qt6/QtCore/qtypes.h \
+  C:/msys64/mingw64/include/qt6/QtCore/qurl.h \
   C:/msys64/mingw64/include/qt6/QtCore/qutf8stringview.h \
+  C:/msys64/mingw64/include/qt6/QtCore/quuid.h \
   C:/msys64/mingw64/include/qt6/QtCore/qvariant.h \
   C:/msys64/mingw64/include/qt6/QtCore/qvarlengtharray.h \
   C:/msys64/mingw64/include/qt6/QtCore/qversiontagging.h \

@@ -7,38 +7,27 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
+# Detecta Qt6 e Widgets/Core
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui)
 
-# Lista todos os arquivos fonte
-set(SOURCES
-    scr/main.cpp
-    scr/MainWindow.cpp
-    scr/Theme.cpp
-    scr/Product.cpp
-    scr/AddProductDialog.cpp
-	scr/ProductManager.cpp
+# Inclui arquivos da pasta src/scr e include
+file(GLOB_RECURSE SOURCES
+    scr/*.cpp
+)
+file(GLOB_RECURSE HEADERS
+    include/*.h
 )
 
-# Lista todos os headers
-set(HEADERS
-    include/MainWindow.h
-    include/Theme.h
-    include/Product.h
-    include/AddProductDialog.h
-	include/ProductManager.h
-)
-
+# Executável final
 add_executable(${PROJECT_NAME}
     ${SOURCES}
     ${HEADERS}
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE include)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Core Qt6::Widgets)
+target_include_directories(${PROJECT_NAME} PRIVATE include scr)
 
-# Para Windows, remover console
-if(WIN32)
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-        WIN32_EXECUTABLE TRUE
-    )
-endif()
+target_link_libraries(${PROJECT_NAME}
+    PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets
+)
+
+

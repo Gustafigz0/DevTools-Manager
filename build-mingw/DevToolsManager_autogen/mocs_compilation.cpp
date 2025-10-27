@@ -2,3 +2,4 @@
 #include "6YEA5652QU/moc_AddProductDialog.cpp"
 #include "6YEA5652QU/moc_MainWindow.cpp"
 #include "6YEA5652QU/moc_ProductManager.cpp"
+#include "6YEA5652QU/moc_ToastNotification.cpp"

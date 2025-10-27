@@ -298,6 +298,30 @@ scr/Theme.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DevToolsManager.dir\build.make CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.s
 .PHONY : scr/Theme.cpp.s
 
+scr/ToastNotification.obj: scr/ToastNotification.cpp.obj
+.PHONY : scr/ToastNotification.obj
+
+# target to build an object file
+scr/ToastNotification.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DevToolsManager.dir\build.make CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.obj
+.PHONY : scr/ToastNotification.cpp.obj
+
+scr/ToastNotification.i: scr/ToastNotification.cpp.i
+.PHONY : scr/ToastNotification.i
+
+# target to preprocess a source file
+scr/ToastNotification.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DevToolsManager.dir\build.make CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.i
+.PHONY : scr/ToastNotification.cpp.i
+
+scr/ToastNotification.s: scr/ToastNotification.cpp.s
+.PHONY : scr/ToastNotification.s
+
+# target to generate assembly for a file
+scr/ToastNotification.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DevToolsManager.dir\build.make CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.s
+.PHONY : scr/ToastNotification.cpp.s
+
 scr/main.obj: scr/main.cpp.obj
 .PHONY : scr/main.obj
 
@@ -351,6 +375,9 @@ help:
 	@echo ... scr/Theme.obj
 	@echo ... scr/Theme.i
 	@echo ... scr/Theme.s
+	@echo ... scr/ToastNotification.obj
+	@echo ... scr/ToastNotification.i
+	@echo ... scr/ToastNotification.s
 	@echo ... scr/main.obj
 	@echo ... scr/main.i
 	@echo ... scr/main.s

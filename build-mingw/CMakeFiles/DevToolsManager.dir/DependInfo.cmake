@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/Product.cpp" "CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj" "gcc" "CMakeFiles/DevToolsManager.dir/scr/Product.cpp.obj.d"
   "C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/ProductManager.cpp" "CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj" "gcc" "CMakeFiles/DevToolsManager.dir/scr/ProductManager.cpp.obj.d"
   "C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/Theme.cpp" "CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj" "gcc" "CMakeFiles/DevToolsManager.dir/scr/Theme.cpp.obj.d"
+  "C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/ToastNotification.cpp" "CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.obj" "gcc" "CMakeFiles/DevToolsManager.dir/scr/ToastNotification.cpp.obj.d"
   "C:/Users/Guts/Documents/GitHub/DevTools-Manager/scr/main.cpp" "CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj" "gcc" "CMakeFiles/DevToolsManager.dir/scr/main.cpp.obj.d"
   )
 
