@@ -2,6 +2,7 @@ C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/DevToolsManager_au
   C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/DevToolsManager_autogen/moc_predefs.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QDateTime \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QList \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/QSet \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QString \
   C:/Qt/6.9.3/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/q20functional.h \

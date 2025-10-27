@@ -725,6 +725,7 @@ C:/Users/a40297/Documents/GitHub/DevTools-Manager/include/MainWindow.h
  mmc:Q_OBJECT
  mdp:C:/Qt/6.9.3/mingw_64/include/QtCore/QDateTime
  mdp:C:/Qt/6.9.3/mingw_64/include/QtCore/QList
+ mdp:C:/Qt/6.9.3/mingw_64/include/QtCore/QSet
  mdp:C:/Qt/6.9.3/mingw_64/include/QtCore/QString
  mdp:C:/Qt/6.9.3/mingw_64/include/QtCore/q17memory.h
  mdp:C:/Qt/6.9.3/mingw_64/include/QtCore/q20functional.h

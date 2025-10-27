@@ -401,6 +401,8 @@ CMakeFiles/DevToolsManager.dir/DevToolsManager_autogen/mocs_compilation.cpp.obj:
  C:/Qt/6.9.3/mingw_64/include/QtWidgets/qtabwidget.h \
  C:/Qt/6.9.3/mingw_64/include/QtCore/QList \
  C:/Qt/6.9.3/mingw_64/include/QtCore/qlist.h \
+ C:/Qt/6.9.3/mingw_64/include/QtCore/QSet \
+ C:/Qt/6.9.3/mingw_64/include/QtCore/qset.h \
  C:\Users\a40297\Documents\GitHub\DevTools-Manager\build-mingw\DevToolsManager_autogen\6YEA5652QU/moc_ProductManager.cpp \
  C:/Users/a40297/Documents/GitHub/DevTools-Manager/include/ProductManager.h \
  C:/Qt/6.9.3/mingw_64/include/QtCore/QObject \

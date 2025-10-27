@@ -109,6 +109,7 @@ DevToolsManager_autogen/timestamp: C:/Program\ Files/CMake/bin/cmake.exe \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QDateTime \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QList \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QObject \
+  C:/Qt/6.9.3/mingw_64/include/QtCore/QSet \
   C:/Qt/6.9.3/mingw_64/include/QtCore/QString \
   C:/Qt/6.9.3/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.9.3/mingw_64/include/QtCore/q20functional.h \
@@ -1120,6 +1121,12 @@ C:/Qt/6.9.3/mingw_64/include/QtCore/QObject:
 
 C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6WidgetsPrivate/Qt6WidgetsPrivateConfigVersionImpl.cmake:
 
+C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Gui/Qt6GuiDependencies.cmake:
+
+C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/pthread.h:
+
+C:/Qt/6.9.3/mingw_64/include/QtCore/QSet:
+
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/tr1/riemann_zeta.tcc:
 
 C:/Qt/6.9.3/mingw_64/include/QtCore/q20functional.h:
@@ -1406,9 +1413,9 @@ C:/Qt/6.9.3/mingw_64/include/QtCore/qtresource.h:
 
 C:/Qt/6.9.3/mingw_64/include/QtCore/qttypetraits.h:
 
-C:/Qt/6.9.3/mingw_64/include/QtCore/qtversionchecks.h:
-
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_iterator_base_funcs.h:
+
+C:/Qt/6.9.3/mingw_64/include/QtCore/qtversionchecks.h:
 
 C:/Qt/6.9.3/mingw_64/include/QtCore/qtypeinfo.h:
 
@@ -1633,8 +1640,6 @@ C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateTargets.
 C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Gui/Qt6GuiAdditionalTargetInfo.cmake:
 
 C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Gui/Qt6GuiConfig.cmake:
-
-C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Gui/Qt6GuiDependencies.cmake:
 
 C:/Qt/6.9.3/mingw_64/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsTargets.cmake:
 
@@ -1991,8 +1996,6 @@ C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/crtdefs.h:
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/errno.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/process.h:
-
-C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/pthread.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/pthread_signal.h:
 
