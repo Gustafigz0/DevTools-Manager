@@ -183,13 +183,13 @@ void MainWindow::setupUi()
 
 void MainWindow::loadSampleProducts()
 {
-    allProducts_.append(Product("001", "Mouse Gamer RGB", "Periféricos", 149.90, 25));
-    allProducts_.append(Product("002", "Teclado Mecânico", "Periféricos", 299.90, 15));
-    allProducts_.append(Product("003", "Monitor 27\" 144Hz", "Monitores", 1299.90, 8));
-    allProducts_.append(Product("004", "Headset Wireless", "Áudio", 399.90, 12));
-    allProducts_.append(Product("005", "Webcam Full HD", "Câmeras", 249.90, 20));
-    allProducts_.append(Product("006", "SSD 1TB NVMe", "Armazenamento", 499.90, 30));
-    allProducts_.append(Product("007", "Mousepad Grande", "Acessórios", 79.90, 50));
+    allProducts_.append(Product("001", "Mouse Gamer RGB", "Periféricos", 49.90, 25));
+    allProducts_.append(Product("002", "Teclado Mecânico", "Periféricos", 99.90, 15));
+    allProducts_.append(Product("003", "Monitor 27\" 144Hz", "Monitores", 299.90, 8));
+    allProducts_.append(Product("004", "Headset Wireless", "Áudio", 99.90, 12));
+    allProducts_.append(Product("005", "Webcam Full HD", "Câmeras", 49.90, 20));
+    allProducts_.append(Product("006", "SSD 1TB NVMe", "Armazenamento", 99.90, 30));
+    allProducts_.append(Product("007", "Mousepad Grande", "Acessórios", 49.90, 50));
     filteredProducts_ = allProducts_;
 }
 
@@ -240,7 +240,7 @@ void MainWindow::createProductCard(const Product& product)
         QPushButton {
             background: #232323;
             border: 2px solid #58abfa;
-            border-radius: 10px;   /* Metade do min-width/min-height faz círculo! */
+            border-radius: 10px;
             min-width: 20px; min-height: 20px;
             max-width: 20px; max-height: 20px;
             padding: 0px;
@@ -249,11 +249,16 @@ void MainWindow::createProductCard(const Product& product)
             background: #58abfa;
             border: 2px solid #58abfa;
         }
-        QPushButton:hover {
+        QPushButton:checked:hover {
+            background: #58abfa;
+            border: 2px solid #aee4ff;
+        }
+        QPushButton:hover:!checked {
             border-color: #88d1fc;
             background: #282e39;
         }
     )");
+
     cardLayout->addWidget(selectButton, 0, Qt::AlignVCenter);
     connect(selectButton, &QPushButton::toggled, this, [this, product](bool checked) {
         onSelectProductToggled(product.getId(), checked);
@@ -345,7 +350,16 @@ void MainWindow::onDeleteSelectedProductsClicked()
 
 void MainWindow::onAddProductClicked()
 {
-    AddProductDialog dialog(this);
+    // Coleta todas as categorias únicas dos produtos já cadastrados
+    QStringList categorias;
+    for (const Product& p : allProducts_)
+        categorias << p.getCategory();
+    categorias.removeDuplicates();
+
+    // Cria o dialog passando a lista de categorias únicas
+    AddProductDialog dialog(categorias, this);
+
+    // Resto do seu código (não muda)
     if (dialog.exec() == QDialog::Accepted) {
         Product newProduct = dialog.getProduct();
         for (const Product& p : allProducts_) {
@@ -362,6 +376,7 @@ void MainWindow::onAddProductClicked()
             QString("Produto '%1' adicionado com sucesso!").arg(newProduct.getName()));
     }
 }
+
 
 void MainWindow::onSearchTextChanged(const QString& text)
 {

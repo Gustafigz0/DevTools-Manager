@@ -396,10 +396,6 @@ CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtWidgets/qboxlayout.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qgridlayout.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/QHBoxLayout \
- C:/msys64/mingw64/include/qt6/QtWidgets/QFormLayout \
- C:/msys64/mingw64/include/qt6/QtWidgets/qformlayout.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/QLayout \
- C:/msys64/mingw64/include/qt6/QtWidgets/qlayout.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/QLabel \
  C:/msys64/mingw64/include/qt6/QtWidgets/qlabel.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qframe.h \
@@ -436,4 +432,6 @@ CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtWidgets/QMessageBox \
  C:/msys64/mingw64/include/qt6/QtWidgets/qmessagebox.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/qdialog.h \
- C:/msys64/mingw64/include/qt6/QtWidgets/qdialogbuttonbox.h
+ C:/msys64/mingw64/include/qt6/QtWidgets/qdialogbuttonbox.h \
+ C:/msys64/mingw64/include/qt6/QtCore/QStringList \
+ C:/msys64/mingw64/include/qt6/QtCore/qstringlist.h

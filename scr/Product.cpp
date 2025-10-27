@@ -13,7 +13,7 @@ Product::Product(QString id, QString name, QString category,
 }
 
 QString Product::getPriceFormatted() const {
-    return QString("R$ %1").arg(price_, 0, 'f', 2);
+    return QString("€ %1").arg(price_, 0, 'f', 2);
 }
 
 QString Product::getQuantityText() const {
