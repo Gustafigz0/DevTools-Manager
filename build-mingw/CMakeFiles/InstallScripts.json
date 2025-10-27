@@ -1,8 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"C:/Users/Guts/Documents/GitHub/Gui/build-mingw/cmake_install.cmake",
-		"C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/cmake_install.cmake"
+		"C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

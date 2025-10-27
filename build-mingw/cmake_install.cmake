@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Guts/Documents/GitHub/Gui
+# Install script for directory: C:/Users/a40297/Documents/GitHub/DevTools-Manager
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/MinimalQtWidgets")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/DevToolsManager")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,18 +34,13 @@ endif()
 
 # Set path to fallback-tool for dependency-resolution.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/msys64/mingw64/bin/objdump.exe")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("C:/Users/Guts/Documents/GitHub/Gui/build-mingw/scr/cmake_install.cmake")
+  set(CMAKE_OBJDUMP "C:/Qt/Tools/mingw1310_64/bin/objdump.exe")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/Guts/Documents/GitHub/Gui/build-mingw/install_local_manifest.txt"
+  file(WRITE "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -61,6 +56,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/Guts/Documents/GitHub/Gui/build-mingw/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
