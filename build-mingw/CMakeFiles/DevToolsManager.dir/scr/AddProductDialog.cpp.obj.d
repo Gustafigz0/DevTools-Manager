@@ -441,4 +441,6 @@ CMakeFiles/DevToolsManager.dir/scr/AddProductDialog.cpp.obj: \
  C:/Qt/6.9.3/mingw_64/include/QtWidgets/qdialog.h \
  C:/Qt/6.9.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
  C:/Qt/6.9.3/mingw_64/include/QtCore/QStringList \
- C:/Qt/6.9.3/mingw_64/include/QtCore/qstringlist.h
+ C:/Qt/6.9.3/mingw_64/include/QtCore/qstringlist.h \
+ C:/Qt/6.9.3/mingw_64/include/QtWidgets/QFrame \
+ C:/Qt/6.9.3/mingw_64/include/QtWidgets/qframe.h

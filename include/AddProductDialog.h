@@ -2,6 +2,8 @@
 #include <QDialog>
 #include "Product.h"
 
+
+
 class QLineEdit;
 class QComboBox;
 class QDoubleSpinBox;
@@ -27,6 +29,7 @@ private:
     void setupUi(const QStringList& categorias); // agora recebe a lista dinâmica
     void populateFields(const Product& product);
 
+    QSpinBox* stockAdjustSpinBox_;
     QLineEdit* idEdit_;
     QLineEdit* nameEdit_;
     QComboBox* categoryCombo_;
