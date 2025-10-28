@@ -150,8 +150,8 @@ void MainWindow::setupUi()
     connect(filterCategoryBox_, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onFilterChanged);
 
     filterStockBox_ = new QComboBox;
-    filterStockBox_->addItems({"Todos Estoques", "Estoque OK", "Baixo Estoque", "Sem Estoque"});
-    filterStockBox_->setToolTip("Filtrar por situação de estoque");
+    filterStockBox_->addItems({"Todos stock", "stock OK", "Baixo stock", "Sem stock"});
+    filterStockBox_->setToolTip("Filtrar por situação de stock");
     filterStockBox_->setStyleSheet("QComboBox { background: #242526; color: #fff; border: 2px solid #353a40; border-radius: 10px; font-size: 14px; padding: 6px 17px;} QComboBox::drop-down { border: none; width: 0px; }");
     filterRow->addWidget(filterStockBox_, 2);
     connect(filterStockBox_, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onFilterChanged);
@@ -220,11 +220,11 @@ void MainWindow::filterAndSortProducts()
         bool matchesCategory = selectedCategory.isEmpty() || product.getCategory() == selectedCategory;
 
         bool matchesStock = true;
-        if (stockStatus == "Estoque OK")
+        if (stockStatus == "stock OK")
             matchesStock = product.getQuantity() > 5;
-        else if (stockStatus == "Baixo Estoque")
+        else if (stockStatus == "Baixo stock")
             matchesStock = product.getQuantity() > 0 && product.getQuantity() <= 5;
-        else if (stockStatus == "Sem Estoque")
+        else if (stockStatus == "Sem stock")
             matchesStock = product.getQuantity() == 0;
 
         // AQUI a lógica correta do toggle Favoritos/Produtos:
@@ -384,7 +384,7 @@ void MainWindow::createProductCard(const Product& product)
         stockColor = "#e74c3c";
     else
         stockColor = "#2ecc71";
-    QLabel* stockStatus = new QLabel(product.isInStock() ? (product.getQuantity() <= 5 ? "⚠ Baixo estoque" : "✓ Em estoque") : "✗ Sem estoque");
+    QLabel* stockStatus = new QLabel(product.isInStock() ? (product.getQuantity() <= 5 ? "⚠ Baixo stock" : "✓ Em stock") : "✗ Sem stock");
     stockStatus->setStyleSheet(QString("color: %1; font-size: 13px; background: transparent; min-width:108px;").arg(stockColor));
     cardLayout->addWidget(stockStatus, 0, Qt::AlignVCenter);
 

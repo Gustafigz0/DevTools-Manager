@@ -154,7 +154,7 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
     formRow("Categoria:", categoryCombo_);
 
     priceSpinBox_ = new QDoubleSpinBox;
-    priceSpinBox_->setPrefix("R$ ");
+    priceSpinBox_->setPrefix("€ ");
     priceSpinBox_->setRange(0.01, 999999.99);
     priceSpinBox_->setDecimals(2);
     priceSpinBox_->setValue(0.01);
