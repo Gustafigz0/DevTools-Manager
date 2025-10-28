@@ -9,6 +9,7 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QStringList>
+#include <QFrame>
 
 AddProductDialog::AddProductDialog(const QStringList& categoriasUnicas, QWidget* parent)
     : QDialog(parent), isEditMode_(false) {
@@ -26,11 +27,11 @@ AddProductDialog::AddProductDialog(const Product& product, const QStringList& ca
 
 void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
     setModal(true);
-    setMinimumWidth(520);
+    setMinimumWidth(540);
 
     auto* mainLayout = new QVBoxLayout(this);
-    mainLayout->setSpacing(28);
-    mainLayout->setContentsMargins(36, 34, 36, 30);
+    mainLayout->setSpacing(24);
+    mainLayout->setContentsMargins(36, 26, 36, 26);
 
     setStyleSheet(R"(
         QDialog {
@@ -103,30 +104,75 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
         QPushButton#cancelButton:hover {
             background: #43434d;
         }
+        QLabel#EditChip {
+            background: #ffbc42;
+            color: #232428;
+            border-radius: 9px;
+            font-weight: 800;
+            font-size: 13px;
+            padding: 4px 16px;
+            margin-bottom: 11px;
+            letter-spacing: 1px;
+            min-width: 95px;
+        }
+        QLabel#AddChip {
+            background: #65ff97;
+            color: #232428;
+            border-radius: 9px;
+            font-weight: 800;
+            font-size: 13px;
+            padding: 4px 16px;
+            margin-bottom: 11px;
+            letter-spacing: 1px;
+            min-width: 95px;
+        }
+        QFrame#stockAdjustGroup {
+            background: #181b20;
+            border: 2px solid #58abfa;
+            border-radius: 18px;
+        }
+        QLabel#stockLabel {
+            font-size: 15px;
+            color: #58abfa;
+            font-weight: 700;
+            margin-left: 10px;
+        }
     )");
+
+    // Chip definido com base no modo
+    if (isEditMode_) {
+        QLabel* editModeChip = new QLabel("Modo Edição");
+        editModeChip->setObjectName("EditChip");
+        editModeChip->setAlignment(Qt::AlignCenter);
+        mainLayout->addWidget(editModeChip, 0, Qt::AlignCenter);
+    } else {
+        QLabel* addChip = new QLabel("Novo Produto");
+        addChip->setObjectName("AddChip");
+        addChip->setAlignment(Qt::AlignCenter);
+        mainLayout->addWidget(addChip, 0, Qt::AlignCenter);
+    }
 
     // Cabeçalho visual moderno
     auto* headerWidget = new QWidget;
-    headerWidget->setStyleSheet(R"(
-        background: #181b20;
-        border-radius: 18px;
-    )");
+    headerWidget->setStyleSheet("background: #181b20; border-radius: 18px;");
     auto* headerLayout = new QHBoxLayout(headerWidget);
     headerLayout->setContentsMargins(20, 8, 20, 8);
     headerLayout->setSpacing(10);
 
-    QLabel* iconLabel = new QLabel("➕");
-    iconLabel->setStyleSheet("font-size: 27px; color: #58abfa; font-weight: bold; background: transparent;");
-    QLabel* titleLabel = new QLabel(isEditMode_ ? "Editar Produto" : "Novo Produto");
+    QLabel* iconLabel = new QLabel(isEditMode_ ? "✏️" : "➕");
+    iconLabel->setStyleSheet(isEditMode_
+        ? "font-size: 27px; color: #58abfa; font-weight: bold; background: transparent;"
+        : "font-size: 27px; color: #65ff97; font-weight: bold; background: transparent;");
+    QLabel* titleLabel = new QLabel(isEditMode_ ? "Editar Produto" : "Adicionar Produto");
     titleLabel->setObjectName("TitleLabel");
-    titleLabel->setStyleSheet("font-size: 21px; font-weight: 800; color: #fff; letter-spacing: 1px; background: transparent;");
+    titleLabel->setStyleSheet("font-size: 22px; font-weight: 800; color: #fff; letter-spacing: 1px; background: transparent;");
     headerLayout->addWidget(iconLabel, 0, Qt::AlignVCenter);
     headerLayout->addSpacing(7);
     headerLayout->addWidget(titleLabel, 0, Qt::AlignVCenter);
     headerLayout->addStretch(1);
     mainLayout->addWidget(headerWidget);
 
-    // Formulário
+    // Formulário principal
     auto* formLayout = new QVBoxLayout;
     formLayout->setSpacing(18);
 
@@ -166,9 +212,41 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
     quantitySpinBox_->setSuffix(" unidades");
     formRow("Quantidade:", quantitySpinBox_);
 
-    mainLayout->addLayout(formLayout);
-    mainLayout->addSpacing(16);
+    // Ajuste de stock só modo edição
+    stockAdjustSpinBox_ = nullptr;
+    if (isEditMode_) {
+        auto* stockGroup = new QFrame;
+        stockGroup->setObjectName("stockAdjustGroup");
+        auto* stockGroupLayout = new QHBoxLayout(stockGroup);
+        stockGroupLayout->setContentsMargins(16, 8, 16, 8);
+        stockGroupLayout->setSpacing(10);
+        QLabel* stockIconLabel = new QLabel("🔄");
+        stockIconLabel->setStyleSheet("font-size: 21px; color: #ffbc42; font-weight: bold;");
+        stockAdjustSpinBox_ = new QSpinBox;
+        stockAdjustSpinBox_->setRange(-999999, 999999);
+        stockAdjustSpinBox_->setValue(0);
+        stockAdjustSpinBox_->setSuffix(" unidades");
+        QLabel* stockLabel = new QLabel("Ajustar Stock");
+        stockLabel->setObjectName("stockLabel");
+        stockGroupLayout->addWidget(stockIconLabel, 0, Qt::AlignLeft);
+        stockGroupLayout->addWidget(stockAdjustSpinBox_, 0, Qt::AlignLeft);
+        stockGroupLayout->addWidget(stockLabel, 0, Qt::AlignLeft);
+        stockGroupLayout->addStretch(1);
+        formLayout->addWidget(stockGroup);
 
+        connect(stockAdjustSpinBox_, QOverload<int>::of(&QSpinBox::valueChanged), this, [=](int value) {
+            QString msg;
+            if (value > 0) msg = QString("Adiciona %1 ao stock").arg(value);
+            if (value < 0) msg = QString("Remove %1 do stock").arg(-value);
+            if (value == 0) msg = QString("Nenhuma alteração de stock");
+            stockAdjustSpinBox_->setToolTip(msg);
+        });
+    }
+
+    mainLayout->addLayout(formLayout);
+    mainLayout->addSpacing(15);
+
+    // Botões principais
     auto* buttonsLayout = new QHBoxLayout;
     buttonsLayout->addStretch();
     btnCancel_ = new QPushButton("Cancelar");
@@ -220,6 +298,18 @@ void AddProductDialog::onSaveClicked() {
         priceSpinBox_->setFocus();
         return;
     }
+
+    if (isEditMode_ && stockAdjustSpinBox_) {
+        int ajuste = stockAdjustSpinBox_->value();
+        int novoStock = quantitySpinBox_->value() + ajuste;
+        if (novoStock < 0) {
+            QMessageBox::warning(this, "Erro", "O stock não pode ser negativo após ajuste!");
+            stockAdjustSpinBox_->setFocus();
+            return;
+        }
+        quantitySpinBox_->setValue(novoStock);
+    }
+
     accept();
 }
 
