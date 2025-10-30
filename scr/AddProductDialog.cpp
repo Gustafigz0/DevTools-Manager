@@ -9,19 +9,20 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QStringList>
-#include <QFrame>
+#include <QFileDialog>
+#include <QPixmap>
 
 AddProductDialog::AddProductDialog(const QStringList& categoriasUnicas, QWidget* parent)
     : QDialog(parent), isEditMode_(false) {
     setupUi(categoriasUnicas);
-    setWindowTitle("Adicionar Novo Produto");
+    setWindowTitle("Add New Product");
 }
 
 AddProductDialog::AddProductDialog(const Product& product, const QStringList& categoriasUnicas, QWidget* parent)
     : QDialog(parent), isEditMode_(true), originalProduct_(product) {
     setupUi(categoriasUnicas);
     populateFields(product);
-    setWindowTitle("Editar Produto");
+    setWindowTitle("Edit Product");
     idEdit_->setEnabled(false);
 }
 
@@ -35,17 +36,17 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
 
     setStyleSheet(R"(
         QDialog {
-            background: #232428;
+            background: #1a1a1a;
         }
         QLabel#TitleLabel {
             font-size: 24px;
             font-weight: 700;
-            color: #58abfa;
+            color: #ffffff;
             margin-bottom: 11px;
             letter-spacing: 0.5px;
         }
         QLabel#FormLabel {
-            color: #fff;
+            color: #ffffff;
             font-size: 15px;
             font-weight: 700;
             border-radius: 9px;
@@ -53,19 +54,19 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
             min-width: 110px;
         }
         QLineEdit, QComboBox, QSpinBox, QDoubleSpinBox {
-            background: #232428;
-            color: #fff;
-            border: 2px solid #353a40;
+            background: #2a2a2a;
+            color: #ffffff;
+            border: 2px solid #444444;
             border-radius: 12px;
             padding: 13px 18px;
             font-size: 15px;
         }
         QLineEdit:focus, QComboBox:focus, QSpinBox:focus, QDoubleSpinBox:focus {
-            border: 2px solid #58abfa;
+            border: 2px solid #666666;
         }
         QComboBox QAbstractItemView {
-            background: #232428;
-            color: #fff;
+            background: #2a2a2a;
+            color: #ffffff;
             border-radius: 9px;
             font-size: 15px;
         }
@@ -82,8 +83,8 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
             image: none; width: 0; height: 0;
         }
         QPushButton {
-            background: #58abfa;
-            color: #fff;
+            background: #333333;
+            color: #ffffff;
             border: none;
             border-radius: 16px;
             padding: 14px 28px;
@@ -92,21 +93,21 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
             min-width: 140px;
         }
         QPushButton:hover {
-            background: #7bd0fc;
+            background: #444444;
         }
         QPushButton:pressed {
-            background: #43a0e4;
+            background: #555555;
         }
         QPushButton#cancelButton {
-            background: #313136;
-            color: #ededed;
+            background: #2a2a2a;
+            color: #cccccc;
         }
         QPushButton#cancelButton:hover {
-            background: #43434d;
+            background: #3a3a3a;
         }
         QLabel#EditChip {
-            background: #ffbc42;
-            color: #232428;
+            background: #666666;
+            color: #ffffff;
             border-radius: 9px;
             font-weight: 800;
             font-size: 13px;
@@ -116,8 +117,8 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
             min-width: 95px;
         }
         QLabel#AddChip {
-            background: #65ff97;
-            color: #232428;
+            background: #444444;
+            color: #ffffff;
             border-radius: 9px;
             font-weight: 800;
             font-size: 13px;
@@ -127,13 +128,13 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
             min-width: 95px;
         }
         QFrame#stockAdjustGroup {
-            background: #181b20;
-            border: 2px solid #58abfa;
+            background: #2a2a2a;
+            border: 2px solid #666666;
             border-radius: 18px;
         }
         QLabel#stockLabel {
             font-size: 15px;
-            color: #58abfa;
+            color: #cccccc;
             font-weight: 700;
             margin-left: 10px;
         }
@@ -141,12 +142,12 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
 
     // Chip definido com base no modo
     if (isEditMode_) {
-        QLabel* editModeChip = new QLabel("Modo Edição");
+        QLabel* editModeChip = new QLabel("Edit Mode");
         editModeChip->setObjectName("EditChip");
         editModeChip->setAlignment(Qt::AlignCenter);
         mainLayout->addWidget(editModeChip, 0, Qt::AlignCenter);
     } else {
-        QLabel* addChip = new QLabel("Novo Produto");
+        QLabel* addChip = new QLabel("New Product");
         addChip->setObjectName("AddChip");
         addChip->setAlignment(Qt::AlignCenter);
         mainLayout->addWidget(addChip, 0, Qt::AlignCenter);
@@ -154,16 +155,16 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
 
     // Cabeçalho visual moderno
     auto* headerWidget = new QWidget;
-    headerWidget->setStyleSheet("background: #181b20; border-radius: 18px;");
+    headerWidget->setStyleSheet("background: #2a2a2a; border-radius: 18px;");
     auto* headerLayout = new QHBoxLayout(headerWidget);
     headerLayout->setContentsMargins(20, 8, 20, 8);
     headerLayout->setSpacing(10);
 
-    QLabel* iconLabel = new QLabel(isEditMode_ ? "✏️" : "➕");
+    QLabel* iconLabel = new QLabel(isEditMode_ ? "✏" : "+");
     iconLabel->setStyleSheet(isEditMode_
-        ? "font-size: 27px; color: #58abfa; font-weight: bold; background: transparent;"
-        : "font-size: 27px; color: #65ff97; font-weight: bold; background: transparent;");
-    QLabel* titleLabel = new QLabel(isEditMode_ ? "Editar Produto" : "Adicionar Produto");
+        ? "font-size: 27px; color: #cccccc; font-weight: bold; background: transparent;"
+        : "font-size: 27px; color: #ffffff; font-weight: bold; background: transparent;");
+    QLabel* titleLabel = new QLabel(isEditMode_ ? "Edit Product" : "Add Product");
     titleLabel->setObjectName("TitleLabel");
     titleLabel->setStyleSheet("font-size: 22px; font-weight: 800; color: #fff; letter-spacing: 1px; background: transparent;");
     headerLayout->addWidget(iconLabel, 0, Qt::AlignVCenter);
@@ -191,7 +192,7 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
     formRow("ID:", idEdit_);
 
     nameEdit_ = new QLineEdit;
-    nameEdit_->setPlaceholderText("Ex: Mouse Gamer RGB");
+    nameEdit_->setPlaceholderText("Ex: Gaming Mouse RGB");
     formRow("Nome:", nameEdit_);
 
     categoryCombo_ = new QComboBox;
@@ -209,8 +210,38 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
     quantitySpinBox_ = new QSpinBox;
     quantitySpinBox_->setRange(0, 999999);
     quantitySpinBox_->setValue(0);
-    quantitySpinBox_->setSuffix(" unidades");
+    quantitySpinBox_->setSuffix(" units");
     formRow("Quantidade:", quantitySpinBox_);
+
+    // Image upload section
+    auto* imageRow = new QHBoxLayout;
+    imageRow->setSpacing(13);
+    QLabel* imageLabel = new QLabel("Imagem:");
+    imageLabel->setObjectName("FormLabel");
+    imageRow->addWidget(imageLabel, 0, Qt::AlignVCenter);
+    
+    auto* imageContainer = new QVBoxLayout;
+    imageContainer->setSpacing(8);
+    
+    btnSelectImage_ = new QPushButton("📷 Select Image");
+    btnSelectImage_->setStyleSheet(
+        "QPushButton { background: #444444; color: #ffffff; border: 2px solid #666666; border-radius: 12px; padding: 10px 16px; font-size: 14px; font-weight: 600; }"
+        "QPushButton:hover { background: #555555; border: 2px solid #777777; }"
+    );
+    connect(btnSelectImage_, &QPushButton::clicked, this, &AddProductDialog::onSelectImageClicked);
+    imageContainer->addWidget(btnSelectImage_);
+    
+    imagePreviewLabel_ = new QLabel("No image selected");
+    imagePreviewLabel_->setStyleSheet(
+        "QLabel { background: #2a2a2a; border: 2px dashed #444444; border-radius: 12px; padding: 20px; color: #888888; font-size: 14px; min-height: 100px; }"
+    );
+    imagePreviewLabel_->setAlignment(Qt::AlignCenter);
+    imagePreviewLabel_->setScaledContents(true);
+    imagePreviewLabel_->setMaximumHeight(120);
+    imageContainer->addWidget(imagePreviewLabel_);
+    
+    imageRow->addLayout(imageContainer, 1);
+    formLayout->addLayout(imageRow);
 
     // Ajuste de stock só modo edição
     stockAdjustSpinBox_ = nullptr;
@@ -220,13 +251,13 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
         auto* stockGroupLayout = new QHBoxLayout(stockGroup);
         stockGroupLayout->setContentsMargins(16, 8, 16, 8);
         stockGroupLayout->setSpacing(10);
-        QLabel* stockIconLabel = new QLabel("🔄");
-        stockIconLabel->setStyleSheet("font-size: 21px; color: #ffbc42; font-weight: bold;");
+        QLabel* stockIconLabel = new QLabel("↻");
+        stockIconLabel->setStyleSheet("font-size: 21px; color: #cccccc; font-weight: bold;");
         stockAdjustSpinBox_ = new QSpinBox;
         stockAdjustSpinBox_->setRange(-999999, 999999);
         stockAdjustSpinBox_->setValue(0);
-        stockAdjustSpinBox_->setSuffix(" unidades");
-        QLabel* stockLabel = new QLabel("Ajustar Stock");
+        stockAdjustSpinBox_->setSuffix(" units");
+        QLabel* stockLabel = new QLabel("Adjust Stock");
         stockLabel->setObjectName("stockLabel");
         stockGroupLayout->addWidget(stockIconLabel, 0, Qt::AlignLeft);
         stockGroupLayout->addWidget(stockAdjustSpinBox_, 0, Qt::AlignLeft);
@@ -236,9 +267,9 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
 
         connect(stockAdjustSpinBox_, QOverload<int>::of(&QSpinBox::valueChanged), this, [=](int value) {
             QString msg;
-            if (value > 0) msg = QString("Adiciona %1 ao stock").arg(value);
-            if (value < 0) msg = QString("Remove %1 do stock").arg(-value);
-            if (value == 0) msg = QString("Nenhuma alteração de stock");
+            if (value > 0) msg = QString("Add %1 to stock").arg(value);
+            if (value < 0) msg = QString("Remove %1 from stock").arg(-value);
+            if (value == 0) msg = QString("No stock change");
             stockAdjustSpinBox_->setToolTip(msg);
         });
     }
@@ -249,12 +280,12 @@ void AddProductDialog::setupUi(const QStringList& categoriasUnicas) {
     // Botões principais
     auto* buttonsLayout = new QHBoxLayout;
     buttonsLayout->addStretch();
-    btnCancel_ = new QPushButton("Cancelar");
+    btnCancel_ = new QPushButton("Cancel");
     btnCancel_->setObjectName("cancelButton");
     connect(btnCancel_, &QPushButton::clicked, this, &AddProductDialog::onCancelClicked);
     buttonsLayout->addWidget(btnCancel_);
 
-    btnSave_ = new QPushButton(isEditMode_ ? "Salvar Alterações" : "Adicionar Produto");
+    btnSave_ = new QPushButton(isEditMode_ ? "Save Changes" : "Add Product");
     connect(btnSave_, &QPushButton::clicked, this, &AddProductDialog::onSaveClicked);
     buttonsLayout->addWidget(btnSave_);
     mainLayout->addLayout(buttonsLayout);
@@ -275,6 +306,17 @@ void AddProductDialog::populateFields(const Product& product) {
         categoryCombo_->setEditText(product.getCategory());
     priceSpinBox_->setValue(product.getPrice());
     quantitySpinBox_->setValue(product.getQuantity());
+    
+    // Load image if exists
+    imagePath_ = product.getImagePath();
+    if (!imagePath_.isEmpty() && QFile::exists(imagePath_)) {
+        QPixmap pixmap(imagePath_);
+        if (!pixmap.isNull()) {
+            imagePreviewLabel_->setPixmap(pixmap.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            imagePreviewLabel_->setText("");
+            btnSelectImage_->setText("🔄 Change Image");
+        }
+    }
 }
 
 void AddProductDialog::validateFields() {
@@ -282,19 +324,40 @@ void AddProductDialog::validateFields() {
     btnSave_->setEnabled(valid);
 }
 
+void AddProductDialog::onSelectImageClicked() {
+    QString fileName = QFileDialog::getOpenFileName(
+        this,
+        "Select Product Image",
+        "",
+        "Image Files (*.png *.jpg *.jpeg *.bmp *.gif);;All Files (*)"
+    );
+    
+    if (!fileName.isEmpty()) {
+        QPixmap pixmap(fileName);
+        if (!pixmap.isNull()) {
+            imagePath_ = fileName;
+            imagePreviewLabel_->setPixmap(pixmap.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            imagePreviewLabel_->setText("");
+            btnSelectImage_->setText("🔄 Change Image");
+        } else {
+            QMessageBox::warning(this, "Error", "Could not load the selected image file!");
+        }
+    }
+}
+
 void AddProductDialog::onSaveClicked() {
     if (idEdit_->text().trimmed().isEmpty()) {
-        QMessageBox::warning(this, "Erro", "O ID do produto é obrigatório!");
+        QMessageBox::warning(this, "Error", "Product ID is required!");
         idEdit_->setFocus();
         return;
     }
     if (nameEdit_->text().trimmed().isEmpty()) {
-        QMessageBox::warning(this, "Erro", "O nome do produto é obrigatório!");
+        QMessageBox::warning(this, "Error", "Product name is required!");
         nameEdit_->setFocus();
         return;
     }
     if (priceSpinBox_->value() <= 0) {
-        QMessageBox::warning(this, "Erro", "O preço deve ser maior que zero!");
+        QMessageBox::warning(this, "Error", "Price must be greater than zero!");
         priceSpinBox_->setFocus();
         return;
     }
@@ -303,7 +366,7 @@ void AddProductDialog::onSaveClicked() {
         int ajuste = stockAdjustSpinBox_->value();
         int novoStock = quantitySpinBox_->value() + ajuste;
         if (novoStock < 0) {
-            QMessageBox::warning(this, "Erro", "O stock não pode ser negativo após ajuste!");
+            QMessageBox::warning(this, "Error", "Stock cannot be negative after adjustment!");
             stockAdjustSpinBox_->setFocus();
             return;
         }
@@ -318,11 +381,13 @@ void AddProductDialog::onCancelClicked() {
 }
 
 Product AddProductDialog::getProduct() const {
-    return Product(
+    Product product(
         idEdit_->text().trimmed(),
         nameEdit_->text().trimmed(),
         categoryCombo_->currentText().trimmed(),
         priceSpinBox_->value(),
         quantitySpinBox_->value()
     );
+    product.setImagePath(imagePath_);
+    return product;
 }

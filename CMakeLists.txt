@@ -7,25 +7,44 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-# Detecta Qt6 e Widgets/Core
+# Find Qt6
+set(CMAKE_PREFIX_PATH "/usr/local/lib/cmake/Qt6" ${CMAKE_PREFIX_PATH})
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui)
 
-# Inclui arquivos da pasta src/scr e include
-file(GLOB_RECURSE SOURCES
-    scr/*.cpp
-)
-file(GLOB_RECURSE HEADERS
-    include/*.h
+# Source files
+set(SOURCES
+    scr/main.cpp
+    scr/MainWindow.cpp
+    scr/AddProductDialog.cpp
+    scr/Product.cpp
+    scr/ProductManager.cpp
+    scr/Theme.cpp
+    scr/ToastNotification.cpp
+    scr/UserAuthDialog.cpp
+    scr/ClickableLabel.cpp
 )
 
-# Executável final
+# Header files
+set(HEADERS
+    include/MainWindow.h
+    include/AddProductDialog.h
+    include/Product.h
+    include/ProductManager.h
+    include/Theme.h
+    include/ToastNotification.h
+    include/ClickableLabel.h
+)
+
+# Create executable
 add_executable(${PROJECT_NAME}
     ${SOURCES}
     ${HEADERS}
 )
 
+# Include directories
 target_include_directories(${PROJECT_NAME} PRIVATE include scr)
 
+# Link libraries
 target_link_libraries(${PROJECT_NAME}
     PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets
 )
