@@ -1,50 +1,55 @@
-#include "Product.hpp"
-#include "CSV.hpp"
-#include <sstream>
+#include "Product.h"
 
+Product::Product()
+    : id_(""), name_(""), category_(""), price_(0.0), quantity_(0), imagePath_("") {}
 
-Product::Product(int id, std::string name, std::string category,
-                 double price, int stock, std::string description)
-    : id_(id), name_(std::move(name)), category_(std::move(category)),
-      price_(price), stock_(stock), description_(std::move(description)) {}
+Product::Product(const QString& id, const QString& name, const QString& category, double price, int quantity)
+    : id_(id), name_(name), category_(category), price_(price), quantity_(quantity), imagePath_("") {}
 
-int Product::id() const { return id_; }
-const std::string& Product::name() const { return name_; }
-const std::string& Product::category() const { return category_; }
-double Product::price() const { return price_; }
-int Product::stock() const { return stock_; }
-const std::string& Product::description() const { return description_; }
+QString Product::getId() const { return id_; }
+QString Product::getName() const { return name_; }
+QString Product::getCategory() const { return category_; }
+double Product::getPrice() const { return price_; }
+int Product::getQuantity() const { return quantity_; }
+bool Product::isInStock() const { return quantity_ > 0; }
 
-void Product::setName(const std::string& v) { name_ = v; }
-void Product::setCategory(const std::string& v) { category_ = v; }
-void Product::setPrice(double v) { price_ = v; }
-void Product::setStock(int v) { stock_ = v; }
-void Product::setDescription(const std::string& v) { description_ = v; }
-
-std::string Product::toCSV() const {
-    std::ostringstream oss;
-    oss << id_ << ','
-        << CSV::escape(name_) << ','
-        << CSV::escape(category_) << ','
-        << price_ << ','
-        << stock_ << ','
-        << CSV::escape(description_);
-    return oss.str();
+QString Product::getPriceFormatted() const {
+    // Usar € para exemplo europeu ou "R$" se preferir
+    return QString("€ %1").arg(QString::number(price_, 'f', 2));
 }
 
-bool Product::fromCSVLine(const std::string& line, Product& out) {
-    auto fields = CSV::splitLine(line);
-    if (fields.size() < 6) return false;
-    try {
-        int id = std::stoi(fields[0]);
-        std::string name = fields[1];
-        std::string category = fields[2];
-        double price = std::stod(fields[3]);
-        int stock = std::stoi(fields[4]);
-        std::string description = fields[5];
-        out = Product(id, name, category, price, stock, description);
-        return true;
-    } catch (...) {
-        return false;
-    }
+QString Product::getQuantityText() const {
+    return QString("Qtd: %1").arg(quantity_);
 }
+
+QString Product::getImagePath() const { return imagePath_; }
+
+// Serialização para JSON
+QJsonObject Product::toJsonObject() const {
+    QJsonObject obj;
+    obj["id"] = id_;
+    obj["name"] = name_;
+    obj["category"] = category_;
+    obj["price"] = price_;
+    obj["imagePath"] = imagePath_;
+    return obj;
+}
+
+Product Product::fromJsonObject(const QJsonObject& obj) {
+    Product product(
+        obj.value("id").toString(),
+        obj.value("name").toString(),
+        obj.value("category").toString(),
+        obj.value("price").toDouble(),
+        obj.value("quantity").toInt()
+    );
+    product.setImagePath(obj.value("imagePath").toString());
+    return product;
+}
+
+// Setters
+void Product::setId(const QString& id) { id_ = id; }
+void Product::setName(const QString& n) { name_ = n; }
+void Product::setCategory(const QString& c) { category_ = c; }
+void Product::setPrice(double p) { price_ = p; }
+void Product::setImagePath(const QString& path) { imagePath_ = path; }
