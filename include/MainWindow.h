@@ -7,6 +7,7 @@
 #include "Product.h"
 #include <QComboBox>
 #include <QEvent>
+#include <QColor>
 
 // Forward declarations
 class QVBoxLayout;
@@ -22,7 +23,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit MainWindow(QWidget* parent = nullptr);
+    explicit MainWindow(const QString& username = QString(), QWidget* parent = nullptr);
 
 signals:
     void productListChanged();
@@ -37,6 +38,7 @@ private slots:
     void onFilterChanged();
     void onExportProductsClicked();
     void onImportProductsClicked();
+    void onLogoutClicked();
 
 private:
     void setupUi();
@@ -54,6 +56,7 @@ private:
     // UI State
 private:
     bool filterRunning_ = false;
+    int lastProductCardClickedIndex_ = -1;
 
     QWidget* sidebarBox_;
     QVBoxLayout* sidebarLayout_;
@@ -62,6 +65,7 @@ private:
     QPushButton* btnDeleteSelected_;
     QPushButton* btnExport_;
     QPushButton* btnImport_;
+    QPushButton* btnLogout_ = nullptr;
     QWidget* productsBg_;
     QVBoxLayout* productsLayout_;
     QWidget* productsContainer_;
@@ -70,6 +74,8 @@ private:
     QComboBox* filterCategoryBox_;
     QComboBox* filterStockBox_;
     ToastNotification* toastNotifier_;
+    QLabel* userLabel_ = nullptr;
+    QString currentUsername_;
     // e outros membros...
 
 

@@ -17,20 +17,23 @@
 #include <QDebug>
 #include "AddProductDialog.h"
 #include "ToastNotification.h"
+#include <QGuiApplication>
+#include <QApplication>
+#include <QKeyEvent>
+#include "UserAuthDialog.h"
+#include "ClickableLabel.h"
+#include <QCryptographicHash>
+#include <QProcess>
 
-MainWindow::MainWindow(QWidget* parent)
-    : QMainWindow(parent)
+MainWindow::MainWindow(const QString& username, QWidget* parent)
+    : QMainWindow(parent), currentUsername_(username)
 {
-    qDebug() << "MainWindow início";
     setupUi();
-    qDebug() << "MainWindow: depois de setupUi";
     loadSampleProducts();
-    qDebug() << "MainWindow: depois de loadSampleProducts";
-    qDebug() << "ANTES filterAndSortProducts";
     filterAndSortProducts();
-    qDebug() << "DEPOIS filterAndSortProducts";
     displayProducts();
-    qDebug() << "MainWindow fim/OK";
+    
+    // Update user label will be done in setupUi after userLabel_ is created
 }
 
 void MainWindow::setupUi()
@@ -123,10 +126,16 @@ void MainWindow::setupUi()
     auto* headerLayout = new QHBoxLayout(userInfoLabel);
     headerLayout->setContentsMargins(0,0,0,0);
 
-    QLabel* userLabel = new QLabel("User: <b>Guts</b>");
-    userLabel->setStyleSheet("color: #ffffff; font-size: 16px; font-weight: 600; background: transparent; border: none;");
-    headerLayout->addWidget(userLabel);
+    userLabel_ = new QLabel();
+    userLabel_->setText(currentUsername_.isEmpty() ? "User" : "User: " + currentUsername_);
+    userLabel_->setStyleSheet("color: #ffffff; font-size: 16px; font-weight: 600; background: transparent; border: none;");
+    headerLayout->addWidget(userLabel_);
     headerLayout->addStretch();
+
+    btnLogout_ = new QPushButton("Logout");
+    btnLogout_->setStyleSheet("background: #222; color: #fff; border-radius: 13px; font-size: 12px; padding:6px 20px; font-weight: 700;");
+    connect(btnLogout_, &QPushButton::clicked, this, &MainWindow::onLogoutClicked);
+    headerLayout->addWidget(btnLogout_);
 
     qDebug() << "setupUi: btnAddProduct";
     QPushButton* btnAddProduct = new QPushButton("➕ Add Product");
@@ -191,8 +200,6 @@ void MainWindow::setupUi()
     resize(1200, 770);
     qDebug() << "setupUi: FIM";
 }
-
-
 
 void MainWindow::loadSampleProducts()
 {
@@ -294,7 +301,7 @@ void MainWindow::createProductCard(const Product& product)
     cardLayout->setContentsMargins(22, 12, 22, 12);
     cardLayout->setSpacing(15);
 
-    QPushButton* favBtn = new QPushButton(favoriteProductIds_.contains(product.getId()) ? "*" : "○");
+    QPushButton* favBtn = new QPushButton(favoriteProductIds_.contains(product.getId()) ? "⭐" : "○");
     favBtn->setCheckable(true);
     favBtn->setChecked(favoriteProductIds_.contains(product.getId()));
     favBtn->setCursor(Qt::PointingHandCursor);
@@ -313,12 +320,19 @@ void MainWindow::createProductCard(const Product& product)
         bool favorited = favBtn->isChecked();
         if (favorited) favoriteProductIds_.insert(product.getId());
         else favoriteProductIds_.remove(product.getId());
-        favBtn->setText(favorited ? "*" : "○");
+        favBtn->setText(favorited ? "⭐" : "○");
         filterAndSortProducts();
         displayProducts();
     });
     cardLayout->addWidget(favBtn, 0, Qt::AlignVCenter);
 
+    int currentIndex = -1;
+    for (int i = 0; i < filteredProducts_.size(); ++i) {
+        if (filteredProducts_[i].getId() == product.getId()) {
+            currentIndex = i;
+            break;
+        }
+    }
     QPushButton* selectButton = new QPushButton;
     selectButton->setCheckable(true);
     selectButton->setChecked(selectedProductIds_.contains(product.getId()));
@@ -346,8 +360,22 @@ void MainWindow::createProductCard(const Product& product)
     )");
     selectButton->setToolTip(selectedProductIds_.contains(product.getId()) ? "Unselect" : "Select");
     cardLayout->addWidget(selectButton, 0, Qt::AlignVCenter);
-    connect(selectButton, &QPushButton::toggled, this, [this, product](bool checked) {
-        onSelectProductToggled(product.getId(), checked);
+    connect(selectButton, &QPushButton::clicked, this, [this, product, currentIndex, selectButton](bool checked) {
+        QGuiApplication::keyboardModifiers();
+        auto modifiers = QGuiApplication::keyboardModifiers();
+        if (modifiers & Qt::ShiftModifier && lastProductCardClickedIndex_ >= 0 && lastProductCardClickedIndex_ < filteredProducts_.size()) {
+            int from = qMin(lastProductCardClickedIndex_, currentIndex);
+            int to = qMax(lastProductCardClickedIndex_, currentIndex);
+            for (int i = from; i <= to; ++i) {
+                selectedProductIds_.insert(filteredProducts_[i].getId());
+            }
+            updateDeleteSelectedButtonState(); // Sure it's enabled after selection
+            displayProducts();
+            if (btnDeleteSelected_) btnDeleteSelected_->setChecked(true); /* For checkable, otherwise just enabled is enough */
+        } else {
+            onSelectProductToggled(product.getId(), checked);
+        }
+        lastProductCardClickedIndex_ = currentIndex;
     });
 
     QLabel* icon = new QLabel;
@@ -420,6 +448,25 @@ void MainWindow::createProductCard(const Product& product)
 
 bool MainWindow::eventFilter(QObject* obj, QEvent* event)
 {
+    if (event->type() == QEvent::KeyPress) {
+        QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+#ifdef Q_OS_MAC
+        bool isCommandA = keyEvent->key() == Qt::Key_A && (keyEvent->modifiers() & Qt::MetaModifier);
+#else
+        bool isCommandA = keyEvent->key() == Qt::Key_A && (keyEvent->modifiers() & Qt::ControlModifier);
+#endif
+        if (isCommandA) {
+            // Select all visible (filtered) products
+            selectedProductIds_.clear();
+            for (const Product &p : filteredProducts_) {
+                selectedProductIds_.insert(p.getId());
+            }
+            updateDeleteSelectedButtonState(); // Make sure delete is enabled
+            displayProducts(); // update UI for checked checkboxes
+            if (btnDeleteSelected_) btnDeleteSelected_->setChecked(true); /* For checkable, otherwise just enabled is enough */
+            return true;
+        }
+    }
     if (event->type() == QEvent::MouseButtonDblClick) {
         QWidget* card = qobject_cast<QWidget*>(obj);
         if (card && card->property("editId").isValid()) {
@@ -633,4 +680,17 @@ void MainWindow::onBtnFavorites() {
     btnShowFavorites_->setChecked(true);
     filterAndSortProducts();
     displayProducts();
+}
+
+void MainWindow::onLogoutClicked() {
+    int ret = QMessageBox::question(this, "Logout", 
+        "Are you sure you want to logout?",
+        QMessageBox::Yes | QMessageBox::No);
+    
+    if (ret == QMessageBox::Yes) {
+        this->close();
+        QApplication::quit();
+        // Restart the application (main will show login again)
+        QProcess::startDetached(QApplication::arguments()[0], QApplication::arguments());
+    }
 }

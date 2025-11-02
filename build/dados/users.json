@@ -1,0 +1,9 @@
+{
+    "users": [
+        {
+            "password_hash": "8c97f08aa635ce53b85a51878fbeed7564e45b19eada16cedcd86fbec1bdf6ce",
+            "salt": "6u5zm6YyEsGAPLz2p7G9OIvg9DuJ6wMI",
+            "username": "Beni"
+        }
+    ]
+}

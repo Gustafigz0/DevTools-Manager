@@ -1,0 +1,5 @@
+/Users/brituz/Downloads/DevTools-Manager-sandbox/build/CMakeFiles/DevToolsManager.dir
+/Users/brituz/Downloads/DevTools-Manager-sandbox/build/CMakeFiles/edit_cache.dir
+/Users/brituz/Downloads/DevTools-Manager-sandbox/build/CMakeFiles/rebuild_cache.dir
+/Users/brituz/Downloads/DevTools-Manager-sandbox/build/CMakeFiles/DevToolsManager_autogen_timestamp_deps.dir
+/Users/brituz/Downloads/DevTools-Manager-sandbox/build/CMakeFiles/DevToolsManager_autogen.dir

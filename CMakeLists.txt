@@ -20,6 +20,9 @@ set(SOURCES
     scr/ProductManager.cpp
     scr/Theme.cpp
     scr/ToastNotification.cpp
+    scr/UserAuthDialog.cpp
+    scr/UserAuthManager.cpp
+    scr/ClickableLabel.cpp
 )
 
 # Header files
@@ -30,6 +33,8 @@ set(HEADERS
     include/ProductManager.h
     include/Theme.h
     include/ToastNotification.h
+    include/UserAuthManager.h
+    include/ClickableLabel.h
 )
 
 # Create executable
