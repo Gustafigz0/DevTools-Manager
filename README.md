@@ -64,10 +64,7 @@ Stock modification UI | ✅
 Price tracking | ✅  
 Search | ✅  
 Vision-style UI | ✅  
-Dashboard screen | 🔜  
-iPad app version | 🔜  
-CSV export | 🔜  
-Cloud optional mode | 🔜  
+
 
 ---
 
