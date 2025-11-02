@@ -1,30 +1,105 @@
-# DevTools-Manager
+# 🍏 DevTools Manager 
+Offline IT Inventory & Software License Manager — Vision-Style UI
 
-A system designed to help IT companies manage inventory, stock, and internal tools — currently under development on the `sandbox` branch.
+DevTools Manager is a lightweight **offline-first** app built to help IT teams manage hardware inventory, software licenses, stock levels, and item photos — **100% local with JSON storage**, no cloud, no dependencies.
 
-## 🎯 Objective
+---
 
-Centralize and optimize the control of stock, hardware components, equipment, software licenses, and tools used by technical teams.
+## ✅ Features
 
-## ✨ Planned Features
+### 📦 Inventory Management
+- Add / Edit / Delete items
+- Track:
+  - Name, Category, Serial
+  - Quantity in stock
+  - Minimum stock
+  - 🔢 **Quick stock increase / decrease**
+  - 💰 Price per item
+  - 📍 Location
+  - 📝 Notes
+  - 🖼 Item image (secure offline saving)
+- Low-stock visual alerts
 
-- Inventory management (incoming/outgoing items)
-- Stock control for components and equipment
-- Software license & tool tracking
-- Usage and movement history
-- Modular architecture for future expansion
+### 🧾 Software License Manager
+- Add / Edit / Delete licenses
+- Fields:
+  - Software name  
+  - License key  
+  - Assigned to  
+  - Expiration date  
+  - Notes  
+- Local secure storage
 
-## 🛠️ Tech Stack
+### 🧠 Smart UI/UX
+- macOS Vision glass-blur style navigation
+- ✅ Sidebar navigation (Inventory / Licenses)
+- ✅ Search bar (real-time filtering)
+- ✅ Smooth form views
 
-- C++ (C++14)
-- CMake
-- Future UI integration possibilities (Qt / GTK / Web)
+---
 
-## 📦 Installation
+## 💾 Local Storage
 
-```bash
-git clone --branch sandbox https://github.com/Gustafigz0/DevTools-Manager.git
-cd DevTools-Manager
-mkdir build && cd build
-cmake ..
-make
+| Technology | Purpose |
+|-----------|--------|
+`FileManager` | Local file handling  
+`Codable` | JSON encode/decode  
+`.json` files | Persistent storage  
+❌ No Core Data  
+❌ No SQLite  
+❌ No Internet / Cloud  
+
+This app is designed for **privacy-focused businesses** — all data stays local.
+
+---
+
+## 🎯 Roadmap
+
+| Feature | Status |
+|--------|--------|
+Inventory + Licenses CRUD | ✅  
+JSON local storage | ✅  
+Image safe-storage | ✅  
+Stock modification UI | ✅  
+Price tracking | ✅  
+Search | ✅  
+Vision-style UI | ✅  
+Dashboard screen | 🔜  
+iPad app version | 🔜  
+CSV export | 🔜  
+Cloud optional mode | 🔜  
+
+---
+
+## 🔐 Privacy
+
+- No internet required  
+- No servers  
+- No tracking  
+- All data stored **locally only**
+
+Perfect for internal device & license management.
+
+---
+
+## 📜 License
+
+MIT License — Feel free to use, modify, and contribute.
+
+---
+
+## 🤝 Contributing
+
+Pull requests and feature suggestions are welcome.  
+If you build improvements, share them back! 🙌
+
+---
+
+## 👋 Author Notes
+
+This is an MVP version — clean, fast, secure, offline, and private.  
+More enterprise features coming next.
+
+---
+
+### ⭐ If you like this project, star the repo!
