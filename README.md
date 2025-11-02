@@ -1,4 +1,4 @@
-# 🍏 DevTools Manager 
+# DevTools Manager 
 Offline IT Inventory & Software License Manager — Vision-Style UI
 
 DevTools Manager is a lightweight **offline-first** app built to help IT teams manage hardware inventory, software licenses, stock levels, and item photos — **100% local with JSON storage**, no cloud, no dependencies.
