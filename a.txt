@@ -1,4 +1,0 @@
-cd C:\Users\Guts\Documents\GitHub\Gui\build-mingw
-cmake .. -G "MinGW Makefiles"
-cmake --build .
-windeployqt.exe DevToolsManager.exe

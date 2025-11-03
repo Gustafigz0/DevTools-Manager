@@ -391,3 +391,9 @@ Product AddProductDialog::getProduct() const {
     product.setImagePath(imagePath_);
     return product;
 }
+
+void AddProductDialog::setInitialId(const QString& id) {
+    if (!isEditMode_ && idEdit_ && idEdit_->text().trimmed().isEmpty()) {
+        idEdit_->setText(id);
+    }
+}

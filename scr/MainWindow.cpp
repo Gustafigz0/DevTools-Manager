@@ -24,6 +24,9 @@
 #include "ClickableLabel.h"
 #include <QCryptographicHash>
 #include <QProcess>
+#include <QListView>
+#include <QSignalBlocker>
+#include <QRegularExpression>
 
 MainWindow::MainWindow(const QString& username, QWidget* parent)
     : QMainWindow(parent), currentUsername_(username)
@@ -163,17 +166,91 @@ void MainWindow::setupUi()
 
     filterCategoryBox_ = new QComboBox;
     filterCategoryBox_->setToolTip("Filtrar por Categoria");
-    filterCategoryBox_->setStyleSheet("QComboBox { background: #2a2a2a; color: #fff; border: 2px solid #444444; border-radius: 10px; font-size: 14px; padding: 6px 17px;} QComboBox::drop-down { border: none; width: 0px; }");
+    filterCategoryBox_->setStyleSheet(
+        "QComboBox { background: #2a2a2a; color: #fff; border: 2px solid #444444; border-radius: 10px; font-size: 14px; padding: 8px 14px; min-height: 32px;}"
+        "QComboBox:focus { border-color: #666666; }"
+        "QComboBox::drop-down { border: none; width: 0px; }"
+        "QComboBox QAbstractItemView { background: transparent; border: none; }"
+    );
+    filterCategoryBox_->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    filterCategoryBox_->setEditable(false);
+    filterCategoryBox_->setInsertPolicy(QComboBox::NoInsert);
+    filterCategoryBox_->setDuplicatesEnabled(false);
+    // Modern popup view styling
+    {
+        auto* catView = new QListView(filterCategoryBox_);
+        catView->setStyleSheet(
+            "QListView { background: transparent; color: #ffffff; border: none; padding: 0px; outline: 0; }"
+            "QListView::viewport { background: #2a2a2a; border: 2px solid #444444; border-radius: 10px; }"
+            "QListView::item { padding: 8px 12px; min-height: 30px; border-radius: 6px; }"
+            "QListView::item:hover { background: #383838; }"
+            "QListView::item:selected { background: #555555; }"
+            "QScrollBar:vertical { background: transparent; width: 10px; margin: 6px 3px 6px 0; }"
+            "QScrollBar::handle:vertical { background: #555555; border-radius: 5px; }"
+            "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }"
+        );
+        catView->setFrameShape(QFrame::NoFrame);
+        catView->setAutoFillBackground(false);
+        // Let eventFilter keep popup width equal to button width
+        catView->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+        catView->setUniformItemSizes(true);
+        catView->setSpacing(2);
+        catView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        catView->setTextElideMode(Qt::ElideRight);
+        filterCategoryBox_->setView(catView);
+        filterCategoryBox_->setMaxVisibleItems(8);
+    }
     filterRow->addWidget(filterCategoryBox_, 2);
     connect(filterCategoryBox_, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onFilterChanged);
 
     filterStockBox_ = new QComboBox;
     filterStockBox_->addItems({"All stock", "In stock", "Low stock", "Out of stock"});
     filterStockBox_->setToolTip("Filter by stock status");
-    filterStockBox_->setStyleSheet("QComboBox { background: #2a2a2a; color: #fff; border: 2px solid #444444; border-radius: 10px; font-size: 14px; padding: 6px 17px;} QComboBox::drop-down { border: none; width: 0px; }");
+    filterStockBox_->setStyleSheet(
+        "QComboBox { background: #2a2a2a; color: #fff; border: 2px solid #444444; border-radius: 10px; font-size: 14px; padding: 8px 14px; min-height: 32px;}"
+        "QComboBox:focus { border-color: #666666; }"
+        "QComboBox::drop-down { border: none; width: 0px; }"
+        "QComboBox QAbstractItemView { background: transparent; border: none; }"
+    );
+    filterStockBox_->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    filterStockBox_->setEditable(false);
+    filterStockBox_->setInsertPolicy(QComboBox::NoInsert);
+    filterStockBox_->setDuplicatesEnabled(false);
+    {
+        auto* stockView = new QListView(filterStockBox_);
+        stockView->setStyleSheet(
+            "QListView { background: transparent; color: #ffffff; border: none; padding: 0px; outline: 0; }"
+            "QListView::viewport { background: #2a2a2a; border: 2px solid #444444; border-radius: 10px; }"
+            "QListView::item { padding: 8px 12px; min-height: 30px; border-radius: 6px; }"
+            "QListView::item:hover { background: #383838; }"
+            "QListView::item:selected { background: #555555; }"
+            "QScrollBar:vertical { background: transparent; width: 10px; margin: 6px 3px 6px 0; }"
+            "QScrollBar::handle:vertical { background: #555555; border-radius: 5px; }"
+            "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }"
+        );
+        stockView->setFrameShape(QFrame::NoFrame);
+        stockView->setAutoFillBackground(false);
+        // Let eventFilter keep popup width equal to button width
+        stockView->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+        stockView->setUniformItemSizes(true);
+        stockView->setSpacing(2);
+        stockView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        stockView->setTextElideMode(Qt::ElideRight);
+        filterStockBox_->setView(stockView);
+        filterStockBox_->setMaxVisibleItems(8);
+    }
     filterRow->addWidget(filterStockBox_, 2);
     connect(filterStockBox_, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onFilterChanged);
 
+    // Normalize heights to match the search bar
+    {
+        int h = searchBar_->sizeHint().height();
+        filterCategoryBox_->setFixedHeight(h);
+        filterStockBox_->setFixedHeight(h);
+        // Track size changes to keep popup width == button width
+        filterCategoryBox_->installEventFilter(this);
+        filterStockBox_->installEventFilter(this);
+    }
     productsLayout_->addLayout(filterRow);
     qDebug() << "setupUi: filtros OK";
 
@@ -254,11 +331,23 @@ void MainWindow::filterAndSortProducts()
         return a.getName().toLower() < b.getName().toLower();
     });
 
-    filterCategoryBox_->clear();
-    filterCategoryBox_->addItem("Todas Categorias");
-    QSet<QString> cats;
-    for (const Product& p : allProducts_) cats.insert(p.getCategory());
-    for (const QString& cat : cats) filterCategoryBox_->addItem(cat);
+    {
+        QSignalBlocker blocker(filterCategoryBox_);
+        filterCategoryBox_->clear();
+        filterCategoryBox_->addItem("Todas Categorias");
+        QSet<QString> cats;
+        for (const Product& p : allProducts_) cats.insert(p.getCategory());
+        QStringList sortedCats = QStringList(cats.begin(), cats.end());
+        std::sort(sortedCats.begin(), sortedCats.end(), [](const QString& a, const QString& b){ return a.toLower() < b.toLower(); });
+        for (const QString& cat : sortedCats) filterCategoryBox_->addItem(cat);
+        int idx = 0;
+        if (!selectedCategory.isEmpty()) {
+            for (int i = 0; i < filterCategoryBox_->count(); ++i) {
+                if (filterCategoryBox_->itemText(i) == selectedCategory) { idx = i; break; }
+            }
+        }
+        filterCategoryBox_->setCurrentIndex(idx);
+    }
 
     filterRunning_ = false;
 }
@@ -448,6 +537,14 @@ void MainWindow::createProductCard(const Product& product)
 
 bool MainWindow::eventFilter(QObject* obj, QEvent* event)
 {
+    // Keep popup width exactly equal to combo button width and handle select-all hotkey
+    if ((obj == filterCategoryBox_ || obj == filterStockBox_) &&
+        (event->type() == QEvent::Resize || event->type() == QEvent::Show || event->type() == QEvent::ShowToParent)) {
+        QComboBox* combo = qobject_cast<QComboBox*>(obj);
+        if (combo && combo->view()) {
+            combo->view()->setFixedWidth(combo->width());
+        }
+    }
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
 #ifdef Q_OS_MAC
@@ -561,6 +658,28 @@ void MainWindow::onAddProductClicked()
     categorias.removeDuplicates();
 
     AddProductDialog dialog(categorias, this);
+
+    // Auto-generate a unique numeric ID (user can still edit it)
+    QSet<QString> existingIds;
+    for (const Product& p : allProducts_) existingIds.insert(p.getId());
+    auto generateUniqueId = [&](int minWidth){
+        int maxNum = 0;
+        QRegularExpression re("^\\d+$");
+        for (const QString& id : existingIds) {
+            if (re.match(id).hasMatch()) {
+                bool ok = false; int n = id.toInt(&ok);
+                if (ok) maxNum = qMax(maxNum, n);
+            }
+        }
+        int candidate = maxNum + 1;
+        QString s;
+        do {
+            s = QString("%1").arg(candidate, qMax(minWidth, (int)QString::number(candidate).size()), 10, QChar('0'));
+            candidate++;
+        } while (existingIds.contains(s));
+        return s;
+    };
+    dialog.setInitialId(generateUniqueId(3));
 
     if (dialog.exec() == QDialog::Accepted) {
         Product newProduct = dialog.getProduct();

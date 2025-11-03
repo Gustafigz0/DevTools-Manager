@@ -19,6 +19,7 @@ public:
     AddProductDialog(const Product& product, const QStringList& categorias, QWidget* parent = nullptr);
 
     Product getProduct() const;
+    void setInitialId(const QString& id);
 
 private slots:
     void onSaveClicked();
