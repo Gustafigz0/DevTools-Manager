@@ -26,25 +26,85 @@
 #include <QListView>
 #include <QSignalBlocker>
 #include <QRegularExpression>
+#include <QMouseEvent>
 
 MainWindow::MainWindow(const QString& username, QWidget* parent)
     : QMainWindow(parent), currentUsername_(username)
 {
+    // Remove native title bar for custom styling
+    setWindowFlag(Qt::FramelessWindowHint, true);
+    setAttribute(Qt::WA_TranslucentBackground, false);
     setupUi();
     loadSampleProducts();
     filterAndSortProducts();
     displayProducts();
-    
-    // Update user label will be done in setupUi after userLabel_ is created
 }
 
 void MainWindow::setupUi()
 {
-    qDebug() << "setupUi: widgets-raiz";
+    qDebug() << "setupUi: root";
     auto* central = new QWidget(this);
-    central->setStyleSheet("background: #0d1117;"); // GitHub dark background
-    auto* root = new QHBoxLayout(central);
-    root->setContentsMargins(0, 0, 0, 0);
+    central->setObjectName("centralRoot");
+    central->setStyleSheet(R"(
+        #centralRoot { background: #0d1117; }
+    )");
+    auto* globalVBox = new QVBoxLayout(central);
+    globalVBox->setContentsMargins(0,0,0,0);
+    globalVBox->setSpacing(0);
+
+    // ---------------- Custom Title Bar -----------------
+    titleBar_ = new QWidget(central);
+    titleBar_->setObjectName("TitleBar");
+    titleBar_->setFixedHeight(42);
+    titleBar_->setStyleSheet(R"(
+        #TitleBar {
+            background: #0d1117;
+            border-bottom: 1px solid #21262d;
+        }
+        #TitleBar QLabel#WindowTitleLabel {
+            color: #c9d1d9;
+            font-size: 13px;
+            font-weight: 600;
+            padding-left: 12px;
+        }
+        #TitleBar QPushButton {
+            background: transparent;
+            border: none;
+            color: #8b949e;
+            font-size: 12px;
+            min-width: 36px;
+            padding: 0px;
+        }
+        #TitleBar QPushButton:hover { background: #21262d; color: #c9d1d9; }
+        #TitleBar QPushButton#CloseBtn:hover { background: #da3633; color: #ffffff; }
+    )");
+    auto* titleLayout = new QHBoxLayout(titleBar_);
+    titleLayout->setContentsMargins(0,0,0,0);
+    titleLayout->setSpacing(0);
+    titleLabel_ = new QLabel("DevTools Manager", titleBar_);
+    titleLabel_->setObjectName("WindowTitleLabel");
+    titleLayout->addWidget(titleLabel_, 0, Qt::AlignVCenter);
+    titleLayout->addStretch(1);
+    btnWinMin_ = new QPushButton("_", titleBar_); btnWinMin_->setToolTip("Minimize");
+    btnWinMax_ = new QPushButton("□", titleBar_); btnWinMax_->setToolTip("Maximize/Restore");
+    btnWinClose_ = new QPushButton("✕", titleBar_); btnWinClose_->setObjectName("CloseBtn"); btnWinClose_->setToolTip("Close");
+    titleLayout->addWidget(btnWinMin_);
+    titleLayout->addWidget(btnWinMax_);
+    titleLayout->addWidget(btnWinClose_);
+
+    connect(btnWinMin_, &QPushButton::clicked, this, []{ QApplication::activeWindow()->showMinimized(); });
+    connect(btnWinMax_, &QPushButton::clicked, this, [this]{
+        if (isMaximized()) showNormal(); else showMaximized();
+    });
+    connect(btnWinClose_, &QPushButton::clicked, this, [this]{ close(); });
+
+    // Mouse events for drag
+    titleBar_->installEventFilter(this);
+
+    // ---------------- Body Layout (Sidebar + Content) -----------------
+    auto* bodyWrapper = new QWidget(central);
+    auto* root = new QHBoxLayout(bodyWrapper);
+    root->setContentsMargins(0,0,0,0);
     root->setSpacing(0);
 
     qDebug() << "setupUi: sidebarBox/layout";
@@ -98,6 +158,8 @@ void MainWindow::setupUi()
             background: #21262d;
             color: #c9d1d9;
             font-weight: 600;
+            border-left: 3px solid #1f6feb;
+            padding-left: 9px; /* compensate for left border */
         }
         QPushButton:hover {
             background: #161b22;
@@ -125,6 +187,8 @@ void MainWindow::setupUi()
             background: #21262d;
             color: #c9d1d9;
             font-weight: 600;
+            border-left: 3px solid #1f6feb;
+            padding-left: 9px;
         }
         QPushButton:hover {
             background: #161b22;
@@ -598,29 +662,20 @@ void MainWindow::setupUi()
 
     root->addWidget(sidebarBox_, 0);
     root->addWidget(productsBg_, 1);
+    globalVBox->addWidget(titleBar_);
+    globalVBox->addWidget(bodyWrapper, 1);
     setCentralWidget(central);
-    setWindowTitle("DevTools Manager");
+    setWindowTitle("DevTools Manager"); // logical title
     resize(1280, 800);
     
     // Apply GitHub-like window styling
-    setStyleSheet(R"(
-        QMainWindow {
-            background: #0d1117;
-        }
-        QMessageBox {
-            background: #161b22;
-            color: #c9d1d9;
-        }
+    setStyleSheet(styleSheet() + R"(
+        QMainWindow { background: #0d1117; }
+        QMessageBox { background: #161b22; color: #c9d1d9; }
         QMessageBox QPushButton {
-            background: #21262d;
-            color: #c9d1d9;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 5px 16px;
+            background: #21262d; color: #c9d1d9; border: 1px solid #30363d; border-radius: 6px; padding: 5px 16px;
         }
-        QMessageBox QPushButton:hover {
-            background: #30363d;
-        }
+        QMessageBox QPushButton:hover { background: #30363d; }
     )");
     
     qDebug() << "setupUi: FIM";
@@ -952,41 +1007,62 @@ void MainWindow::createProductCard(const Product& product)
 
 bool MainWindow::eventFilter(QObject* obj, QEvent* event)
 {
-    // Keep popup width exactly equal to combo button width and handle select-all hotkey
+    // Title bar drag & double click
+    if (obj == titleBar_) {
+        if (event->type() == QEvent::MouseButtonPress) {
+            auto* me = static_cast<QMouseEvent*>(event);
+            if (me->button() == Qt::LeftButton) {
+                draggingWindow_ = true;
+                dragOffset_ = me->globalPosition().toPoint() - frameGeometry().topLeft();
+                return true;
+            }
+        } else if (event->type() == QEvent::MouseMove && draggingWindow_) {
+            auto* me = static_cast<QMouseEvent*>(event);
+            if (me->buttons() & Qt::LeftButton) {
+                move(me->globalPosition().toPoint() - dragOffset_);
+                return true;
+            }
+        } else if (event->type() == QEvent::MouseButtonRelease) {
+            draggingWindow_ = false;
+        } else if (event->type() == QEvent::MouseButtonDblClick) {
+            if (isMaximized()) showNormal(); else showMaximized();
+            return true;
+        }
+    }
+
+    // Keep popup width equal to combo width
     if ((obj == filterCategoryBox_ || obj == filterStockBox_) &&
         (event->type() == QEvent::Resize || event->type() == QEvent::Show || event->type() == QEvent::ShowToParent)) {
-        QComboBox* combo = qobject_cast<QComboBox*>(obj);
-        if (combo && combo->view()) {
+        if (auto* combo = qobject_cast<QComboBox*>(obj); combo && combo->view()) {
             combo->view()->setFixedWidth(combo->width());
         }
     }
+
+    // Ctrl+A select all
     if (event->type() == QEvent::KeyPress) {
-        QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+        auto* keyEvent = static_cast<QKeyEvent*>(event);
 #ifdef Q_OS_MAC
         bool isCommandA = keyEvent->key() == Qt::Key_A && (keyEvent->modifiers() & Qt::MetaModifier);
 #else
         bool isCommandA = keyEvent->key() == Qt::Key_A && (keyEvent->modifiers() & Qt::ControlModifier);
 #endif
         if (isCommandA) {
-            // Select all visible (filtered) products
             selectedProductIds_.clear();
-            for (const Product &p : filteredProducts_) {
-                selectedProductIds_.insert(p.getId());
-            }
-            updateDeleteSelectedButtonState(); // Make sure delete is enabled
-            displayProducts(); // update UI for checked checkboxes
-            if (btnDeleteSelected_) btnDeleteSelected_->setChecked(true); /* For checkable, otherwise just enabled is enough */
+            for (const Product &p : filteredProducts_) selectedProductIds_.insert(p.getId());
+            updateDeleteSelectedButtonState();
+            displayProducts();
             return true;
         }
     }
+
+    // Product card double-click edit
     if (event->type() == QEvent::MouseButtonDblClick) {
-        QWidget* card = qobject_cast<QWidget*>(obj);
-        if (card && card->property("editId").isValid()) {
-            QString editId = card->property("editId").toString();
-            onEditProductRequested(editId);
+        if (auto* card = qobject_cast<QWidget*>(obj); card && card->property("editId").isValid()) {
+            onEditProductRequested(card->property("editId").toString());
             return true;
         }
     }
+
     return QMainWindow::eventFilter(obj, event);
 }
 
