@@ -67,6 +67,14 @@ private:
     bool draggingWindow_ = false;
     QPoint dragOffset_;
 
+    // Window resize handling
+    bool resizing_ = false;
+    QPoint resizeOffset_;
+    Qt::Edges resizeEdge_ = Qt::Edges();
+
+    // Window rounded container (card)
+    QWidget* windowCard_ = nullptr;
+
     QWidget* sidebarBox_;
     QVBoxLayout* sidebarLayout_;
     QPushButton* btnProducts_;
@@ -98,8 +106,16 @@ private:
     void filterAndSortProducts();
     void onBtnProducts();
     void onBtnFavorites();
+    
+    // Helper methods for window resize
+    Qt::Edges getResizeEdge(const QPoint& pos);
+    void updateCursorShape(Qt::Edges edges);
 
     protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
+    void resizeEvent(QResizeEvent* event) override;
+    void mousePressEvent(QMouseEvent* event) override;
+    void mouseMoveEvent(QMouseEvent* event) override;
+    void mouseReleaseEvent(QMouseEvent* event) override;
 
 };
