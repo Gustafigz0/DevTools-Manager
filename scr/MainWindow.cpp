@@ -28,14 +28,15 @@
 #include <QRegularExpression>
 #include <QMouseEvent>
 #include <QResizeEvent>
+#include <QGraphicsDropShadowEffect>
 
 MainWindow::MainWindow(const QString& username, QWidget* parent)
     : QMainWindow(parent), currentUsername_(username)
 {
     // Remove native title bar for custom styling
     setWindowFlag(Qt::FramelessWindowHint, true);
-    // Don't use translucent background to avoid rendering bugs
-    setAttribute(Qt::WA_TranslucentBackground, false);
+    // Enable translucent background for rounded corners
+    setAttribute(Qt::WA_TranslucentBackground, true);
     setupUi();
     loadSampleProducts();
     filterAndSortProducts();
@@ -47,51 +48,86 @@ void MainWindow::setupUi()
     qDebug() << "setupUi: root";
     auto* central = new QWidget(this);
     central->setObjectName("centralRoot");
-    // Solid background for stable rendering
-    central->setStyleSheet("#centralRoot { background: #0d1117; }");
-    auto* globalVBox = new QVBoxLayout(central);
-    globalVBox->setContentsMargins(0,0,0,0);
-    globalVBox->setSpacing(0);
+    // Transparent root for rounded corners
+    central->setStyleSheet("#centralRoot { background: transparent; }");
+    globalVBox_ = new QVBoxLayout(central);
+    globalVBox_->setContentsMargins(10,10,10,10);
+    globalVBox_->setSpacing(0);
 
-    // Main container (no shadow to avoid bugs)
+    // Main container with rounded corners and shadow effect
     windowCard_ = new QWidget(central);
     windowCard_->setObjectName("WindowCard");
     windowCard_->setStyleSheet(R"(
         #WindowCard {
             background: #0d1117;
-            border: 2px solid #21262d;
-            border-radius: 0px;
+            border: 1px solid #30363d;
+            border-radius: 12px;
         }
     )");
     auto* cardVBox = new QVBoxLayout(windowCard_);
     cardVBox->setContentsMargins(0,0,0,0);
     cardVBox->setSpacing(0);
 
+    // Invisible resize border overlay for visual feedback
+    resizeBorder_ = new QWidget(windowCard_);
+    resizeBorder_->setObjectName("ResizeBorder");
+    resizeBorder_->setStyleSheet(R"(
+        #ResizeBorder {
+            background: transparent;
+            border: 2px solid transparent;
+            border-radius: 12px;
+        }
+        #ResizeBorder:hover {
+            border: 2px solid rgba(88, 166, 255, 0.3);
+        }
+    )");
+    resizeBorder_->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+    resizeBorder_->raise();
+
     // ---------------- Custom Title Bar -----------------
     titleBar_ = new QWidget(windowCard_);
     titleBar_->setObjectName("TitleBar");
-    titleBar_->setFixedHeight(42);
+    titleBar_->setFixedHeight(48);
     titleBar_->setStyleSheet(R"(
         #TitleBar {
-            background: #0d1117;
+            background: #161b22;
             border-bottom: 1px solid #21262d;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
         }
         #TitleBar QLabel#WindowTitleLabel {
             color: #c9d1d9;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            padding-left: 12px;
+            padding-left: 16px;
         }
         #TitleBar QPushButton {
             background: transparent;
             border: none;
             color: #8b949e;
-            font-size: 12px;
-            min-width: 36px;
+            font-size: 16px;
+            font-weight: 400;
+            min-width: 46px;
+            max-width: 46px;
+            min-height: 48px;
+            max-height: 48px;
             padding: 0px;
+            border-radius: 0px;
         }
-        #TitleBar QPushButton:hover { background: #21262d; color: #c9d1d9; }
-        #TitleBar QPushButton#CloseBtn:hover { background: #da3633; color: #ffffff; }
+        #TitleBar QPushButton:hover { 
+            background: rgba(255, 255, 255, 0.08); 
+            color: #c9d1d9; 
+        }
+        #TitleBar QPushButton#MaxBtn {
+            border-top-right-radius: 0px;
+        }
+        #TitleBar QPushButton#CloseBtn { 
+            border-top-right-radius: 12px;
+        }
+        #TitleBar QPushButton#CloseBtn:hover { 
+            background: #da3633; 
+            color: #ffffff; 
+        }
     )");
     auto* titleLayout = new QHBoxLayout(titleBar_);
     titleLayout->setContentsMargins(0,0,0,0);
@@ -100,17 +136,35 @@ void MainWindow::setupUi()
     titleLabel_->setObjectName("WindowTitleLabel");
     titleLayout->addWidget(titleLabel_, 0, Qt::AlignVCenter);
     titleLayout->addStretch(1);
-    btnWinMin_ = new QPushButton("_", titleBar_); btnWinMin_->setToolTip("Minimize");
-    btnWinMax_ = new QPushButton(isMaximized() ? "❐" : "□", titleBar_); btnWinMax_->setToolTip("Maximize/Restore");
-    btnWinClose_ = new QPushButton("✕", titleBar_); btnWinClose_->setObjectName("CloseBtn"); btnWinClose_->setToolTip("Close");
+    
+    // Modern window control buttons with proper symbols
+    btnWinMin_ = new QPushButton("−", titleBar_); 
+    btnWinMin_->setToolTip("Minimize");
+    
+    btnWinMax_ = new QPushButton(isMaximized() ? "❐" : "□", titleBar_); 
+    btnWinMax_->setObjectName("MaxBtn");
+    btnWinMax_->setToolTip("Maximize/Restore");
+    
+    btnWinClose_ = new QPushButton("✕", titleBar_); 
+    btnWinClose_->setObjectName("CloseBtn"); 
+    btnWinClose_->setToolTip("Close");
+    
     titleLayout->addWidget(btnWinMin_);
     titleLayout->addWidget(btnWinMax_);
     titleLayout->addWidget(btnWinClose_);
 
     connect(btnWinMin_, &QPushButton::clicked, this, []{ QApplication::activeWindow()->showMinimized(); });
     connect(btnWinMax_, &QPushButton::clicked, this, [this]{
-        if (isMaximized()) { showNormal(); btnWinMax_->setText("□"); }
-        else { showMaximized(); btnWinMax_->setText("❐"); }
+        if (isMaximized()) { 
+            showNormal(); 
+            btnWinMax_->setText("□"); 
+            updateWindowStyle(false);
+        }
+        else { 
+            showMaximized(); 
+            btnWinMax_->setText("❐"); 
+            updateWindowStyle(true);
+        }
     });
     connect(btnWinClose_, &QPushButton::clicked, this, [this]{ close(); });
 
@@ -791,7 +845,7 @@ void MainWindow::setupUi()
     root->addWidget(productsBg_, 1);
     cardVBox->addWidget(titleBar_);
     cardVBox->addWidget(bodyWrapper, 1);
-    globalVBox->addWidget(windowCard_, 1);
+    globalVBox_->addWidget(windowCard_, 1);
     setCentralWidget(central);
     setWindowTitle("DevTools Manager"); // logical title
     
@@ -801,7 +855,7 @@ void MainWindow::setupUi()
     
     // Apply GitHub-like window styling
     setStyleSheet(styleSheet() + R"(
-        QMainWindow { background: #0d1117; }
+        QMainWindow { background: transparent; }
         QMessageBox { background: #161b22; color: #c9d1d9; }
         QMessageBox QPushButton {
             background: #21262d; color: #c9d1d9; border: 1px solid #30363d; border-radius: 6px; padding: 5px 16px;
@@ -809,7 +863,142 @@ void MainWindow::setupUi()
         QMessageBox QPushButton:hover { background: #30363d; }
     )");
     
+    // Add subtle drop shadow effect
+    if (windowCard_) {
+        QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
+        shadow->setBlurRadius(30);
+        shadow->setXOffset(0);
+        shadow->setYOffset(4);
+        shadow->setColor(QColor(0, 0, 0, 120));
+        windowCard_->setGraphicsEffect(shadow);
+    }
+    
     qDebug() << "setupUi: FIM";
+}
+
+void MainWindow::updateWindowStyle(bool maximized)
+{
+    if (maximized) {
+        // Remove rounded corners when maximized
+        globalVBox_->setContentsMargins(0,0,0,0);
+        windowCard_->setStyleSheet(R"(
+            #WindowCard {
+                background: #0d1117;
+                border: 1px solid #30363d;
+                border-radius: 0px;
+            }
+        )");
+        titleBar_->setStyleSheet(R"(
+            #TitleBar {
+                background: #161b22;
+                border-bottom: 1px solid #21262d;
+                border-top-left-radius: 0px;
+                border-top-right-radius: 0px;
+            }
+            #TitleBar QLabel#WindowTitleLabel {
+                color: #c9d1d9;
+                font-size: 14px;
+                font-weight: 600;
+                padding-left: 16px;
+            }
+            #TitleBar QPushButton {
+                background: transparent;
+                border: none;
+                color: #8b949e;
+                font-size: 16px;
+                font-weight: 400;
+                min-width: 46px;
+                max-width: 46px;
+                min-height: 48px;
+                max-height: 48px;
+                padding: 0px;
+                border-radius: 0px;
+            }
+            #TitleBar QPushButton:hover { 
+                background: rgba(255, 255, 255, 0.08); 
+                color: #c9d1d9; 
+            }
+            #TitleBar QPushButton#MaxBtn {
+                border-top-right-radius: 0px;
+            }
+            #TitleBar QPushButton#CloseBtn { 
+                border-top-right-radius: 0px;
+            }
+            #TitleBar QPushButton#CloseBtn:hover { 
+                background: #da3633; 
+                color: #ffffff; 
+            }
+        )");
+        if (resizeBorder_) {
+            resizeBorder_->setStyleSheet(R"(
+                #ResizeBorder {
+                    background: transparent;
+                    border: 2px solid transparent;
+                    border-radius: 0px;
+                }
+            )");
+        }
+    } else {
+        // Restore rounded corners when normal
+        globalVBox_->setContentsMargins(10,10,10,10);
+        windowCard_->setStyleSheet(R"(
+            #WindowCard {
+                background: #0d1117;
+                border: 1px solid #30363d;
+                border-radius: 12px;
+            }
+        )");
+        titleBar_->setStyleSheet(R"(
+            #TitleBar {
+                background: #161b22;
+                border-bottom: 1px solid #21262d;
+                border-top-left-radius: 12px;
+                border-top-right-radius: 12px;
+            }
+            #TitleBar QLabel#WindowTitleLabel {
+                color: #c9d1d9;
+                font-size: 14px;
+                font-weight: 600;
+                padding-left: 16px;
+            }
+            #TitleBar QPushButton {
+                background: transparent;
+                border: none;
+                color: #8b949e;
+                font-size: 16px;
+                font-weight: 400;
+                min-width: 46px;
+                max-width: 46px;
+                min-height: 48px;
+                max-height: 48px;
+                padding: 0px;
+                border-radius: 0px;
+            }
+            #TitleBar QPushButton:hover { 
+                background: rgba(255, 255, 255, 0.08); 
+                color: #c9d1d9; 
+            }
+            #TitleBar QPushButton#MaxBtn {
+                border-top-right-radius: 0px;
+            }
+            #TitleBar QPushButton#CloseBtn { 
+                border-top-right-radius: 12px;
+            }
+            #TitleBar QPushButton#CloseBtn:hover { 
+                background: #da3633; 
+                color: #ffffff; 
+            }
+        )");
+        if (resizeBorder_) {
+            resizeBorder_->setStyleSheet(R"(
+                #ResizeBorder {
+                    background: transparent;
+                    border: 2px solid transparent;
+                    border-radius: 12px;
+                }
+            )");
+        }
+    }
 }
 
 void MainWindow::loadSampleProducts()
@@ -1159,9 +1348,11 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event)
             if (isMaximized()) {
                 showNormal();
                 if (btnWinMax_) btnWinMax_->setText("□");
+                updateWindowStyle(false);
             } else {
                 showMaximized();
                 if (btnWinMax_) btnWinMax_->setText("❐");
+                updateWindowStyle(true);
             }
             return true;
         }
@@ -1206,6 +1397,10 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event)
 void MainWindow::resizeEvent(QResizeEvent* event)
 {
     QMainWindow::resizeEvent(event);
+    // Update resize border to match window size
+    if (resizeBorder_ && windowCard_) {
+        resizeBorder_->setGeometry(windowCard_->rect());
+    }
 }
 
 void MainWindow::mousePressEvent(QMouseEvent* event)
@@ -1287,7 +1482,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent* event)
 
 Qt::Edges MainWindow::getResizeEdge(const QPoint& pos)
 {
-    const int edgeMargin = 8; // pixels
+    const int edgeMargin = 10; // increased for better usability
     Qt::Edges edges;
     
     if (pos.x() <= edgeMargin) edges |= Qt::LeftEdge;
@@ -1300,6 +1495,28 @@ Qt::Edges MainWindow::getResizeEdge(const QPoint& pos)
 
 void MainWindow::updateCursorShape(Qt::Edges edges)
 {
+    // Update resize border visual feedback
+    if (resizeBorder_) {
+        if (edges != Qt::Edges()) {
+            resizeBorder_->setStyleSheet(R"(
+                #ResizeBorder {
+                    background: transparent;
+                    border: 2px solid rgba(88, 166, 255, 0.5);
+                    border-radius: 12px;
+                }
+            )");
+        } else {
+            resizeBorder_->setStyleSheet(R"(
+                #ResizeBorder {
+                    background: transparent;
+                    border: 2px solid transparent;
+                    border-radius: 12px;
+                }
+            )");
+        }
+    }
+    
+    // Update cursor
     if (edges == (Qt::LeftEdge | Qt::TopEdge) || edges == (Qt::RightEdge | Qt::BottomEdge)) {
         setCursor(Qt::SizeFDiagCursor);
     } else if (edges == (Qt::RightEdge | Qt::TopEdge) || edges == (Qt::LeftEdge | Qt::BottomEdge)) {

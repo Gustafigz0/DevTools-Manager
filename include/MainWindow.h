@@ -52,6 +52,7 @@ private:
     void showToast(const QString& message, QColor color = QColor("#323e54"));
     void logOperation(const QString& op, const Product& p);
     void showHistoryDialog();
+    void updateWindowStyle(bool maximized);
 
     // UI State
 private:
@@ -71,9 +72,11 @@ private:
     bool resizing_ = false;
     QPoint resizeOffset_;
     Qt::Edges resizeEdge_ = Qt::Edges();
+    QWidget* resizeBorder_ = nullptr;
 
     // Window rounded container (card)
     QWidget* windowCard_ = nullptr;
+    QVBoxLayout* globalVBox_ = nullptr;
 
     QWidget* sidebarBox_;
     QVBoxLayout* sidebarLayout_;
