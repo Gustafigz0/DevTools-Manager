@@ -42,44 +42,95 @@ void MainWindow::setupUi()
 {
     qDebug() << "setupUi: widgets-raiz";
     auto* central = new QWidget(this);
+    central->setStyleSheet("background: #0d1117;"); // GitHub dark background
     auto* root = new QHBoxLayout(central);
-    root->setContentsMargins(16, 16, 16, 16);
-    root->setSpacing(24);
+    root->setContentsMargins(0, 0, 0, 0);
+    root->setSpacing(0);
 
     qDebug() << "setupUi: sidebarBox/layout";
     sidebarBox_ = new QWidget;
-    sidebarBox_->setStyleSheet("background: #1a1a1a; border-radius: 24px; min-width: 220px; max-width: 240px;");
+    sidebarBox_->setStyleSheet(R"(
+        QWidget {
+            background: #161b22;
+            border-right: 1px solid #21262d;
+            min-width: 256px;
+            max-width: 256px;
+        }
+    )");
     sidebarLayout_ = new QVBoxLayout(sidebarBox_);
-    sidebarLayout_->setContentsMargins(20, 26, 20, 30);
-    sidebarLayout_->setSpacing(14);
+    sidebarLayout_->setContentsMargins(16, 24, 16, 24);
+    sidebarLayout_->setSpacing(8);
 
     qDebug() << "setupUi: logo";
-    QLabel* logoLabel = new QLabel("<b>DevTools</b>\n Manager");
-    logoLabel->setStyleSheet("color: #ffffff; font-size: 20px; font-weight: 700; border: none;");
-    logoLabel->setAlignment(Qt::AlignCenter);
+    QLabel* logoLabel = new QLabel("<span style='font-size: 16px; font-weight: 600; color: #c9d1d9;'>DevTools Manager</span>");
+    logoLabel->setStyleSheet(R"(
+        color: #c9d1d9;
+        border: none;
+        background: transparent;
+        padding: 8px 12px;
+    )");
+    logoLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     sidebarLayout_->addWidget(logoLabel);
-    sidebarLayout_->addSpacing(28);
+    
+    // Separator line
+    QFrame* line1 = new QFrame();
+    line1->setFrameShape(QFrame::HLine);
+    line1->setStyleSheet("background: #21262d; max-height: 1px;");
+    sidebarLayout_->addWidget(line1);
+    sidebarLayout_->addSpacing(8);
 
     qDebug() << "setupUi: btnProducts";
-    btnProducts_ = new QPushButton("📦 Products");
+    btnProducts_ = new QPushButton("Products");
     btnProducts_->setCheckable(true);
     btnProducts_->setChecked(true);
-    btnProducts_->setStyleSheet(
-        "QPushButton { background: #333333; color: #fff; border: none; border-radius: 12px; padding: 12px 16px; font-size: 15px; font-weight: 600; margin-bottom: 3px; text-align: left; letter-spacing: 1px; }"
-        "QPushButton:checked { background: #666666; }"
-        "QPushButton:hover { background: #444444; }"
-    );
+    btnProducts_->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #8b949e;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: left;
+        }
+        QPushButton:checked {
+            background: #21262d;
+            color: #c9d1d9;
+            font-weight: 600;
+        }
+        QPushButton:hover {
+            background: #161b22;
+            color: #c9d1d9;
+        }
+    )");
     sidebarLayout_->addWidget(btnProducts_);
 
     qDebug() << "setupUi: btnShowFavorites";
-    btnShowFavorites_ = new QPushButton("⭐ Favorites");
+    btnShowFavorites_ = new QPushButton("Favorites");
     btnShowFavorites_->setCheckable(true);
     btnShowFavorites_->setChecked(false);
-    btnShowFavorites_->setStyleSheet(
-        "QPushButton { background: #2a2a2a; color: #cccccc; border: none; border-radius: 12px; padding: 12px 16px; font-size: 15px; font-weight: 600; margin-bottom: 6px; text-align: left; }"
-        "QPushButton:checked { background: #666666; color: #ffffff; }"
-        "QPushButton:hover { background: #3a3a3a; }"
-    );
+    btnShowFavorites_->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #8b949e;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: left;
+        }
+        QPushButton:checked {
+            background: #21262d;
+            color: #c9d1d9;
+            font-weight: 600;
+        }
+        QPushButton:hover {
+            background: #161b22;
+            color: #c9d1d9;
+        }
+    )");
     sidebarLayout_->addWidget(btnShowFavorites_);
 
     // Troca: conectando para slots exclusivos (não aos filtros diretos)
@@ -87,69 +138,177 @@ void MainWindow::setupUi()
     connect(btnShowFavorites_, &QPushButton::clicked, this, &MainWindow::onBtnFavorites);
 
     qDebug() << "setupUi: btnDeleteSelected";
-    btnDeleteSelected_ = new QPushButton("🗑️ Delete Selected");
+    btnDeleteSelected_ = new QPushButton("Delete Selected");
     btnDeleteSelected_->setEnabled(false);
-    btnDeleteSelected_->setStyleSheet("QPushButton {background: #444444;color: #fff;border: none;border-radius: 12px;padding: 12px 16px;font-size: 15px;font-weight: 600;margin-bottom: 15px;text-align: left;}QPushButton:disabled {background: #2a2a2a; color: #888888;} QPushButton:hover {background: #555555;}");
+    btnDeleteSelected_->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #f85149;
+            border: 1px solid #da3633;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+        }
+        QPushButton:disabled {
+            background: transparent;
+            color: #484f58;
+            border: 1px solid #30363d;
+        }
+        QPushButton:hover:enabled {
+            background: #da3633;
+            color: #ffffff;
+            border: 1px solid #da3633;
+        }
+    )");
     connect(btnDeleteSelected_, &QPushButton::clicked, this, &MainWindow::onDeleteSelectedProductsClicked);
     sidebarLayout_->addWidget(btnDeleteSelected_);
-    sidebarLayout_->addSpacing(25);
+    sidebarLayout_->addSpacing(4);
+    
+    // Separator line
+    QFrame* line2 = new QFrame();
+    line2->setFrameShape(QFrame::HLine);
+    line2->setStyleSheet("background: #21262d; max-height: 1px;");
+    sidebarLayout_->addWidget(line2);
+    sidebarLayout_->addSpacing(8);
 
     sidebarLayout_->addStretch(1);
 
     qDebug() << "setupUi: btnExport / btnImport";
-    btnExport_ = new QPushButton("📤 Export Catalog");
-    btnExport_->setStyleSheet(
-        "QPushButton { background: #2a2a2a; color: #cccccc; border: none; border-radius: 12px; padding: 12px 16px; font-size: 15px; font-weight: 600; margin-bottom: 6px; text-align: left; }"
-        "QPushButton:hover { background: #3a3a3a; }"
-    );
+    btnExport_ = new QPushButton("Export");
+    btnExport_->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #8b949e;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: left;
+        }
+        QPushButton:hover {
+            background: #161b22;
+            color: #c9d1d9;
+        }
+    )");
     btnExport_->setToolTip("Exporta o catálogo para um arquivo JSON");
     connect(btnExport_, &QPushButton::clicked, this, &MainWindow::onExportProductsClicked);
     sidebarLayout_->addWidget(btnExport_);
 
-    btnImport_ = new QPushButton("📥 Import Catalog");
-    btnImport_->setStyleSheet(
-        "QPushButton { background: #2a2a2a; color: #cccccc; border: none; border-radius: 12px; padding: 12px 16px; font-size: 15px; font-weight: 600; margin-bottom: 6px; text-align: left; }"
-        "QPushButton:hover { background: #3a3a3a; }"
-    );
+    btnImport_ = new QPushButton("Import");
+    btnImport_->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #8b949e;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: left;
+        }
+        QPushButton:hover {
+            background: #161b22;
+            color: #c9d1d9;
+        }
+    )");
     btnImport_->setToolTip("Importa produtos de um arquivo JSON");
     connect(btnImport_, &QPushButton::clicked, this, &MainWindow::onImportProductsClicked);
     sidebarLayout_->addWidget(btnImport_);
 
     qDebug() << "setupUi: productsBg";
     productsBg_ = new QWidget;
-    productsBg_->setStyleSheet("background: #1a1a1a; border-radius: 28px; padding: 24px;");
+    productsBg_->setStyleSheet("background: #0d1117;");
     productsLayout_ = new QVBoxLayout(productsBg_);
-    productsLayout_->setSpacing(18);
+    productsLayout_->setSpacing(16);
     productsLayout_->setContentsMargins(24, 24, 24, 24);
 
     qDebug() << "setupUi: userInfoLabel/header";
     QWidget* userInfoLabel = new QWidget;
-    userInfoLabel->setStyleSheet("background: #2a2a2a; border-radius: 18px; padding: 20px 28px;");
+    userInfoLabel->setStyleSheet(R"(
+        QWidget {
+            background: #161b22;
+            border: 1px solid #21262d;
+            border-radius: 6px;
+        }
+    )");
     auto* headerLayout = new QHBoxLayout(userInfoLabel);
-    headerLayout->setContentsMargins(0,0,0,0);
+    headerLayout->setContentsMargins(16, 12, 16, 12);
+    headerLayout->setSpacing(12);
 
     userLabel_ = new QLabel();
-    userLabel_->setText(currentUsername_.isEmpty() ? "User" : "User: " + currentUsername_);
-    userLabel_->setStyleSheet("color: #ffffff; font-size: 16px; font-weight: 600; background: transparent; border: none;");
+    userLabel_->setText(currentUsername_.isEmpty() ? "User" : currentUsername_);
+    userLabel_->setStyleSheet(R"(
+        color: #c9d1d9;
+        font-size: 14px;
+        font-weight: 600;
+        background: transparent;
+        border: none;
+    )");
     headerLayout->addWidget(userLabel_);
     headerLayout->addStretch();
 
     btnLogout_ = new QPushButton("Logout");
-    btnLogout_->setStyleSheet("background: #222; color: #fff; border-radius: 13px; font-size: 12px; padding:6px 20px; font-weight: 700;");
+    btnLogout_->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #8b949e;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            font-size: 12px;
+            padding: 5px 12px;
+            font-weight: 500;
+        }
+        QPushButton:hover {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+        }
+    )");
     connect(btnLogout_, &QPushButton::clicked, this, &MainWindow::onLogoutClicked);
     headerLayout->addWidget(btnLogout_);
 
     qDebug() << "setupUi: btnAddProduct";
-    QPushButton* btnAddProduct = new QPushButton("➕ Add Product");
-    btnAddProduct->setStyleSheet("QPushButton { background: #333333; color: #fff; border: none; border-radius: 12px; padding: 10px 20px; font-size: 14px; font-weight: 600; } QPushButton:hover { background: #444444; }");
+    QPushButton* btnAddProduct = new QPushButton("Add Product");
+    btnAddProduct->setStyleSheet(R"(
+        QPushButton {
+            background: #238636;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        QPushButton:hover {
+            background: #2ea043;
+        }
+    )");
     btnAddProduct->setToolTip("Adicionar um novo produto");
     connect(btnAddProduct, &QPushButton::clicked, this, &MainWindow::onAddProductClicked);
     headerLayout->addWidget(btnAddProduct);
 
     qDebug() << "setupUi: btnShowLog";
-    QPushButton* btnShowLog = new QPushButton("📋 History");
+    QPushButton* btnShowLog = new QPushButton("History");
     btnShowLog->setToolTip("View operation history");
-    btnShowLog->setStyleSheet("QPushButton { background: #2a2a2a; color: #cccccc; border: none; border-radius: 10px; padding: 10px 20px; font-size: 13px; font-weight: 600; } QPushButton:hover { background: #3a3a3a; }");
+    btnShowLog->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #8b949e;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        QPushButton:hover {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+        }
+    )");
     connect(btnShowLog, &QPushButton::clicked, this, &MainWindow::showHistoryDialog);
     headerLayout->addWidget(btnShowLog);
 
@@ -157,21 +316,65 @@ void MainWindow::setupUi()
 
     qDebug() << "setupUi: filtros";
     auto* filterRow = new QHBoxLayout;
+    filterRow->setSpacing(12);
     searchBar_ = new QLineEdit;
     searchBar_->setPlaceholderText("Search products...");
-    searchBar_->setStyleSheet("QLineEdit { background: #2a2a2a; color: #fff; border: 2px solid #444444; border-radius: 14px; padding: 12px 18px; font-size: 15px;} QLineEdit:focus { border: 2px solid #666666; }");
+    searchBar_->setStyleSheet(R"(
+        QLineEdit {
+            background: #0d1117;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 14px;
+        }
+        QLineEdit:focus {
+            background: #0d1117;
+            border: 1px solid #58a6ff;
+            outline: none;
+        }
+        QLineEdit::placeholder {
+            color: #484f58;
+        }
+    )");
     connect(searchBar_, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
     filterRow->addWidget(searchBar_, 5);
 
     filterCategoryBox_ = new QComboBox;
     filterCategoryBox_->setToolTip("Filtrar por Categoria");
-    filterCategoryBox_->setStyleSheet(
-        "QComboBox { background: #2a2a2a; color: #fff; border: 2px solid #444444; border-radius: 10px; font-size: 14px; padding: 8px 14px; min-height: 32px;}"
-        "QComboBox:focus { border-color: #666666; }"
-        "QComboBox::drop-down { border: none; width: 0px; }"
-        "QComboBox QAbstractItemView { background: #2a2a2a; border: 2px solid #444444; border-radius: 10px; }"
-        "QComboBox::down-arrow { width: 0px; }" // Hide the arrow
-    );
+    filterCategoryBox_->setStyleSheet(R"(
+        QComboBox {
+            background: #0d1117;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            font-size: 14px;
+            padding: 5px 12px;
+            min-height: 20px;
+        }
+        QComboBox:focus {
+            border: 1px solid #58a6ff;
+        }
+        QComboBox::drop-down {
+            border: none;
+            width: 20px;
+        }
+        QComboBox::down-arrow {
+            image: none;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #8b949e;
+            width: 0;
+            height: 0;
+        }
+        QComboBox QAbstractItemView {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            outline: none;
+            selection-background-color: #21262d;
+        }
+    )");
     filterCategoryBox_->setAttribute(Qt::WA_NoSystemBackground);
     filterCategoryBox_->setAttribute(Qt::WA_TranslucentBackground);
     filterCategoryBox_->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -183,16 +386,47 @@ void MainWindow::setupUi()
     // Modern popup view styling
     {
         auto* catView = new QListView(filterCategoryBox_);
-        catView->setStyleSheet(
-            "QListView { background: #2a2a2a; color: #ffffff; border: none; padding: 0px; outline: 0; }"
-            "QListView::viewport { background: #2a2a2a; border: 2px solid #444444; border-radius: 10px; }"
-            "QListView::item { padding: 8px 12px; min-height: 30px; border-radius: 6px; }"
-            "QListView::item:hover { background: #383838; }"
-            "QListView::item:selected { background: #555555; }"
-            "QScrollBar:vertical { background: transparent; width: 10px; margin: 6px 3px 6px 0; }"
-            "QScrollBar::handle:vertical { background: #555555; border-radius: 5px; }"
-            "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }"
-        );
+        catView->setStyleSheet(R"(
+            QListView {
+                background: #161b22;
+                color: #c9d1d9;
+                border: none;
+                padding: 4px;
+                outline: 0;
+            }
+            QListView::viewport {
+                background: #161b22;
+                border: 1px solid #30363d;
+                border-radius: 6px;
+            }
+            QListView::item {
+                padding: 6px 12px;
+                min-height: 28px;
+                border-radius: 4px;
+            }
+            QListView::item:hover {
+                background: #21262d;
+            }
+            QListView::item:selected {
+                background: #1f6feb;
+                color: #ffffff;
+            }
+            QScrollBar:vertical {
+                background: #161b22;
+                width: 8px;
+                margin: 0;
+            }
+            QScrollBar::handle:vertical {
+                background: #30363d;
+                border-radius: 4px;
+            }
+            QScrollBar::handle:vertical:hover {
+                background: #484f58;
+            }
+            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+                height: 0;
+            }
+        )");
         catView->setFrameShape(QFrame::NoFrame);
         catView->setAutoFillBackground(false);
         // Let eventFilter keep popup width equal to button width
@@ -211,13 +445,39 @@ void MainWindow::setupUi()
     filterStockBox_ = new QComboBox;
     filterStockBox_->addItems({"All stock", "In stock", "Low stock", "Out of stock"});
     filterStockBox_->setToolTip("Filter by stock status");
-    filterStockBox_->setStyleSheet(
-        "QComboBox { background: #2a2a2a; color: #fff; border: 2px solid #444444; border-radius: 10px; font-size: 14px; padding: 8px 14px; min-height: 32px;}"
-        "QComboBox:focus { border-color: #666666; }"
-        "QComboBox::drop-down { border: none; width: 0px; }"
-        "QComboBox QAbstractItemView { background: #2a2a2a; border: 2px solid #444444; border-radius: 10px; }"
-        "QComboBox::down-arrow { width: 0px; }" // Hide the arrow
-    );
+    filterStockBox_->setStyleSheet(R"(
+        QComboBox {
+            background: #0d1117;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            font-size: 14px;
+            padding: 5px 12px;
+            min-height: 20px;
+        }
+        QComboBox:focus {
+            border: 1px solid #58a6ff;
+        }
+        QComboBox::drop-down {
+            border: none;
+            width: 20px;
+        }
+        QComboBox::down-arrow {
+            image: none;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #8b949e;
+            width: 0;
+            height: 0;
+        }
+        QComboBox QAbstractItemView {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            outline: none;
+            selection-background-color: #21262d;
+        }
+    )");
     filterStockBox_->setAttribute(Qt::WA_NoSystemBackground);
     filterStockBox_->setAttribute(Qt::WA_TranslucentBackground);
     filterStockBox_->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -228,16 +488,47 @@ void MainWindow::setupUi()
     filterStockBox_->setFrame(false);
     {
         auto* stockView = new QListView(filterStockBox_);
-        stockView->setStyleSheet(
-            "QListView { background: #2a2a2a; color: #ffffff; border: none; padding: 0px; outline: 0; }"
-            "QListView::viewport { background: #2a2a2a; border: 2px solid #444444; border-radius: 10px; }"
-            "QListView::item { padding: 8px 12px; min-height: 30px; border-radius: 6px; }"
-            "QListView::item:hover { background: #383838; }"
-            "QListView::item:selected { background: #555555; }"
-            "QScrollBar:vertical { background: transparent; width: 10px; margin: 6px 3px 6px 0; }"
-            "QScrollBar::handle:vertical { background: #555555; border-radius: 5px; }"
-            "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }"
-        );
+        stockView->setStyleSheet(R"(
+            QListView {
+                background: #161b22;
+                color: #c9d1d9;
+                border: none;
+                padding: 4px;
+                outline: 0;
+            }
+            QListView::viewport {
+                background: #161b22;
+                border: 1px solid #30363d;
+                border-radius: 6px;
+            }
+            QListView::item {
+                padding: 6px 12px;
+                min-height: 28px;
+                border-radius: 4px;
+            }
+            QListView::item:hover {
+                background: #21262d;
+            }
+            QListView::item:selected {
+                background: #1f6feb;
+                color: #ffffff;
+            }
+            QScrollBar:vertical {
+                background: #161b22;
+                width: 8px;
+                margin: 0;
+            }
+            QScrollBar::handle:vertical {
+                background: #30363d;
+                border-radius: 4px;
+            }
+            QScrollBar::handle:vertical:hover {
+                background: #484f58;
+            }
+            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+                height: 0;
+            }
+        )");
         stockView->setFrameShape(QFrame::NoFrame);
         stockView->setAutoFillBackground(false);
         // Let eventFilter keep popup width equal to button width
@@ -269,11 +560,35 @@ void MainWindow::setupUi()
     QScrollArea* scrollArea = new QScrollArea;
     scrollArea->setWidgetResizable(true);
     scrollArea->setFrameShape(QFrame::NoFrame);
-    scrollArea->setStyleSheet("QScrollArea { background: transparent; border: none; }");
+    scrollArea->setStyleSheet(R"(
+        QScrollArea {
+            background: transparent;
+            border: none;
+        }
+        QScrollBar:vertical {
+            background: #0d1117;
+            width: 10px;
+            margin: 0;
+        }
+        QScrollBar::handle:vertical {
+            background: #30363d;
+            border-radius: 5px;
+            min-height: 30px;
+        }
+        QScrollBar::handle:vertical:hover {
+            background: #484f58;
+        }
+        QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+            height: 0;
+        }
+        QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+            background: none;
+        }
+    )");
     productsContainer_ = new QWidget;
     productsCardsLayout_ = new QVBoxLayout(productsContainer_);
-    productsCardsLayout_->setSpacing(16);
-    productsCardsLayout_->setContentsMargins(0,0,0,0);
+    productsCardsLayout_->setSpacing(8);
+    productsCardsLayout_->setContentsMargins(0,0,8,0);
     scrollArea->setWidget(productsContainer_);
     productsLayout_->addWidget(scrollArea, 1);
 
@@ -285,7 +600,29 @@ void MainWindow::setupUi()
     root->addWidget(productsBg_, 1);
     setCentralWidget(central);
     setWindowTitle("DevTools Manager");
-    resize(1200, 770);
+    resize(1280, 800);
+    
+    // Apply GitHub-like window styling
+    setStyleSheet(R"(
+        QMainWindow {
+            background: #0d1117;
+        }
+        QMessageBox {
+            background: #161b22;
+            color: #c9d1d9;
+        }
+        QMessageBox QPushButton {
+            background: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 5px 16px;
+        }
+        QMessageBox QPushButton:hover {
+            background: #30363d;
+        }
+    )");
+    
     qDebug() << "setupUi: FIM";
 }
 
@@ -372,7 +709,13 @@ void MainWindow::displayProducts()
     }
     if (filteredProducts_.isEmpty()) {
         QLabel* emptyLabel = new QLabel("No products found");
-        emptyLabel->setStyleSheet("color: #888888; font-size: 16px; padding: 40px;");
+        emptyLabel->setStyleSheet(R"(
+            color: #8b949e;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 48px 24px;
+            background: transparent;
+        )");
         emptyLabel->setAlignment(Qt::AlignCenter);
         productsCardsLayout_->addWidget(emptyLabel);
         productsCardsLayout_->addStretch();
@@ -388,39 +731,45 @@ void MainWindow::createProductCard(const Product& product)
     QWidget* card = new QWidget;
     card->setStyleSheet(R"(
         QWidget {
-            background: #2a2a2a;
-            border-radius: 16px;
-            margin-bottom: 6px;
-            padding: 0px 0px;
+            background: #161b22;
+            border: 1px solid #21262d;
+            border-radius: 6px;
         }
         QWidget:hover {
-            background: #333333;
+            border: 1px solid #30363d;
+            background: #161b22;
         }
     )");
     auto* cardLayout = new QHBoxLayout(card);
-    cardLayout->setContentsMargins(22, 12, 22, 12);
-    cardLayout->setSpacing(15);
+    cardLayout->setContentsMargins(16, 12, 16, 12);
+    cardLayout->setSpacing(12);
 
-    QPushButton* favBtn = new QPushButton(favoriteProductIds_.contains(product.getId()) ? "⭐" : "○");
+    QPushButton* favBtn = new QPushButton(favoriteProductIds_.contains(product.getId()) ? "★" : "☆");
     favBtn->setCheckable(true);
     favBtn->setChecked(favoriteProductIds_.contains(product.getId()));
     favBtn->setCursor(Qt::PointingHandCursor);
     favBtn->setToolTip(favBtn->isChecked() ? "Unfavorite" : "Favorite");
     favBtn->setStyleSheet(R"(
         QPushButton {
-            font-size: 22px;
-            color: #cccccc;
+            font-size: 18px;
+            color: #8b949e;
             background: transparent;
             border: none;
-            min-width: 34px;
+            min-width: 24px;
+            padding: 0px;
         }
-        QPushButton:hover { color: #ffffff; }
+        QPushButton:checked {
+            color: #f1e05a;
+        }
+        QPushButton:hover {
+            color: #f1e05a;
+        }
     )");
     connect(favBtn, &QPushButton::clicked, this, [this, product, favBtn]() {
         bool favorited = favBtn->isChecked();
         if (favorited) favoriteProductIds_.insert(product.getId());
         else favoriteProductIds_.remove(product.getId());
-        favBtn->setText(favorited ? "⭐" : "○");
+        favBtn->setText(favorited ? "★" : "☆");
         filterAndSortProducts();
         displayProducts();
     });
@@ -438,24 +787,21 @@ void MainWindow::createProductCard(const Product& product)
     selectButton->setChecked(selectedProductIds_.contains(product.getId()));
     selectButton->setStyleSheet(R"(
         QPushButton {
-            background: #2a2a2a;
-            border: 2px solid #666666;
-            border-radius: 10px;
-            min-width: 20px; min-height: 20px;
-            max-width: 20px; max-height: 20px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 4px;
+            min-width: 16px;
+            min-height: 16px;
+            max-width: 16px;
+            max-height: 16px;
             padding: 0px;
         }
         QPushButton:checked {
-            background: #666666;
-            border: 2px solid #666666;
+            background: #1f6feb;
+            border: 1px solid #1f6feb;
         }
-        QPushButton:checked:hover {
-            background: #666666;
-            border: 2px solid #888888;
-        }
-        QPushButton:hover:!checked {
-            border-color: #888888;
-            background: #333333;
+        QPushButton:hover {
+            border-color: #58a6ff;
         }
     )");
     selectButton->setToolTip(selectedProductIds_.contains(product.getId()) ? "Unselect" : "Select");
@@ -480,10 +826,14 @@ void MainWindow::createProductCard(const Product& product)
 
     QLabel* icon = new QLabel;
     icon->setStyleSheet(R"(
-        background: #333333;
-        border-radius: 12px;
-        min-width: 48px; min-height: 48px; max-width: 48px; max-height: 48px;
-        margin-left: 0px; margin-right: 8px; padding: 0px;
+        background: #21262d;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        min-width: 48px;
+        min-height: 48px;
+        max-width: 48px;
+        max-height: 48px;
+        padding: 0px;
     )");
     icon->setAlignment(Qt::AlignCenter);
     icon->setScaledContents(true);
@@ -495,18 +845,25 @@ void MainWindow::createProductCard(const Product& product)
         if (!pixmap.isNull()) {
             icon->setPixmap(pixmap.scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         } else {
-            icon->setText("■");
-            icon->setStyleSheet(icon->styleSheet() + "font-size: 28px;");
+            icon->setText("📦");
+            icon->setStyleSheet(icon->styleSheet() + "font-size: 24px; color: #58a6ff;");
         }
     } else {
-        icon->setText("■");
-        icon->setStyleSheet(icon->styleSheet() + "font-size: 28px;");
+        icon->setText("📦");
+        icon->setStyleSheet(icon->styleSheet() + "font-size: 24px; color: #58a6ff;");
     }
     
     cardLayout->addWidget(icon, 0, Qt::AlignVCenter);
 
-    QLabel* nameLabel = new QLabel(QString("<b>%1</b>").arg(product.getName()));
-    nameLabel->setStyleSheet("color: #fff; font-size: 17px; min-width:160px; background: transparent; border: none; margin-right:12px;");
+    QLabel* nameLabel = new QLabel(product.getName());
+    nameLabel->setStyleSheet(R"(
+        color: #c9d1d9;
+        font-size: 14px;
+        font-weight: 600;
+        min-width: 200px;
+        background: transparent;
+        border: none;
+    )");
     cardLayout->addWidget(nameLabel, 1, Qt::AlignVCenter);
 
     card->setCursor(Qt::PointingHandCursor);
@@ -514,30 +871,77 @@ void MainWindow::createProductCard(const Product& product)
     card->setProperty("editId", product.getId());
 
     QLabel* categoryLabel = new QLabel(product.getCategory());
-    categoryLabel->setStyleSheet("color: #aaa; font-size: 14px; background: transparent; min-width:110px;");
+    categoryLabel->setStyleSheet(R"(
+        color: #8b949e;
+        font-size: 12px;
+        background: #21262d;
+        border: 1px solid #30363d;
+        border-radius: 12px;
+        padding: 2px 8px;
+        min-width: 80px;
+        font-weight: 500;
+    )");
+    categoryLabel->setAlignment(Qt::AlignCenter);
     cardLayout->addWidget(categoryLabel, 0, Qt::AlignVCenter);
 
-    QLabel* idLabel = new QLabel(QString("ID: %1").arg(product.getId()));
-    idLabel->setStyleSheet("color: #cccccc; font-size: 13px; background: transparent; min-width:70px;");
+    QLabel* idLabel = new QLabel(QString("#%1").arg(product.getId()));
+    idLabel->setStyleSheet(R"(
+        color: #8b949e;
+        font-size: 12px;
+        background: transparent;
+        min-width: 60px;
+        font-weight: 400;
+    )");
     cardLayout->addWidget(idLabel, 0, Qt::AlignVCenter);
 
     QLabel* priceLabel = new QLabel(product.getPriceFormatted());
-    priceLabel->setStyleSheet("color: #ffffff; font-size: 16px; font-weight: bold; background: transparent; min-width:95px;");
+    priceLabel->setStyleSheet(R"(
+        color: #c9d1d9;
+        font-size: 14px;
+        font-weight: 600;
+        background: transparent;
+        min-width: 85px;
+    )");
     cardLayout->addWidget(priceLabel, 0, Qt::AlignVCenter);
 
-    QLabel* qtyLabel = new QLabel(product.getQuantityText());
-    qtyLabel->setStyleSheet("color: #fff; font-size: 14px; background: transparent; min-width:80px;");
+    QLabel* qtyLabel = new QLabel(QString("Qty: %1").arg(product.getQuantity()));
+    qtyLabel->setStyleSheet(R"(
+        color: #8b949e;
+        font-size: 12px;
+        background: transparent;
+        min-width: 70px;
+        font-weight: 400;
+    )");
     cardLayout->addWidget(qtyLabel, 0, Qt::AlignVCenter);
 
     QString stockColor;
-    if (product.isInStock() && product.getQuantity() <= 5)
-        stockColor = "#cccccc";
-    else if (!product.isInStock())
-        stockColor = "#888888";
-    else
-        stockColor = "#ffffff";
-    QLabel* stockStatus = new QLabel(product.isInStock() ? (product.getQuantity() <= 5 ? "! Low stock" : "+ In stock") : "- Out of stock");
-    stockStatus->setStyleSheet(QString("color: %1; font-size: 13px; background: transparent; min-width:108px;").arg(stockColor));
+    QString stockBgColor;
+    QString stockText;
+    if (product.isInStock() && product.getQuantity() <= 5) {
+        stockColor = "#d29922";
+        stockBgColor = "#341a00";
+        stockText = "Low stock";
+    } else if (!product.isInStock()) {
+        stockColor = "#f85149";
+        stockBgColor = "#490202";
+        stockText = "Out of stock";
+    } else {
+        stockColor = "#3fb950";
+        stockBgColor = "#0f2414";
+        stockText = "In stock";
+    }
+    
+    QLabel* stockStatus = new QLabel(stockText);
+    stockStatus->setStyleSheet(QString(R"(
+        color: %1;
+        font-size: 12px;
+        background: %2;
+        border-radius: 12px;
+        padding: 2px 8px;
+        min-width: 80px;
+        font-weight: 500;
+    )").arg(stockColor, stockBgColor));
+    stockStatus->setAlignment(Qt::AlignCenter);
     cardLayout->addWidget(stockStatus, 0, Qt::AlignVCenter);
 
     cardLayout->addStretch(1);
