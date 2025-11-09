@@ -8,7 +8,7 @@ class QLineEdit;
 class QComboBox;
 class QDoubleSpinBox;
 class QSpinBox;
-class QPushButton;
+class QLabel;
 
 class AddProductDialog : public QDialog {
     Q_OBJECT
@@ -19,11 +19,13 @@ public:
     AddProductDialog(const Product& product, const QStringList& categorias, QWidget* parent = nullptr);
 
     Product getProduct() const;
+    void setInitialId(const QString& id);
 
 private slots:
     void onSaveClicked();
     void onCancelClicked();
     void validateFields();
+    void onSelectImageClicked();
 
 private:
     void setupUi(const QStringList& categorias); // agora recebe a lista dinâmica
@@ -37,6 +39,9 @@ private:
     QSpinBox* quantitySpinBox_;
     QPushButton* btnSave_;
     QPushButton* btnCancel_;
+    QPushButton* btnSelectImage_;
+    QLabel* imagePreviewLabel_;
+    QString imagePath_;
     bool isEditMode_;
     Product originalProduct_;
 };

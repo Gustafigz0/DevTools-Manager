@@ -14,6 +14,7 @@ public:
     int getQuantity() const;
     QString getPriceFormatted() const;
     QString getQuantityText() const;
+    QString getImagePath() const;
     bool isInStock() const;
 
     // Serialização/Deserialização
@@ -25,6 +26,7 @@ public:
     void setCategory(const QString&);
     void setPrice(double);
     void setQuantity(int);
+    void setImagePath(const QString&);
 
 private:
     QString id_;
@@ -32,4 +34,5 @@ private:
     QString category_;
     double price_;
     int quantity_;
+    QString imagePath_;
 };

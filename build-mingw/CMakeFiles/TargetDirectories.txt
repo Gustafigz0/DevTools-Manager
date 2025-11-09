@@ -1,5 +1,0 @@
-C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/DevToolsManager.dir
-C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/edit_cache.dir
-C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/rebuild_cache.dir
-C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/DevToolsManager_autogen_timestamp_deps.dir
-C:/Users/a40297/Documents/GitHub/DevTools-Manager/build-mingw/CMakeFiles/DevToolsManager_autogen.dir

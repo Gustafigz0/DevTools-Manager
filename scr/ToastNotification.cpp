@@ -6,7 +6,7 @@
 #include <QGraphicsOpacityEffect>
 
 ToastNotification::ToastNotification(QWidget* parent)
-    : QWidget(parent), label_(nullptr), bgColor_("#323e54"), opacity_(1.0)
+    : QWidget(parent), label_(nullptr), bgColor_("#444444"), opacity_(1.0)
 {
     setAttribute(Qt::WA_TranslucentBackground);
     setWindowFlags(Qt::FramelessWindowHint | Qt::ToolTip);
