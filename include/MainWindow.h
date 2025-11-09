@@ -8,12 +8,12 @@
 #include <QComboBox>
 #include <QEvent>
 #include <QColor>
+class QPushButton;
 
 // Forward declarations
 class QVBoxLayout;
 class QHBoxLayout;
 class QLineEdit;
-class QPushButton;
 class QWidget;
 class QLabel;
 class QScrollArea;
@@ -57,6 +57,15 @@ private:
 private:
     bool filterRunning_ = false;
     int lastProductCardClickedIndex_ = -1;
+
+    // Custom title bar
+    QWidget* titleBar_ = nullptr;
+    QLabel* titleLabel_ = nullptr;
+    QPushButton* btnWinMin_ = nullptr;
+    QPushButton* btnWinMax_ = nullptr;
+    QPushButton* btnWinClose_ = nullptr;
+    bool draggingWindow_ = false;
+    QPoint dragOffset_;
 
     QWidget* sidebarBox_;
     QVBoxLayout* sidebarLayout_;
