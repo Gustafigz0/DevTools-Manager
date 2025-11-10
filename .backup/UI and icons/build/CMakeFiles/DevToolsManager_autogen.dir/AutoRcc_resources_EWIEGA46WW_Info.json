@@ -1,0 +1,31 @@
+{
+	"BUILD_DIR" : "/Users/brituz/Documents/GitHub/DevTools-Manager/build/DevToolsManager_autogen",
+	"CMAKE_BINARY_DIR" : "/Users/brituz/Documents/GitHub/DevTools-Manager/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/Users/brituz/Documents/GitHub/DevTools-Manager/build",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/Users/brituz/Documents/GitHub/DevTools-Manager",
+	"CMAKE_SOURCE_DIR" : "/Users/brituz/Documents/GitHub/DevTools-Manager",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Unix Makefiles",
+	"INCLUDE_DIR" : "/Users/brituz/Documents/GitHub/DevTools-Manager/build/DevToolsManager_autogen/include",
+	"INPUTS" : 
+	[
+		"/Users/brituz/Documents/GitHub/DevTools-Manager/symbols/app-logo.png",
+		"/Users/brituz/Documents/GitHub/DevTools-Manager/symbols/icons8-cardboard-box-48.png",
+		"/Users/brituz/Documents/GitHub/DevTools-Manager/symbols/icons8-rotate-right-48.png",
+		"/Users/brituz/Documents/GitHub/DevTools-Manager/symbols/icons8-admin-settings-male-48.png",
+		"/Users/brituz/Documents/GitHub/DevTools-Manager/symbols/icons8-camera-50.png",
+		"/Users/brituz/Documents/GitHub/DevTools-Manager/symbols/icons8-trash-48.png",
+		"/Users/brituz/Documents/GitHub/DevTools-Manager/symbols/icons8-tray-30.png"
+	],
+	"LOCK_FILE" : "/Users/brituz/Documents/GitHub/DevTools-Manager/build/CMakeFiles/DevToolsManager_autogen.dir/AutoRcc_resources_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "/usr/local/share/qt/libexec/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/Users/brituz/Documents/GitHub/DevTools-Manager/build/CMakeFiles/DevToolsManager_autogen.dir/AutoRcc_resources_EWIEGA46WW_Used.txt",
+	"SOURCE" : "/Users/brituz/Documents/GitHub/DevTools-Manager/resources.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

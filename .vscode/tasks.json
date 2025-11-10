@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build DevToolsManager",
+			"type": "shell",
+			"command": "cmake --build build",
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Run DevToolsManager",
+			"type": "shell",
+			"command": "./build/DevToolsManager",
+			"group": "test"
+		}
+	]
+}

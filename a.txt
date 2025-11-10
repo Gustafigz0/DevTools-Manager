@@ -1,0 +1,6 @@
+cmake -S . -B build -G "MinGW Makefiles" -DQT_BIN_DIR="C:/Qt/6.6.2/mingw73_64/bin" -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+
+pushd build
+cpack -G WIX --verbose
+popd

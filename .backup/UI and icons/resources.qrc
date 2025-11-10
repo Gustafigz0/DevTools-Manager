@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>symbols/app-logo.png</file>
+        <file>symbols/icons8-rotate-right-48.png</file>
+        <file>symbols/icons8-camera-50.png</file>
+        <file>symbols/icons8-admin-settings-male-48.png</file>
+        <file>symbols/icons8-cardboard-box-48.png</file>
+        <file>symbols/icons8-trash-48.png</file>
+        <file>symbols/icons8-tray-30.png</file>
+    </qresource>
+</RCC>

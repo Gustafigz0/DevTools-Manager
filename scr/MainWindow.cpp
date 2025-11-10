@@ -21,136 +21,706 @@
 #include <QApplication>
 #include <QKeyEvent>
 #include "UserAuthDialog.h"
-#include "ClickableLabel.h"
 #include <QCryptographicHash>
 #include <QProcess>
 #include <QListView>
 #include <QSignalBlocker>
 #include <QRegularExpression>
+#include <QMouseEvent>
+#include <QResizeEvent>
+#include <QGraphicsDropShadowEffect>
+#include <QPainter>
+#include <QPainterPath>
+#include <QPainter>
+#include <cmath>
 
 MainWindow::MainWindow(const QString& username, QWidget* parent)
     : QMainWindow(parent), currentUsername_(username)
 {
+    // Remove native title bar for custom styling
+    setWindowFlag(Qt::FramelessWindowHint, true);
+    // Enable translucent background for rounded corners
+    setAttribute(Qt::WA_TranslucentBackground, true);
     setupUi();
     loadSampleProducts();
     filterAndSortProducts();
     displayProducts();
+}
+
+// Helper function to make icon white
+static QIcon makeWhiteIcon(const QString& path, const QSize& size = QSize(24, 24)) {
+    QPixmap pixmap(path);
+    if (pixmap.isNull()) return QIcon();
+    QImage img = pixmap.toImage().convertToFormat(QImage::Format_ARGB32);
+    for (int y = 0; y < img.height(); ++y) {
+        for (int x = 0; x < img.width(); ++x) {
+            QColor c = img.pixelColor(x, y);
+            if (c.alpha() > 0) {
+                c.setRed(255); c.setGreen(255); c.setBlue(255);
+                img.setPixelColor(x, y, c);
+            }
+        }
+    }
     
-    // Update user label will be done in setupUi after userLabel_ is created
+    // Create QIcon with both normal and disabled states
+    QIcon icon;
+    icon.addPixmap(QPixmap::fromImage(img), QIcon::Normal);
+    
+    // Create dimmed version for disabled state
+    QImage dimImg = img;
+    for (int y = 0; y < dimImg.height(); ++y) {
+        for (int x = 0; x < dimImg.width(); ++x) {
+            QColor c = dimImg.pixelColor(x, y);
+            if (c.alpha() > 0) {
+                c.setRed(72); c.setGreen(79); c.setBlue(88); // #484f58
+                dimImg.setPixelColor(x, y, c);
+            }
+        }
+    }
+    icon.addPixmap(QPixmap::fromImage(dimImg), QIcon::Disabled);
+    
+    return icon;
 }
 
 void MainWindow::setupUi()
 {
-    qDebug() << "setupUi: widgets-raiz";
+    qDebug() << "setupUi: root";
     auto* central = new QWidget(this);
-    auto* root = new QHBoxLayout(central);
-    root->setContentsMargins(16, 16, 16, 16);
-    root->setSpacing(24);
+    central->setObjectName("centralRoot");
+    // Transparent root for rounded corners
+    central->setStyleSheet("#centralRoot { background: transparent; }");
+    globalVBox_ = new QVBoxLayout(central);
+    globalVBox_->setContentsMargins(10,10,10,10);
+    globalVBox_->setSpacing(0);
+
+    // Main container with rounded corners and shadow effect
+    windowCard_ = new QWidget(central);
+    windowCard_->setObjectName("WindowCard");
+    windowCard_->setStyleSheet(R"(
+        #WindowCard {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+        }
+    )");
+    auto* cardVBox = new QVBoxLayout(windowCard_);
+    cardVBox->setContentsMargins(0,0,0,0);
+    cardVBox->setSpacing(0);
+
+    // Invisible resize border overlay for visual feedback
+    resizeBorder_ = new QWidget(windowCard_);
+    resizeBorder_->setObjectName("ResizeBorder");
+    resizeBorder_->setStyleSheet(R"(
+        #ResizeBorder {
+            background: transparent;
+            border: 2px solid transparent;
+            border-radius: 12px;
+        }
+        #ResizeBorder:hover {
+            border: 2px solid rgba(88, 166, 255, 0.3);
+        }
+    )");
+    resizeBorder_->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+    resizeBorder_->raise();
+
+    // ---------------- Custom Title Bar -----------------
+    titleBar_ = new QWidget(windowCard_);
+    titleBar_->setObjectName("TitleBar");
+    titleBar_->setFixedHeight(48);
+    titleBar_->setStyleSheet(R"(
+        #TitleBar {
+            background: #161b22;
+            border-bottom: 1px solid #21262d;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        #TitleBar QLabel#WindowTitleLabel {
+            color: #c9d1d9;
+            font-size: 14px;
+            font-weight: 600;
+            padding-left: 16px;
+        }
+        #TitleBar QPushButton {
+            background: transparent;
+            border: none;
+            color: #8b949e;
+            font-size: 16px;
+            font-weight: 400;
+            min-width: 46px;
+            max-width: 46px;
+            min-height: 48px;
+            max-height: 48px;
+            padding: 0px;
+            border-radius: 0px;
+        }
+        #TitleBar QPushButton:hover { 
+            background: rgba(255, 255, 255, 0.08); 
+            color: #c9d1d9; 
+        }
+        #TitleBar QPushButton#MaxBtn {
+            border-top-right-radius: 0px;
+        }
+        #TitleBar QPushButton#CloseBtn { 
+            border-top-right-radius: 12px;
+        }
+        #TitleBar QPushButton#CloseBtn:hover { 
+            background: #da3633; 
+            color: #ffffff; 
+        }
+    )");
+    auto* titleLayout = new QHBoxLayout(titleBar_);
+    titleLayout->setContentsMargins(0,0,0,0);
+    titleLayout->setSpacing(0);
+    titleLabel_ = new QLabel("DevTools Manager", titleBar_);
+    titleLabel_->setObjectName("WindowTitleLabel");
+    titleLayout->addWidget(titleLabel_, 0, Qt::AlignVCenter);
+    titleLayout->addStretch(1);
+    
+    // Modern window control buttons with proper symbols
+    btnWinMin_ = new QPushButton("−", titleBar_); 
+    btnWinMin_->setToolTip("Minimize");
+    
+    btnWinMax_ = new QPushButton(isMaximized() ? "❐" : "□", titleBar_); 
+    btnWinMax_->setObjectName("MaxBtn");
+    btnWinMax_->setToolTip("Maximize/Restore");
+    
+    btnWinClose_ = new QPushButton("✕", titleBar_); 
+    btnWinClose_->setObjectName("CloseBtn"); 
+    btnWinClose_->setToolTip("Close");
+    
+    titleLayout->addWidget(btnWinMin_);
+    titleLayout->addWidget(btnWinMax_);
+    titleLayout->addWidget(btnWinClose_);
+
+    connect(btnWinMin_, &QPushButton::clicked, this, []{ QApplication::activeWindow()->showMinimized(); });
+    connect(btnWinMax_, &QPushButton::clicked, this, [this]{
+        if (isMaximized()) { 
+            showNormal(); 
+            btnWinMax_->setText("□"); 
+            updateWindowStyle(false);
+        }
+        else { 
+            showMaximized(); 
+            btnWinMax_->setText("❐"); 
+            updateWindowStyle(true);
+        }
+    });
+    connect(btnWinClose_, &QPushButton::clicked, this, [this]{ close(); });
+
+    // Mouse events for drag
+    titleBar_->installEventFilter(this);
+
+    // ---------------- Body Layout (Sidebar + Content) -----------------
+    auto* bodyWrapper = new QWidget(windowCard_);
+    auto* root = new QHBoxLayout(bodyWrapper);
+    root->setContentsMargins(0,0,0,0);
+    root->setSpacing(0);
 
     qDebug() << "setupUi: sidebarBox/layout";
     sidebarBox_ = new QWidget;
-    sidebarBox_->setStyleSheet("background: #1a1a1a; border-radius: 24px; min-width: 220px; max-width: 240px;");
+    sidebarBox_->setStyleSheet(R"(
+        QWidget {
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                stop:0 #161b22, stop:1 #0d1117);
+            border-right: 1px solid #21262d;
+            min-width: 280px;
+            max-width: 280px;
+        }
+    )");
     sidebarLayout_ = new QVBoxLayout(sidebarBox_);
-    sidebarLayout_->setContentsMargins(20, 26, 20, 30);
-    sidebarLayout_->setSpacing(14);
+    sidebarLayout_->setContentsMargins(20, 28, 20, 28);
+    sidebarLayout_->setSpacing(6);
 
     qDebug() << "setupUi: logo";
-    QLabel* logoLabel = new QLabel("<b>DevTools</b>\n Manager");
-    logoLabel->setStyleSheet("color: #ffffff; font-size: 20px; font-weight: 700; border: none;");
-    logoLabel->setAlignment(Qt::AlignCenter);
-    sidebarLayout_->addWidget(logoLabel);
-    sidebarLayout_->addSpacing(28);
+    // Logo container with icon + text
+    QWidget* logoContainer = new QWidget;
+    logoContainer->setStyleSheet("background: transparent; border: none;");
+    auto* logoLayout = new QHBoxLayout(logoContainer);
+    logoLayout->setContentsMargins(12, 12, 12, 12);
+    logoLayout->setSpacing(12);
+    
+    // Icon box
+    QLabel* iconLabel = new QLabel;
+    iconLabel->setStyleSheet(R"(
+        background: #0d1117;
+        border: 2px solid #1f6feb;
+        border-radius: 8px;
+        padding: 0px;
+        min-width: 40px;
+        min-height: 40px;
+        max-width: 40px;
+        max-height: 40px;
+    )");
+    iconLabel->setAlignment(Qt::AlignCenter);
+    {
+        QPixmap logoPixmap(":/symbols/app-logo.png");
+        if (!logoPixmap.isNull()) {
+            // Convert to white
+            QImage img = logoPixmap.toImage().convertToFormat(QImage::Format_ARGB32);
+            for (int y = 0; y < img.height(); ++y) {
+                for (int x = 0; x < img.width(); ++x) {
+                    QColor c = img.pixelColor(x, y);
+                    if (c.alpha() > 0) {
+                        c.setRed(255); c.setGreen(255); c.setBlue(255);
+                        img.setPixelColor(x, y, c);
+                    }
+                }
+            }
+            iconLabel->setPixmap(QPixmap::fromImage(img).scaled(36, 36, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        }
+    }
+    logoLayout->addWidget(iconLabel);
+    
+    QLabel* logoLabel = new QLabel("<span style='font-size: 16px; font-weight: 700; color: #c9d1d9;'>DevTools<br/><span style='font-size: 12px; color: #8b949e; font-weight: 500;'>Manager</span></span>");
+    logoLabel->setStyleSheet("color: #c9d1d9; border: none; background: transparent;");
+    logoLayout->addWidget(logoLabel, 1);
+    
+    sidebarLayout_->addWidget(logoContainer);
+    sidebarLayout_->addSpacing(8);
+    
+    // Separator line with gradient effect
+    QFrame* line1 = new QFrame();
+    line1->setFrameShape(QFrame::HLine);
+    line1->setStyleSheet(R"(
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+            stop:0 transparent, stop:0.5 #30363d, stop:1 transparent);
+        max-height: 1px;
+        border: none;
+    )");
+    sidebarLayout_->addWidget(line1);
+    sidebarLayout_->addSpacing(12);
+
+    // Navigation section label
+    QLabel* navLabel = new QLabel("NAVIGATION");
+    navLabel->setStyleSheet(R"(
+        color: #6e7681;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        background: transparent;
+        border: none;
+        padding: 8px 12px 4px 12px;
+    )");
+    sidebarLayout_->addWidget(navLabel);
+    sidebarLayout_->addSpacing(4);
 
     qDebug() << "setupUi: btnProducts";
-    btnProducts_ = new QPushButton("📦 Products");
+    btnProducts_ = new QPushButton("Products");
+    {
+        QPixmap boxPm(":/symbols/icons8-cardboard-box-48.png");
+        if (!boxPm.isNull()) {
+            QImage img = boxPm.toImage().convertToFormat(QImage::Format_ARGB32);
+            for (int y = 0; y < img.height(); ++y) {
+                for (int x = 0; x < img.width(); ++x) {
+                    QColor c = img.pixelColor(x, y);
+                    if (c.alpha() > 0) {
+                        c.setRed(255); c.setGreen(255); c.setBlue(255);
+                        img.setPixelColor(x, y, c);
+                    }
+                }
+            }
+            btnProducts_->setIcon(QIcon(QPixmap::fromImage(img)));
+        }
+    }
+    btnProducts_->setIconSize(QSize(18,18));
     btnProducts_->setCheckable(true);
     btnProducts_->setChecked(true);
-    btnProducts_->setStyleSheet(
-        "QPushButton { background: #333333; color: #fff; border: none; border-radius: 12px; padding: 12px 16px; font-size: 15px; font-weight: 600; margin-bottom: 3px; text-align: left; letter-spacing: 1px; }"
-        "QPushButton:checked { background: #666666; }"
-        "QPushButton:hover { background: #444444; }"
-    );
+    btnProducts_->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #8b949e;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: left;
+        }
+        QPushButton:checked {
+            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                stop:0 #1f6feb, stop:1 #0d1117);
+            color: #ffffff;
+            font-weight: 700;
+            padding-left: 10px;
+            border-radius: 8px;
+        }
+        QPushButton:hover:!checked {
+            background: #21262d;
+            color: #c9d1d9;
+        }
+    )");
     sidebarLayout_->addWidget(btnProducts_);
 
     qDebug() << "setupUi: btnShowFavorites";
-    btnShowFavorites_ = new QPushButton("⭐ Favorites");
+    btnShowFavorites_ = new QPushButton("Favorites");
+    // Draw a white star icon for the favorites button
+    {
+        QPixmap starPm(18,18);
+        starPm.fill(Qt::transparent);
+        QPainter p(&starPm);
+        p.setRenderHint(QPainter::Antialiasing, true);
+        p.setBrush(QColor("#ffffff"));
+        p.setPen(Qt::NoPen);
+        QPointF pts[10];
+        const double PI = 3.14159265358979323846;
+        double cx=9, cy=9, r1=8, r2=3.8;
+        for(int i=0;i<10;++i){
+            double ang = PI/2 + i * PI/5;
+            double r = (i%2==0)?r1:r2;
+            pts[i] = QPointF(cx + r*std::cos(ang), cy - r*std::sin(ang));
+        }
+        p.drawPolygon(pts,10);
+        p.end();
+        btnShowFavorites_->setIcon(QIcon(starPm));
+    }
+    btnShowFavorites_->setIconSize(QSize(18,18));
     btnShowFavorites_->setCheckable(true);
     btnShowFavorites_->setChecked(false);
-    btnShowFavorites_->setStyleSheet(
-        "QPushButton { background: #2a2a2a; color: #cccccc; border: none; border-radius: 12px; padding: 12px 16px; font-size: 15px; font-weight: 600; margin-bottom: 6px; text-align: left; }"
-        "QPushButton:checked { background: #666666; color: #ffffff; }"
-        "QPushButton:hover { background: #3a3a3a; }"
-    );
+    btnShowFavorites_->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #8b949e;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: left;
+        }
+        QPushButton:checked {
+            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                stop:0 #1f6feb, stop:1 #0d1117);
+            color: #ffffff;
+            font-weight: 700;
+            padding-left: 10px;
+            border-radius: 8px;
+        }
+        QPushButton:hover:!checked {
+            background: #21262d;
+            color: #c9d1d9;
+        }
+    )");
     sidebarLayout_->addWidget(btnShowFavorites_);
 
-    // Troca: conectando para slots exclusivos (não aos filtros diretos)
     connect(btnProducts_, &QPushButton::clicked, this, &MainWindow::onBtnProducts);
     connect(btnShowFavorites_, &QPushButton::clicked, this, &MainWindow::onBtnFavorites);
 
+    sidebarLayout_->addSpacing(8);
+
+    // Actions section label
+    QLabel* actionsLabel = new QLabel("ACTIONS");
+    actionsLabel->setStyleSheet(R"(
+        color: #6e7681;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        background: transparent;
+        border: none;
+        padding: 8px 12px 4px 12px;
+    )");
+    sidebarLayout_->addWidget(actionsLabel);
+    sidebarLayout_->addSpacing(4);
+
     qDebug() << "setupUi: btnDeleteSelected";
-    btnDeleteSelected_ = new QPushButton("🗑️ Delete Selected");
+    btnDeleteSelected_ = new QPushButton("Delete Selected");
+    // Trash icon is actually SVG, use QIcon directly or draw it
+    // Since SVG support might not work, let's draw a simple trash icon
+    {
+        QPixmap trashPm(16, 16);
+        trashPm.fill(Qt::transparent);
+        QPainter p(&trashPm);
+        p.setRenderHint(QPainter::Antialiasing, true);
+        p.setPen(QPen(QColor("#ffffff"), 1.5));
+        p.setBrush(Qt::NoBrush);
+        // Draw trash can
+        p.drawRect(4, 6, 8, 8);
+        p.drawLine(3, 5, 13, 5);
+        p.drawLine(6, 3, 10, 3);
+        p.drawLine(6, 3, 6, 5);
+        p.drawLine(10, 3, 10, 5);
+        p.drawLine(6, 8, 6, 12);
+        p.drawLine(8, 8, 8, 12);
+        p.drawLine(10, 8, 10, 12);
+        p.end();
+        btnDeleteSelected_->setIcon(QIcon(trashPm));
+    }
+    btnDeleteSelected_->setIconSize(QSize(16,16));
     btnDeleteSelected_->setEnabled(false);
-    btnDeleteSelected_->setStyleSheet("QPushButton {background: #444444;color: #fff;border: none;border-radius: 12px;padding: 12px 16px;font-size: 15px;font-weight: 600;margin-bottom: 15px;text-align: left;}QPushButton:disabled {background: #2a2a2a; color: #888888;} QPushButton:hover {background: #555555;}");
+    // Ensure icon shows even when disabled
+    btnDeleteSelected_->setProperty("iconVisibleInDisabledState", true);
+    btnDeleteSelected_->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #f85149;
+            border: 1px solid #da3633;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: left;
+            icon-size: 16px;
+        }
+        QPushButton:disabled {
+            background: transparent;
+            color: #484f58;
+            border: 1px solid #30363d;
+            opacity: 1.0;
+        }
+        QPushButton:hover:enabled {
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                stop:0 #da3633, stop:1 #8b0000);
+            color: #ffffff;
+            border: 1px solid #f85149;
+        }
+    )");
     connect(btnDeleteSelected_, &QPushButton::clicked, this, &MainWindow::onDeleteSelectedProductsClicked);
     sidebarLayout_->addWidget(btnDeleteSelected_);
-    sidebarLayout_->addSpacing(25);
+    sidebarLayout_->addSpacing(12);
+    
+    // Separator line with gradient
+    QFrame* line2 = new QFrame();
+    line2->setFrameShape(QFrame::HLine);
+    line2->setStyleSheet(R"(
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+            stop:0 transparent, stop:0.5 #30363d, stop:1 transparent);
+        max-height: 1px;
+        border: none;
+    )");
+    sidebarLayout_->addWidget(line2);
+    sidebarLayout_->addSpacing(12);
 
     sidebarLayout_->addStretch(1);
 
+    // Tools section label
+    QLabel* toolsLabel = new QLabel("TOOLS");
+    toolsLabel->setStyleSheet(R"(
+        color: #6e7681;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        background: transparent;
+        border: none;
+        padding: 8px 12px 4px 12px;
+    )");
+    sidebarLayout_->addWidget(toolsLabel);
+    sidebarLayout_->addSpacing(4);
+
     qDebug() << "setupUi: btnExport / btnImport";
-    btnExport_ = new QPushButton("📤 Export Catalog");
-    btnExport_->setStyleSheet(
-        "QPushButton { background: #2a2a2a; color: #cccccc; border: none; border-radius: 12px; padding: 12px 16px; font-size: 15px; font-weight: 600; margin-bottom: 6px; text-align: left; }"
-        "QPushButton:hover { background: #3a3a3a; }"
-    );
-    btnExport_->setToolTip("Exporta o catálogo para um arquivo JSON");
+    btnExport_ = new QPushButton("Export");
+    {
+        QPixmap trayPm(":/symbols/icons8-tray-30.png");
+        if (!trayPm.isNull()) {
+            QImage img = trayPm.toImage().convertToFormat(QImage::Format_ARGB32);
+            for (int y = 0; y < img.height(); ++y) {
+                for (int x = 0; x < img.width(); ++x) {
+                    QColor c = img.pixelColor(x, y);
+                    if (c.alpha() > 0) {
+                        c.setRed(255); c.setGreen(255); c.setBlue(255);
+                        img.setPixelColor(x, y, c);
+                    }
+                }
+            }
+            btnExport_->setIcon(QIcon(QPixmap::fromImage(img)));
+        }
+    }
+    btnExport_->setIconSize(QSize(16,16));
+    btnExport_->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #8b949e;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: left;
+        }
+        QPushButton:hover {
+            background: #21262d;
+            color: #58a6ff;
+        }
+    )");
+    btnExport_->setToolTip("Export catalog to a JSON file");
     connect(btnExport_, &QPushButton::clicked, this, &MainWindow::onExportProductsClicked);
     sidebarLayout_->addWidget(btnExport_);
 
-    btnImport_ = new QPushButton("📥 Import Catalog");
-    btnImport_->setStyleSheet(
-        "QPushButton { background: #2a2a2a; color: #cccccc; border: none; border-radius: 12px; padding: 12px 16px; font-size: 15px; font-weight: 600; margin-bottom: 6px; text-align: left; }"
-        "QPushButton:hover { background: #3a3a3a; }"
-    );
-    btnImport_->setToolTip("Importa produtos de um arquivo JSON");
+    btnImport_ = new QPushButton("Import");
+    {
+        QPixmap trayPm(":/symbols/icons8-tray-30.png");
+        if (!trayPm.isNull()) {
+            QImage img = trayPm.toImage().convertToFormat(QImage::Format_ARGB32);
+            for (int y = 0; y < img.height(); ++y) {
+                for (int x = 0; x < img.width(); ++x) {
+                    QColor c = img.pixelColor(x, y);
+                    if (c.alpha() > 0) {
+                        c.setRed(255); c.setGreen(255); c.setBlue(255);
+                        img.setPixelColor(x, y, c);
+                    }
+                }
+            }
+            btnImport_->setIcon(QIcon(QPixmap::fromImage(img)));
+        }
+    }
+    btnImport_->setIconSize(QSize(16,16));
+    btnImport_->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #8b949e;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: left;
+        }
+        QPushButton:hover {
+            background: #21262d;
+            color: #58a6ff;
+        }
+    )");
+    btnImport_->setToolTip("Import products from a JSON file");
     connect(btnImport_, &QPushButton::clicked, this, &MainWindow::onImportProductsClicked);
     sidebarLayout_->addWidget(btnImport_);
 
+    // User info card at bottom of sidebar
+    sidebarLayout_->addSpacing(16);
+    QWidget* sidebarUserCard = new QWidget;
+    sidebarUserCard->setStyleSheet(R"(
+        QWidget {
+            background: #0d1117;
+            border: 1px solid #21262d;
+            border-radius: 8px;
+        }
+    )");
+    auto* userCardLayout = new QVBoxLayout(sidebarUserCard);
+    userCardLayout->setContentsMargins(12, 12, 12, 12);
+    userCardLayout->setSpacing(6);
+    
+    QLabel* userIconLabel = new QLabel;
+    userIconLabel->setStyleSheet("background: transparent; border: none;");
+    userIconLabel->setAlignment(Qt::AlignCenter);
+    {
+        QPixmap userPm(":/symbols/icons8-admin-settings-male-48.png");
+        if (!userPm.isNull()) {
+            QImage img = userPm.toImage().convertToFormat(QImage::Format_ARGB32);
+            for (int y = 0; y < img.height(); ++y) {
+                for (int x = 0; x < img.width(); ++x) {
+                    QColor c = img.pixelColor(x, y);
+                    if (c.alpha() > 0) {
+                        c.setRed(255); c.setGreen(255); c.setBlue(255);
+                        img.setPixelColor(x, y, c);
+                    }
+                }
+            }
+            userIconLabel->setPixmap(QPixmap::fromImage(img).scaled(32,32, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        }
+    }
+    
+    QLabel* sidebarUserLabel = new QLabel(currentUsername_.isEmpty() ? "User" : currentUsername_);
+    sidebarUserLabel->setStyleSheet(R"(
+        color: #c9d1d9;
+        font-size: 13px;
+        font-weight: 600;
+        background: transparent;
+        border: none;
+    )");
+    sidebarUserLabel->setAlignment(Qt::AlignCenter);
+    
+    userCardLayout->addWidget(userIconLabel);
+    userCardLayout->addWidget(sidebarUserLabel);
+    sidebarLayout_->addWidget(sidebarUserCard);
+
     qDebug() << "setupUi: productsBg";
     productsBg_ = new QWidget;
-    productsBg_->setStyleSheet("background: #1a1a1a; border-radius: 28px; padding: 24px;");
+    productsBg_->setStyleSheet("background: #0d1117;");
     productsLayout_ = new QVBoxLayout(productsBg_);
-    productsLayout_->setSpacing(18);
+    productsLayout_->setSpacing(16);
     productsLayout_->setContentsMargins(24, 24, 24, 24);
 
     qDebug() << "setupUi: userInfoLabel/header";
     QWidget* userInfoLabel = new QWidget;
-    userInfoLabel->setStyleSheet("background: #2a2a2a; border-radius: 18px; padding: 20px 28px;");
+    userInfoLabel->setStyleSheet(R"(
+        QWidget {
+            background: #161b22;
+            border: 1px solid #21262d;
+            border-radius: 6px;
+        }
+    )");
     auto* headerLayout = new QHBoxLayout(userInfoLabel);
-    headerLayout->setContentsMargins(0,0,0,0);
+    headerLayout->setContentsMargins(16, 12, 16, 12);
+    headerLayout->setSpacing(12);
 
     userLabel_ = new QLabel();
-    userLabel_->setText(currentUsername_.isEmpty() ? "User" : "User: " + currentUsername_);
-    userLabel_->setStyleSheet("color: #ffffff; font-size: 16px; font-weight: 600; background: transparent; border: none;");
+    userLabel_->setText(currentUsername_.isEmpty() ? "User" : currentUsername_);
+    userLabel_->setStyleSheet(R"(
+        color: #c9d1d9;
+        font-size: 14px;
+        font-weight: 600;
+        background: transparent;
+        border: none;
+    )");
     headerLayout->addWidget(userLabel_);
     headerLayout->addStretch();
 
     btnLogout_ = new QPushButton("Logout");
-    btnLogout_->setStyleSheet("background: #222; color: #fff; border-radius: 13px; font-size: 12px; padding:6px 20px; font-weight: 700;");
+    btnLogout_->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #8b949e;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            font-size: 12px;
+            padding: 5px 12px;
+            font-weight: 500;
+        }
+        QPushButton:hover {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+        }
+    )");
     connect(btnLogout_, &QPushButton::clicked, this, &MainWindow::onLogoutClicked);
     headerLayout->addWidget(btnLogout_);
 
     qDebug() << "setupUi: btnAddProduct";
-    QPushButton* btnAddProduct = new QPushButton("➕ Add Product");
-    btnAddProduct->setStyleSheet("QPushButton { background: #333333; color: #fff; border: none; border-radius: 12px; padding: 10px 20px; font-size: 14px; font-weight: 600; } QPushButton:hover { background: #444444; }");
-    btnAddProduct->setToolTip("Adicionar um novo produto");
+    QPushButton* btnAddProduct = new QPushButton("Add Product");
+    btnAddProduct->setStyleSheet(R"(
+        QPushButton {
+            background: #238636;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        QPushButton:hover {
+            background: #2ea043;
+        }
+    )");
+    btnAddProduct->setToolTip("Add a new product");
     connect(btnAddProduct, &QPushButton::clicked, this, &MainWindow::onAddProductClicked);
     headerLayout->addWidget(btnAddProduct);
 
     qDebug() << "setupUi: btnShowLog";
-    QPushButton* btnShowLog = new QPushButton("📋 History");
+    QPushButton* btnShowLog = new QPushButton("History");
     btnShowLog->setToolTip("View operation history");
-    btnShowLog->setStyleSheet("QPushButton { background: #2a2a2a; color: #cccccc; border: none; border-radius: 10px; padding: 10px 20px; font-size: 13px; font-weight: 600; } QPushButton:hover { background: #3a3a3a; }");
+    btnShowLog->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #8b949e;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        QPushButton:hover {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+        }
+    )");
     connect(btnShowLog, &QPushButton::clicked, this, &MainWindow::showHistoryDialog);
     headerLayout->addWidget(btnShowLog);
 
@@ -158,37 +728,117 @@ void MainWindow::setupUi()
 
     qDebug() << "setupUi: filtros";
     auto* filterRow = new QHBoxLayout;
+    filterRow->setSpacing(12);
     searchBar_ = new QLineEdit;
     searchBar_->setPlaceholderText("Search products...");
-    searchBar_->setStyleSheet("QLineEdit { background: #2a2a2a; color: #fff; border: 2px solid #444444; border-radius: 14px; padding: 12px 18px; font-size: 15px;} QLineEdit:focus { border: 2px solid #666666; }");
+    searchBar_->setStyleSheet(R"(
+        QLineEdit {
+            background: #0d1117;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 14px;
+        }
+        QLineEdit:focus {
+            background: #0d1117;
+            border: 1px solid #58a6ff;
+            outline: none;
+        }
+        QLineEdit::placeholder {
+            color: #484f58;
+        }
+    )");
     connect(searchBar_, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
     filterRow->addWidget(searchBar_, 5);
 
     filterCategoryBox_ = new QComboBox;
     filterCategoryBox_->setToolTip("Filtrar por Categoria");
-    filterCategoryBox_->setStyleSheet(
-        "QComboBox { background: #2a2a2a; color: #fff; border: 2px solid #444444; border-radius: 10px; font-size: 14px; padding: 8px 14px; min-height: 32px;}"
-        "QComboBox:focus { border-color: #666666; }"
-        "QComboBox::drop-down { border: none; width: 0px; }"
-        "QComboBox QAbstractItemView { background: transparent; border: none; }"
-    );
+    filterCategoryBox_->setStyleSheet(R"(
+        QComboBox {
+            background: #0d1117;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            font-size: 14px;
+            padding: 5px 12px;
+            min-height: 20px;
+        }
+        QComboBox:focus {
+            border: 1px solid #58a6ff;
+        }
+        QComboBox::drop-down {
+            border: none;
+            width: 20px;
+        }
+        QComboBox::down-arrow {
+            image: none;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #8b949e;
+            width: 0;
+            height: 0;
+        }
+        QComboBox QAbstractItemView {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            outline: none;
+            selection-background-color: #21262d;
+        }
+    )");
+    filterCategoryBox_->setAttribute(Qt::WA_NoSystemBackground);
+    filterCategoryBox_->setAttribute(Qt::WA_TranslucentBackground);
     filterCategoryBox_->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     filterCategoryBox_->setEditable(false);
     filterCategoryBox_->setInsertPolicy(QComboBox::NoInsert);
     filterCategoryBox_->setDuplicatesEnabled(false);
+    filterCategoryBox_->setMaxVisibleItems(8);
+    filterCategoryBox_->setFrame(false);
     // Modern popup view styling
     {
         auto* catView = new QListView(filterCategoryBox_);
-        catView->setStyleSheet(
-            "QListView { background: transparent; color: #ffffff; border: none; padding: 0px; outline: 0; }"
-            "QListView::viewport { background: #2a2a2a; border: 2px solid #444444; border-radius: 10px; }"
-            "QListView::item { padding: 8px 12px; min-height: 30px; border-radius: 6px; }"
-            "QListView::item:hover { background: #383838; }"
-            "QListView::item:selected { background: #555555; }"
-            "QScrollBar:vertical { background: transparent; width: 10px; margin: 6px 3px 6px 0; }"
-            "QScrollBar::handle:vertical { background: #555555; border-radius: 5px; }"
-            "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }"
-        );
+        catView->setStyleSheet(R"(
+            QListView {
+                background: #161b22;
+                color: #c9d1d9;
+                border: none;
+                padding: 4px;
+                outline: 0;
+            }
+            QListView::viewport {
+                background: #161b22;
+                border: 1px solid #30363d;
+                border-radius: 6px;
+            }
+            QListView::item {
+                padding: 6px 12px;
+                min-height: 28px;
+                border-radius: 4px;
+            }
+            QListView::item:hover {
+                background: #21262d;
+            }
+            QListView::item:selected {
+                background: #1f6feb;
+                color: #ffffff;
+            }
+            QScrollBar:vertical {
+                background: #161b22;
+                width: 8px;
+                margin: 0;
+            }
+            QScrollBar::handle:vertical {
+                background: #30363d;
+                border-radius: 4px;
+            }
+            QScrollBar::handle:vertical:hover {
+                background: #484f58;
+            }
+            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+                height: 0;
+            }
+        )");
         catView->setFrameShape(QFrame::NoFrame);
         catView->setAutoFillBackground(false);
         // Let eventFilter keep popup width equal to button width
@@ -201,33 +851,96 @@ void MainWindow::setupUi()
         filterCategoryBox_->setMaxVisibleItems(8);
     }
     filterRow->addWidget(filterCategoryBox_, 2);
-    connect(filterCategoryBox_, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onFilterChanged);
+    // Use activated() so we react only to user selection from the popup (reduces extra redraws)
+    connect(filterCategoryBox_, QOverload<int>::of(&QComboBox::activated), this, &MainWindow::onFilterChanged);
 
     filterStockBox_ = new QComboBox;
     filterStockBox_->addItems({"All stock", "In stock", "Low stock", "Out of stock"});
     filterStockBox_->setToolTip("Filter by stock status");
-    filterStockBox_->setStyleSheet(
-        "QComboBox { background: #2a2a2a; color: #fff; border: 2px solid #444444; border-radius: 10px; font-size: 14px; padding: 8px 14px; min-height: 32px;}"
-        "QComboBox:focus { border-color: #666666; }"
-        "QComboBox::drop-down { border: none; width: 0px; }"
-        "QComboBox QAbstractItemView { background: transparent; border: none; }"
-    );
+    filterStockBox_->setStyleSheet(R"(
+        QComboBox {
+            background: #0d1117;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            font-size: 14px;
+            padding: 5px 12px;
+            min-height: 20px;
+        }
+        QComboBox:focus {
+            border: 1px solid #58a6ff;
+        }
+        QComboBox::drop-down {
+            border: none;
+            width: 20px;
+        }
+        QComboBox::down-arrow {
+            image: none;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #8b949e;
+            width: 0;
+            height: 0;
+        }
+        QComboBox QAbstractItemView {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            outline: none;
+            selection-background-color: #21262d;
+        }
+    )");
+    filterStockBox_->setAttribute(Qt::WA_NoSystemBackground);
+    filterStockBox_->setAttribute(Qt::WA_TranslucentBackground);
     filterStockBox_->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     filterStockBox_->setEditable(false);
     filterStockBox_->setInsertPolicy(QComboBox::NoInsert);
     filterStockBox_->setDuplicatesEnabled(false);
+    filterStockBox_->setMaxVisibleItems(8);
+    filterStockBox_->setFrame(false);
     {
         auto* stockView = new QListView(filterStockBox_);
-        stockView->setStyleSheet(
-            "QListView { background: transparent; color: #ffffff; border: none; padding: 0px; outline: 0; }"
-            "QListView::viewport { background: #2a2a2a; border: 2px solid #444444; border-radius: 10px; }"
-            "QListView::item { padding: 8px 12px; min-height: 30px; border-radius: 6px; }"
-            "QListView::item:hover { background: #383838; }"
-            "QListView::item:selected { background: #555555; }"
-            "QScrollBar:vertical { background: transparent; width: 10px; margin: 6px 3px 6px 0; }"
-            "QScrollBar::handle:vertical { background: #555555; border-radius: 5px; }"
-            "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }"
-        );
+        stockView->setStyleSheet(R"(
+            QListView {
+                background: #161b22;
+                color: #c9d1d9;
+                border: none;
+                padding: 4px;
+                outline: 0;
+            }
+            QListView::viewport {
+                background: #161b22;
+                border: 1px solid #30363d;
+                border-radius: 6px;
+            }
+            QListView::item {
+                padding: 6px 12px;
+                min-height: 28px;
+                border-radius: 4px;
+            }
+            QListView::item:hover {
+                background: #21262d;
+            }
+            QListView::item:selected {
+                background: #1f6feb;
+                color: #ffffff;
+            }
+            QScrollBar:vertical {
+                background: #161b22;
+                width: 8px;
+                margin: 0;
+            }
+            QScrollBar::handle:vertical {
+                background: #30363d;
+                border-radius: 4px;
+            }
+            QScrollBar::handle:vertical:hover {
+                background: #484f58;
+            }
+            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+                height: 0;
+            }
+        )");
         stockView->setFrameShape(QFrame::NoFrame);
         stockView->setAutoFillBackground(false);
         // Let eventFilter keep popup width equal to button width
@@ -240,7 +953,8 @@ void MainWindow::setupUi()
         filterStockBox_->setMaxVisibleItems(8);
     }
     filterRow->addWidget(filterStockBox_, 2);
-    connect(filterStockBox_, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onFilterChanged);
+    // Use activated() so we react only to user selection from the popup (reduces extra redraws)
+    connect(filterStockBox_, QOverload<int>::of(&QComboBox::activated), this, &MainWindow::onFilterChanged);
 
     // Normalize heights to match the search bar
     {
@@ -258,11 +972,35 @@ void MainWindow::setupUi()
     QScrollArea* scrollArea = new QScrollArea;
     scrollArea->setWidgetResizable(true);
     scrollArea->setFrameShape(QFrame::NoFrame);
-    scrollArea->setStyleSheet("QScrollArea { background: transparent; border: none; }");
+    scrollArea->setStyleSheet(R"(
+        QScrollArea {
+            background: transparent;
+            border: none;
+        }
+        QScrollBar:vertical {
+            background: #0d1117;
+            width: 10px;
+            margin: 0;
+        }
+        QScrollBar::handle:vertical {
+            background: #30363d;
+            border-radius: 5px;
+            min-height: 30px;
+        }
+        QScrollBar::handle:vertical:hover {
+            background: #484f58;
+        }
+        QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+            height: 0;
+        }
+        QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+            background: none;
+        }
+    )");
     productsContainer_ = new QWidget;
     productsCardsLayout_ = new QVBoxLayout(productsContainer_);
-    productsCardsLayout_->setSpacing(16);
-    productsCardsLayout_->setContentsMargins(0,0,0,0);
+    productsCardsLayout_->setSpacing(8);
+    productsCardsLayout_->setContentsMargins(0,0,8,0);
     scrollArea->setWidget(productsContainer_);
     productsLayout_->addWidget(scrollArea, 1);
 
@@ -272,10 +1010,162 @@ void MainWindow::setupUi()
 
     root->addWidget(sidebarBox_, 0);
     root->addWidget(productsBg_, 1);
+    cardVBox->addWidget(titleBar_);
+    cardVBox->addWidget(bodyWrapper, 1);
+    globalVBox_->addWidget(windowCard_, 1);
     setCentralWidget(central);
-    setWindowTitle("DevTools Manager");
-    resize(1200, 770);
+    setWindowTitle("DevTools Manager"); // logical title
+    
+    // Set proper initial size
+    resize(1280, 800);
+    setMinimumSize(960, 600);
+    
+    // Apply GitHub-like window styling
+    setStyleSheet(styleSheet() + R"(
+        QMainWindow { background: transparent; }
+        QMessageBox { background: #161b22; color: #c9d1d9; }
+        QMessageBox QPushButton {
+            background: #21262d; color: #c9d1d9; border: 1px solid #30363d; border-radius: 6px; padding: 5px 16px;
+        }
+        QMessageBox QPushButton:hover { background: #30363d; }
+    )");
+    
+    // Add subtle drop shadow effect
+    if (windowCard_) {
+        QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
+        shadow->setBlurRadius(30);
+        shadow->setXOffset(0);
+        shadow->setYOffset(4);
+        shadow->setColor(QColor(0, 0, 0, 120));
+        windowCard_->setGraphicsEffect(shadow);
+    }
+    
     qDebug() << "setupUi: FIM";
+}
+
+void MainWindow::updateWindowStyle(bool maximized)
+{
+    if (maximized) {
+        // Remove rounded corners when maximized
+        globalVBox_->setContentsMargins(0,0,0,0);
+        windowCard_->setStyleSheet(R"(
+            #WindowCard {
+                background: #0d1117;
+                border: 1px solid #30363d;
+                border-radius: 0px;
+            }
+        )");
+        titleBar_->setStyleSheet(R"(
+            #TitleBar {
+                background: #161b22;
+                border-bottom: 1px solid #21262d;
+                border-top-left-radius: 0px;
+                border-top-right-radius: 0px;
+            }
+            #TitleBar QLabel#WindowTitleLabel {
+                color: #c9d1d9;
+                font-size: 14px;
+                font-weight: 600;
+                padding-left: 16px;
+            }
+            #TitleBar QPushButton {
+                background: transparent;
+                border: none;
+                color: #8b949e;
+                font-size: 16px;
+                font-weight: 400;
+                min-width: 46px;
+                max-width: 46px;
+                min-height: 48px;
+                max-height: 48px;
+                padding: 0px;
+                border-radius: 0px;
+            }
+            #TitleBar QPushButton:hover { 
+                background: rgba(255, 255, 255, 0.08); 
+                color: #c9d1d9; 
+            }
+            #TitleBar QPushButton#MaxBtn {
+                border-top-right-radius: 0px;
+            }
+            #TitleBar QPushButton#CloseBtn { 
+                border-top-right-radius: 0px;
+            }
+            #TitleBar QPushButton#CloseBtn:hover { 
+                background: #da3633; 
+                color: #ffffff; 
+            }
+        )");
+        if (resizeBorder_) {
+            resizeBorder_->setStyleSheet(R"(
+                #ResizeBorder {
+                    background: transparent;
+                    border: 2px solid transparent;
+                    border-radius: 0px;
+                }
+            )");
+        }
+    } else {
+        // Restore rounded corners when normal
+        globalVBox_->setContentsMargins(10,10,10,10);
+        windowCard_->setStyleSheet(R"(
+            #WindowCard {
+                background: #0d1117;
+                border: 1px solid #30363d;
+                border-radius: 12px;
+            }
+        )");
+        titleBar_->setStyleSheet(R"(
+            #TitleBar {
+                background: #161b22;
+                border-bottom: 1px solid #21262d;
+                border-top-left-radius: 12px;
+                border-top-right-radius: 12px;
+            }
+            #TitleBar QLabel#WindowTitleLabel {
+                color: #c9d1d9;
+                font-size: 14px;
+                font-weight: 600;
+                padding-left: 16px;
+            }
+            #TitleBar QPushButton {
+                background: transparent;
+                border: none;
+                color: #8b949e;
+                font-size: 16px;
+                font-weight: 400;
+                min-width: 46px;
+                max-width: 46px;
+                min-height: 48px;
+                max-height: 48px;
+                padding: 0px;
+                border-radius: 0px;
+            }
+            #TitleBar QPushButton:hover { 
+                background: rgba(255, 255, 255, 0.08); 
+                color: #c9d1d9; 
+            }
+            #TitleBar QPushButton#MaxBtn {
+                border-top-right-radius: 0px;
+            }
+            #TitleBar QPushButton#CloseBtn { 
+                border-top-right-radius: 12px;
+            }
+            #TitleBar QPushButton#CloseBtn:hover { 
+                background: #da3633; 
+                color: #ffffff; 
+            }
+        )");
+        if (resizeBorder_) {
+            resizeBorder_->setStyleSheet(R"(
+                #ResizeBorder {
+                    background: transparent;
+                    border: 2px solid transparent;
+                    border-radius: 12px;
+                }
+            )");
+        }
+    }
 }
 
 void MainWindow::loadSampleProducts()
@@ -313,14 +1203,14 @@ void MainWindow::filterAndSortProducts()
         bool matchesCategory = selectedCategory.isEmpty() || product.getCategory() == selectedCategory;
 
         bool matchesStock = true;
-        if (stockStatus == "stock OK")
+        if (stockStatus == "In stock")
             matchesStock = product.getQuantity() > 5;
-        else if (stockStatus == "Baixo stock")
+        else if (stockStatus == "Low stock")
             matchesStock = product.getQuantity() > 0 && product.getQuantity() <= 5;
-        else if (stockStatus == "Sem stock")
+        else if (stockStatus == "Out of stock")
             matchesStock = product.getQuantity() == 0;
 
-        // AQUI a lógica correta do toggle Favoritos/Produtos:
+        // Toggle logic for Favorites/Products:
         bool matchesFav = !mostrarFavoritos || favoriteProductIds_.contains(product.getId());
 
         if (matchesSearch && matchesCategory && matchesStock && matchesFav)
@@ -334,7 +1224,7 @@ void MainWindow::filterAndSortProducts()
     {
         QSignalBlocker blocker(filterCategoryBox_);
         filterCategoryBox_->clear();
-        filterCategoryBox_->addItem("Todas Categorias");
+        filterCategoryBox_->addItem("All Categories");
         QSet<QString> cats;
         for (const Product& p : allProducts_) cats.insert(p.getCategory());
         QStringList sortedCats = QStringList(cats.begin(), cats.end());
@@ -361,7 +1251,13 @@ void MainWindow::displayProducts()
     }
     if (filteredProducts_.isEmpty()) {
         QLabel* emptyLabel = new QLabel("No products found");
-        emptyLabel->setStyleSheet("color: #888888; font-size: 16px; padding: 40px;");
+        emptyLabel->setStyleSheet(R"(
+            color: #8b949e;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 48px 24px;
+            background: transparent;
+        )");
         emptyLabel->setAlignment(Qt::AlignCenter);
         productsCardsLayout_->addWidget(emptyLabel);
         productsCardsLayout_->addStretch();
@@ -377,39 +1273,64 @@ void MainWindow::createProductCard(const Product& product)
     QWidget* card = new QWidget;
     card->setStyleSheet(R"(
         QWidget {
-            background: #2a2a2a;
-            border-radius: 16px;
-            margin-bottom: 6px;
-            padding: 0px 0px;
+            background: #161b22;
+            border: 1px solid #21262d;
+            border-radius: 6px;
         }
         QWidget:hover {
-            background: #333333;
+            border: 1px solid #30363d;
+            background: #161b22;
         }
     )");
     auto* cardLayout = new QHBoxLayout(card);
-    cardLayout->setContentsMargins(22, 12, 22, 12);
-    cardLayout->setSpacing(15);
+    cardLayout->setContentsMargins(16, 12, 16, 12);
+    cardLayout->setSpacing(12);
 
-    QPushButton* favBtn = new QPushButton(favoriteProductIds_.contains(product.getId()) ? "⭐" : "○");
+    QPushButton* favBtn = new QPushButton;
     favBtn->setCheckable(true);
     favBtn->setChecked(favoriteProductIds_.contains(product.getId()));
     favBtn->setCursor(Qt::PointingHandCursor);
     favBtn->setToolTip(favBtn->isChecked() ? "Unfavorite" : "Favorite");
     favBtn->setStyleSheet(R"(
         QPushButton {
-            font-size: 22px;
-            color: #cccccc;
             background: transparent;
             border: none;
-            min-width: 34px;
+            min-width: 24px;
+            min-height: 24px;
+            padding: 0px;
         }
-        QPushButton:hover { color: #ffffff; }
+        QPushButton:hover { opacity: 0.8; }
     )");
-    connect(favBtn, &QPushButton::clicked, this, [this, product, favBtn]() {
+    auto updateFavIcon = [favBtn]() {
+        // Draw star programmatically in yellow (checked) or dim white (unchecked)
+        QPixmap starPm(20,20);
+        starPm.fill(Qt::transparent);
+        QPainter p(&starPm);
+        p.setRenderHint(QPainter::Antialiasing, true);
+        QColor fill = favBtn->isChecked() ? QColor("#f1e05a") : QColor(255,255,255,80); // white dim when unchecked
+        p.setBrush(fill);
+        p.setPen(Qt::NoPen);
+        // Draw 5-point star
+        QPointF pts[10];
+        const double PI = 3.14159265358979323846;
+        double cx=10, cy=10, r1=9, r2=4.2;
+        for(int i=0;i<10;++i){
+            double ang = PI/2 + i * PI/5;
+            double r = (i%2==0)?r1:r2;
+            pts[i] = QPointF(cx + r*std::cos(ang), cy - r*std::sin(ang));
+        }
+        p.drawPolygon(pts,10);
+        p.end();
+        favBtn->setIcon(QIcon(starPm));
+        favBtn->setIconSize(QSize(20,20));
+    };
+    updateFavIcon();
+    connect(favBtn, &QPushButton::clicked, this, [this, product, favBtn, updateFavIcon]() {
         bool favorited = favBtn->isChecked();
         if (favorited) favoriteProductIds_.insert(product.getId());
         else favoriteProductIds_.remove(product.getId());
-        favBtn->setText(favorited ? "⭐" : "○");
+        favBtn->setToolTip(favorited ? "Unfavorite" : "Favorite");
+        updateFavIcon();
         filterAndSortProducts();
         displayProducts();
     });
@@ -427,24 +1348,21 @@ void MainWindow::createProductCard(const Product& product)
     selectButton->setChecked(selectedProductIds_.contains(product.getId()));
     selectButton->setStyleSheet(R"(
         QPushButton {
-            background: #2a2a2a;
-            border: 2px solid #666666;
-            border-radius: 10px;
-            min-width: 20px; min-height: 20px;
-            max-width: 20px; max-height: 20px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 4px;
+            min-width: 16px;
+            min-height: 16px;
+            max-width: 16px;
+            max-height: 16px;
             padding: 0px;
         }
         QPushButton:checked {
-            background: #666666;
-            border: 2px solid #666666;
+            background: #1f6feb;
+            border: 1px solid #1f6feb;
         }
-        QPushButton:checked:hover {
-            background: #666666;
-            border: 2px solid #888888;
-        }
-        QPushButton:hover:!checked {
-            border-color: #888888;
-            background: #333333;
+        QPushButton:hover {
+            border-color: #58a6ff;
         }
     )");
     selectButton->setToolTip(selectedProductIds_.contains(product.getId()) ? "Unselect" : "Select");
@@ -469,33 +1387,87 @@ void MainWindow::createProductCard(const Product& product)
 
     QLabel* icon = new QLabel;
     icon->setStyleSheet(R"(
-        background: #333333;
-        border-radius: 12px;
-        min-width: 48px; min-height: 48px; max-width: 48px; max-height: 48px;
-        margin-left: 0px; margin-right: 8px; padding: 0px;
+        background: #21262d;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        min-width: 48px;
+        min-height: 48px;
+        max-width: 48px;
+        max-height: 48px;
+        padding: 0px;
+        font-size: 24px;
     )");
     icon->setAlignment(Qt::AlignCenter);
-    icon->setScaledContents(true);
+    
+    // Helper lambda to create rounded pixmap
+    auto makeRoundedPixmap = [](const QPixmap& source, int radius) -> QPixmap {
+        if (source.isNull()) return QPixmap();
+        QPixmap rounded(source.size());
+        rounded.fill(Qt::transparent);
+        QPainter painter(&rounded);
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.setRenderHint(QPainter::SmoothPixmapTransform);
+        QPainterPath path;
+        path.addRoundedRect(rounded.rect(), radius, radius);
+        painter.setClipPath(path);
+        painter.drawPixmap(0, 0, source);
+        painter.end();
+        return rounded;
+    };
     
     // Load product image if it exists
     QString imagePath = product.getImagePath();
     if (!imagePath.isEmpty() && QFile::exists(imagePath)) {
         QPixmap pixmap(imagePath);
         if (!pixmap.isNull()) {
-            icon->setPixmap(pixmap.scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            QPixmap scaled = pixmap.scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            QPixmap rounded = makeRoundedPixmap(scaled, 6);
+            icon->setPixmap(rounded);
+            icon->setScaledContents(false);
         } else {
-            icon->setText("■");
-            icon->setStyleSheet(icon->styleSheet() + "font-size: 28px;");
+            QPixmap boxPm(":/symbols/icons8-cardboard-box-48.png");
+            if (!boxPm.isNull()) {
+                QImage img = boxPm.toImage().convertToFormat(QImage::Format_ARGB32);
+                for (int y = 0; y < img.height(); ++y) {
+                    for (int x = 0; x < img.width(); ++x) {
+                        QColor c = img.pixelColor(x, y);
+                        if (c.alpha() > 0) {
+                            c.setRed(255); c.setGreen(255); c.setBlue(255);
+                            img.setPixelColor(x, y, c);
+                        }
+                    }
+                }
+                icon->setPixmap(QPixmap::fromImage(img).scaled(32,32, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            }
         }
     } else {
-        icon->setText("■");
-        icon->setStyleSheet(icon->styleSheet() + "font-size: 28px;");
+        QPixmap boxPm(":/symbols/icons8-cardboard-box-48.png");
+        if (!boxPm.isNull()) {
+            QImage img = boxPm.toImage().convertToFormat(QImage::Format_ARGB32);
+            for (int y = 0; y < img.height(); ++y) {
+                for (int x = 0; x < img.width(); ++x) {
+                    QColor c = img.pixelColor(x, y);
+                    if (c.alpha() > 0) {
+                        c.setRed(255); c.setGreen(255); c.setBlue(255);
+                        img.setPixelColor(x, y, c);
+                    }
+                }
+            }
+            icon->setPixmap(QPixmap::fromImage(img).scaled(32,32, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        }
     }
     
     cardLayout->addWidget(icon, 0, Qt::AlignVCenter);
 
-    QLabel* nameLabel = new QLabel(QString("<b>%1</b>").arg(product.getName()));
-    nameLabel->setStyleSheet("color: #fff; font-size: 17px; min-width:160px; background: transparent; border: none; margin-right:12px;");
+    QLabel* nameLabel = new QLabel(product.getName());
+    nameLabel->setStyleSheet(R"(
+        color: #c9d1d9;
+        font-size: 14px;
+        font-weight: 600;
+        min-width: 200px;
+        background: transparent;
+        border: none;
+    )");
     cardLayout->addWidget(nameLabel, 1, Qt::AlignVCenter);
 
     card->setCursor(Qt::PointingHandCursor);
@@ -503,30 +1475,77 @@ void MainWindow::createProductCard(const Product& product)
     card->setProperty("editId", product.getId());
 
     QLabel* categoryLabel = new QLabel(product.getCategory());
-    categoryLabel->setStyleSheet("color: #aaa; font-size: 14px; background: transparent; min-width:110px;");
+    categoryLabel->setStyleSheet(R"(
+        color: #8b949e;
+        font-size: 12px;
+        background: #21262d;
+        border: 1px solid #30363d;
+        border-radius: 12px;
+        padding: 2px 8px;
+        min-width: 80px;
+        font-weight: 500;
+    )");
+    categoryLabel->setAlignment(Qt::AlignCenter);
     cardLayout->addWidget(categoryLabel, 0, Qt::AlignVCenter);
 
-    QLabel* idLabel = new QLabel(QString("ID: %1").arg(product.getId()));
-    idLabel->setStyleSheet("color: #cccccc; font-size: 13px; background: transparent; min-width:70px;");
+    QLabel* idLabel = new QLabel(QString("#%1").arg(product.getId()));
+    idLabel->setStyleSheet(R"(
+        color: #8b949e;
+        font-size: 12px;
+        background: transparent;
+        min-width: 60px;
+        font-weight: 400;
+    )");
     cardLayout->addWidget(idLabel, 0, Qt::AlignVCenter);
 
     QLabel* priceLabel = new QLabel(product.getPriceFormatted());
-    priceLabel->setStyleSheet("color: #ffffff; font-size: 16px; font-weight: bold; background: transparent; min-width:95px;");
+    priceLabel->setStyleSheet(R"(
+        color: #c9d1d9;
+        font-size: 14px;
+        font-weight: 600;
+        background: transparent;
+        min-width: 85px;
+    )");
     cardLayout->addWidget(priceLabel, 0, Qt::AlignVCenter);
 
-    QLabel* qtyLabel = new QLabel(product.getQuantityText());
-    qtyLabel->setStyleSheet("color: #fff; font-size: 14px; background: transparent; min-width:80px;");
+    QLabel* qtyLabel = new QLabel(QString("Qty: %1").arg(product.getQuantity()));
+    qtyLabel->setStyleSheet(R"(
+        color: #8b949e;
+        font-size: 12px;
+        background: transparent;
+        min-width: 70px;
+        font-weight: 400;
+    )");
     cardLayout->addWidget(qtyLabel, 0, Qt::AlignVCenter);
 
     QString stockColor;
-    if (product.isInStock() && product.getQuantity() <= 5)
-        stockColor = "#cccccc";
-    else if (!product.isInStock())
-        stockColor = "#888888";
-    else
-        stockColor = "#ffffff";
-    QLabel* stockStatus = new QLabel(product.isInStock() ? (product.getQuantity() <= 5 ? "! Low stock" : "+ In stock") : "- Out of stock");
-    stockStatus->setStyleSheet(QString("color: %1; font-size: 13px; background: transparent; min-width:108px;").arg(stockColor));
+    QString stockBgColor;
+    QString stockText;
+    if (product.isInStock() && product.getQuantity() <= 5) {
+        stockColor = "#d29922";
+        stockBgColor = "#341a00";
+        stockText = "Low stock";
+    } else if (!product.isInStock()) {
+        stockColor = "#f85149";
+        stockBgColor = "#490202";
+        stockText = "Out of stock";
+    } else {
+        stockColor = "#3fb950";
+        stockBgColor = "#0f2414";
+        stockText = "In stock";
+    }
+    
+    QLabel* stockStatus = new QLabel(stockText);
+    stockStatus->setStyleSheet(QString(R"(
+        color: %1;
+        font-size: 12px;
+        background: %2;
+        border-radius: 12px;
+        padding: 2px 8px;
+        min-width: 80px;
+        font-weight: 500;
+    )").arg(stockColor, stockBgColor));
+    stockStatus->setAlignment(Qt::AlignCenter);
     cardLayout->addWidget(stockStatus, 0, Qt::AlignVCenter);
 
     cardLayout->addStretch(1);
@@ -537,42 +1556,207 @@ void MainWindow::createProductCard(const Product& product)
 
 bool MainWindow::eventFilter(QObject* obj, QEvent* event)
 {
-    // Keep popup width exactly equal to combo button width and handle select-all hotkey
+    // Title bar drag & double click
+    if (obj == titleBar_) {
+        if (event->type() == QEvent::MouseButtonPress) {
+            auto* me = static_cast<QMouseEvent*>(event);
+            if (me->button() == Qt::LeftButton) {
+                draggingWindow_ = true;
+                dragOffset_ = me->globalPosition().toPoint() - frameGeometry().topLeft();
+                return true;
+            }
+        } else if (event->type() == QEvent::MouseMove && draggingWindow_) {
+            auto* me = static_cast<QMouseEvent*>(event);
+            if (me->buttons() & Qt::LeftButton) {
+                move(me->globalPosition().toPoint() - dragOffset_);
+                return true;
+            }
+        } else if (event->type() == QEvent::MouseButtonRelease) {
+            draggingWindow_ = false;
+        } else if (event->type() == QEvent::MouseButtonDblClick) {
+            if (isMaximized()) {
+                showNormal();
+                if (btnWinMax_) btnWinMax_->setText("□");
+                updateWindowStyle(false);
+            } else {
+                showMaximized();
+                if (btnWinMax_) btnWinMax_->setText("❐");
+                updateWindowStyle(true);
+            }
+            return true;
+        }
+    }
+
+    // Keep popup width equal to combo width
     if ((obj == filterCategoryBox_ || obj == filterStockBox_) &&
         (event->type() == QEvent::Resize || event->type() == QEvent::Show || event->type() == QEvent::ShowToParent)) {
-        QComboBox* combo = qobject_cast<QComboBox*>(obj);
-        if (combo && combo->view()) {
+        if (auto* combo = qobject_cast<QComboBox*>(obj); combo && combo->view()) {
             combo->view()->setFixedWidth(combo->width());
         }
     }
+
+    // Ctrl+A select all
     if (event->type() == QEvent::KeyPress) {
-        QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+        auto* keyEvent = static_cast<QKeyEvent*>(event);
 #ifdef Q_OS_MAC
         bool isCommandA = keyEvent->key() == Qt::Key_A && (keyEvent->modifiers() & Qt::MetaModifier);
 #else
         bool isCommandA = keyEvent->key() == Qt::Key_A && (keyEvent->modifiers() & Qt::ControlModifier);
 #endif
         if (isCommandA) {
-            // Select all visible (filtered) products
             selectedProductIds_.clear();
-            for (const Product &p : filteredProducts_) {
-                selectedProductIds_.insert(p.getId());
-            }
-            updateDeleteSelectedButtonState(); // Make sure delete is enabled
-            displayProducts(); // update UI for checked checkboxes
-            if (btnDeleteSelected_) btnDeleteSelected_->setChecked(true); /* For checkable, otherwise just enabled is enough */
+            for (const Product &p : filteredProducts_) selectedProductIds_.insert(p.getId());
+            updateDeleteSelectedButtonState();
+            displayProducts();
             return true;
         }
     }
+
+    // Product card double-click edit
     if (event->type() == QEvent::MouseButtonDblClick) {
-        QWidget* card = qobject_cast<QWidget*>(obj);
-        if (card && card->property("editId").isValid()) {
-            QString editId = card->property("editId").toString();
-            onEditProductRequested(editId);
+        if (auto* card = qobject_cast<QWidget*>(obj); card && card->property("editId").isValid()) {
+            onEditProductRequested(card->property("editId").toString());
             return true;
         }
     }
+
     return QMainWindow::eventFilter(obj, event);
+}
+
+void MainWindow::resizeEvent(QResizeEvent* event)
+{
+    QMainWindow::resizeEvent(event);
+    // Update resize border to match window size
+    if (resizeBorder_ && windowCard_) {
+        resizeBorder_->setGeometry(windowCard_->rect());
+    }
+}
+
+void MainWindow::mousePressEvent(QMouseEvent* event)
+{
+    if (event->button() == Qt::LeftButton) {
+        resizeEdge_ = getResizeEdge(event->pos());
+        if (resizeEdge_ != Qt::Edges()) {
+            resizing_ = true;
+            resizeOffset_ = event->globalPosition().toPoint();
+            event->accept();
+            return;
+        }
+    }
+    QMainWindow::mousePressEvent(event);
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent* event)
+{
+    if (resizing_ && resizeEdge_ != Qt::Edges()) {
+        QPoint delta = event->globalPosition().toPoint() - resizeOffset_;
+        resizeOffset_ = event->globalPosition().toPoint();
+        
+        QRect geo = geometry();
+        
+        if (resizeEdge_ & Qt::LeftEdge) {
+            geo.setLeft(geo.left() + delta.x());
+        }
+        if (resizeEdge_ & Qt::RightEdge) {
+            geo.setRight(geo.right() + delta.x());
+        }
+        if (resizeEdge_ & Qt::TopEdge) {
+            geo.setTop(geo.top() + delta.y());
+        }
+        if (resizeEdge_ & Qt::BottomEdge) {
+            geo.setBottom(geo.bottom() + delta.y());
+        }
+        
+        // Apply minimum size constraints
+        if (geo.width() < minimumWidth()) {
+            if (resizeEdge_ & Qt::LeftEdge) {
+                geo.setLeft(geo.right() - minimumWidth());
+            } else {
+                geo.setRight(geo.left() + minimumWidth());
+            }
+        }
+        if (geo.height() < minimumHeight()) {
+            if (resizeEdge_ & Qt::TopEdge) {
+                geo.setTop(geo.bottom() - minimumHeight());
+            } else {
+                geo.setBottom(geo.top() + minimumHeight());
+            }
+        }
+        
+        setGeometry(geo);
+        event->accept();
+        return;
+    }
+    
+    // Update cursor shape when hovering over edges
+    if (!resizing_) {
+        Qt::Edges edges = getResizeEdge(event->pos());
+        updateCursorShape(edges);
+    }
+    
+    QMainWindow::mouseMoveEvent(event);
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent* event)
+{
+    if (event->button() == Qt::LeftButton && resizing_) {
+        resizing_ = false;
+        resizeEdge_ = Qt::Edges();
+        setCursor(Qt::ArrowCursor);
+        event->accept();
+        return;
+    }
+    QMainWindow::mouseReleaseEvent(event);
+}
+
+Qt::Edges MainWindow::getResizeEdge(const QPoint& pos)
+{
+    const int edgeMargin = 10; // increased for better usability
+    Qt::Edges edges;
+    
+    if (pos.x() <= edgeMargin) edges |= Qt::LeftEdge;
+    if (pos.x() >= width() - edgeMargin) edges |= Qt::RightEdge;
+    if (pos.y() <= edgeMargin) edges |= Qt::TopEdge;
+    if (pos.y() >= height() - edgeMargin) edges |= Qt::BottomEdge;
+    
+    return edges;
+}
+
+void MainWindow::updateCursorShape(Qt::Edges edges)
+{
+    // Update resize border visual feedback
+    if (resizeBorder_) {
+        if (edges != Qt::Edges()) {
+            resizeBorder_->setStyleSheet(R"(
+                #ResizeBorder {
+                    background: transparent;
+                    border: 2px solid rgba(88, 166, 255, 0.5);
+                    border-radius: 12px;
+                }
+            )");
+        } else {
+            resizeBorder_->setStyleSheet(R"(
+                #ResizeBorder {
+                    background: transparent;
+                    border: 2px solid transparent;
+                    border-radius: 12px;
+                }
+            )");
+        }
+    }
+    
+    // Update cursor
+    if (edges == (Qt::LeftEdge | Qt::TopEdge) || edges == (Qt::RightEdge | Qt::BottomEdge)) {
+        setCursor(Qt::SizeFDiagCursor);
+    } else if (edges == (Qt::RightEdge | Qt::TopEdge) || edges == (Qt::LeftEdge | Qt::BottomEdge)) {
+        setCursor(Qt::SizeBDiagCursor);
+    } else if (edges & (Qt::LeftEdge | Qt::RightEdge)) {
+        setCursor(Qt::SizeHorCursor);
+    } else if (edges & (Qt::TopEdge | Qt::BottomEdge)) {
+        setCursor(Qt::SizeVerCursor);
+    } else {
+        setCursor(Qt::ArrowCursor);
+    }
 }
 
 void MainWindow::onEditProductRequested(const QString& productId)
@@ -582,17 +1766,17 @@ void MainWindow::onEditProductRequested(const QString& productId)
         if (p.getId() == productId) { toEdit = &p; break; }
     if (!toEdit) return;
 
-    QStringList categorias;
+    QStringList categories;
     for (const Product& prod : allProducts_)
-        categorias << prod.getCategory();
-    categorias.removeDuplicates();
+        categories << prod.getCategory();
+    categories.removeDuplicates();
 
-    AddProductDialog dialog(*toEdit, categorias, this);
+    AddProductDialog dialog(*toEdit, categories, this);
     if (dialog.exec() == QDialog::Accepted) {
         Product updated = dialog.getProduct();
         *toEdit = updated;
         showToast("Product updated!");
-        logOperation("Editado", updated);
+        logOperation("Edited", updated);
         filterAndSortProducts();
         displayProducts();
     }
@@ -632,7 +1816,7 @@ void MainWindow::onDeleteSelectedProductsClicked()
     for (const QString& id : selectedProductIds_) {
         for (int i = 0; i < allProducts_.size(); ++i) {
             if (allProducts_[i].getId() == id) {
-                logOperation("Deletado", allProducts_[i]);
+                logOperation("Deleted", allProducts_[i]);
                 allProducts_.removeAt(i);
                 break;
             }
@@ -652,12 +1836,12 @@ void MainWindow::onDeleteSelectedProductsClicked()
 
 void MainWindow::onAddProductClicked()
 {
-    QStringList categorias;
+    QStringList categories;
     for (const Product& p : allProducts_)
-        categorias << p.getCategory();
-    categorias.removeDuplicates();
+        categories << p.getCategory();
+    categories.removeDuplicates();
 
-    AddProductDialog dialog(categorias, this);
+    AddProductDialog dialog(categories, this);
 
     // Auto-generate a unique numeric ID (user can still edit it)
     QSet<QString> existingIds;
@@ -691,7 +1875,7 @@ void MainWindow::onAddProductClicked()
             }
         }
         allProducts_.append(newProduct);
-        logOperation("Adicionado", newProduct);
+        logOperation("Added", newProduct);
         filterAndSortProducts();
         displayProducts();
         showToast(QString("Product '%1' added!").arg(newProduct.getName()), QColor("#666666"));
@@ -706,8 +1890,13 @@ void MainWindow::onSearchTextChanged(const QString&)
 
 void MainWindow::onFilterChanged()
 {
-    filterAndSortProducts();
-    displayProducts();
+    // Rebuild products list immediately without animations
+    if (productsBg_) {
+        productsBg_->setUpdatesEnabled(false);
+        filterAndSortProducts();
+        displayProducts();
+        productsBg_->setUpdatesEnabled(true);
+    }
 }
 
 void MainWindow::showToast(const QString& message, QColor color)
