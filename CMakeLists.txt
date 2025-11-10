@@ -9,13 +9,14 @@ set(CMAKE_AUTORCC ON)
 
 # Find Qt6
 set(CMAKE_PREFIX_PATH "/usr/local/lib/cmake/Qt6" ${CMAKE_PREFIX_PATH})
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui Charts)
 
 # Source files
 set(SOURCES
     scr/main.cpp
     scr/MainWindow.cpp
     scr/AddProductDialog.cpp
+    scr/DashboardWidget.cpp
     scr/Product.cpp
     scr/ProductManager.cpp
     scr/ToastNotification.cpp
@@ -27,6 +28,7 @@ set(SOURCES
 set(HEADERS
     include/MainWindow.h
     include/AddProductDialog.h
+    include/DashboardWidget.h
     include/Product.h
     include/ProductManager.h
     include/ToastNotification.h
@@ -45,7 +47,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE include scr)
 
 # Link libraries
 target_link_libraries(${PROJECT_NAME}
-    PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets
+    PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Charts
 )
 # Install rules
 install(TARGETS ${PROJECT_NAME}

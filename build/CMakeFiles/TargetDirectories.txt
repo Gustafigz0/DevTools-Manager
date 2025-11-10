@@ -1,0 +1,11 @@
+/Users/brituz/Documents/GitHub/DevTools-Manager/build/CMakeFiles/DevToolsManager.dir
+/Users/brituz/Documents/GitHub/DevTools-Manager/build/CMakeFiles/package.dir
+/Users/brituz/Documents/GitHub/DevTools-Manager/build/CMakeFiles/package_source.dir
+/Users/brituz/Documents/GitHub/DevTools-Manager/build/CMakeFiles/edit_cache.dir
+/Users/brituz/Documents/GitHub/DevTools-Manager/build/CMakeFiles/rebuild_cache.dir
+/Users/brituz/Documents/GitHub/DevTools-Manager/build/CMakeFiles/list_install_components.dir
+/Users/brituz/Documents/GitHub/DevTools-Manager/build/CMakeFiles/install.dir
+/Users/brituz/Documents/GitHub/DevTools-Manager/build/CMakeFiles/install/local.dir
+/Users/brituz/Documents/GitHub/DevTools-Manager/build/CMakeFiles/install/strip.dir
+/Users/brituz/Documents/GitHub/DevTools-Manager/build/CMakeFiles/DevToolsManager_autogen_timestamp_deps.dir
+/Users/brituz/Documents/GitHub/DevTools-Manager/build/CMakeFiles/DevToolsManager_autogen.dir

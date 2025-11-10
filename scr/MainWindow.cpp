@@ -15,7 +15,9 @@
 #include <QPixmap>
 #include <QTimer>
 #include <QDebug>
+#include <QStackedWidget>
 #include "AddProductDialog.h"
+#include "DashboardWidget.h"
 #include "ToastNotification.h"
 #include <QGuiApplication>
 #include <QApplication>
@@ -304,6 +306,68 @@ void MainWindow::setupUi()
     sidebarLayout_->addWidget(navLabel);
     sidebarLayout_->addSpacing(4);
 
+    // Dashboard button
+    qDebug() << "setupUi: btnDashboard";
+    btnDashboard_ = new QPushButton("Dashboard");
+    {
+        QPixmap dashPm(":/symbols/icons8-dashboard-48.png");
+        if (dashPm.isNull()) {
+            // Create a simple dashboard icon if image not found
+            QPixmap dashPm(18, 18);
+            dashPm.fill(Qt::transparent);
+            QPainter p(&dashPm);
+            p.setRenderHint(QPainter::Antialiasing, true);
+            p.setPen(Qt::NoPen);
+            p.setBrush(QColor("#ffffff"));
+            p.drawRect(1, 1, 7, 7);
+            p.drawRect(10, 1, 7, 7);
+            p.drawRect(1, 10, 7, 7);
+            p.drawRect(10, 10, 7, 7);
+            p.end();
+            btnDashboard_->setIcon(QIcon(dashPm));
+        } else {
+            QImage img = dashPm.toImage().convertToFormat(QImage::Format_ARGB32);
+            for (int y = 0; y < img.height(); ++y) {
+                for (int x = 0; x < img.width(); ++x) {
+                    QColor c = img.pixelColor(x, y);
+                    if (c.alpha() > 0) {
+                        c.setRed(255); c.setGreen(255); c.setBlue(255);
+                        img.setPixelColor(x, y, c);
+                    }
+                }
+            }
+            btnDashboard_->setIcon(QIcon(QPixmap::fromImage(img)));
+        }
+    }
+    btnDashboard_->setIconSize(QSize(18,18));
+    btnDashboard_->setCheckable(true);
+    btnDashboard_->setChecked(true);  // Dashboard is default view
+    btnDashboard_->setStyleSheet(R"(
+        QPushButton {
+            background: transparent;
+            color: #8b949e;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: left;
+        }
+        QPushButton:checked {
+            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                stop:0 #1f6feb, stop:1 #0d1117);
+            color: #ffffff;
+            font-weight: 700;
+            padding-left: 10px;
+            border-radius: 8px;
+        }
+        QPushButton:hover:!checked {
+            background: #21262d;
+            color: #c9d1d9;
+        }
+    )");
+    sidebarLayout_->addWidget(btnDashboard_);
+
     qDebug() << "setupUi: btnProducts";
     btnProducts_ = new QPushButton("Products");
     {
@@ -324,7 +388,7 @@ void MainWindow::setupUi()
     }
     btnProducts_->setIconSize(QSize(18,18));
     btnProducts_->setCheckable(true);
-    btnProducts_->setChecked(true);
+    btnProducts_->setChecked(false);  // Dashboard is default, not products
     btnProducts_->setStyleSheet(R"(
         QPushButton {
             background: transparent;
@@ -404,6 +468,7 @@ void MainWindow::setupUi()
 
     connect(btnProducts_, &QPushButton::clicked, this, &MainWindow::onBtnProducts);
     connect(btnShowFavorites_, &QPushButton::clicked, this, &MainWindow::onBtnFavorites);
+    connect(btnDashboard_, &QPushButton::clicked, this, &MainWindow::onDashboardClicked);
 
     sidebarLayout_->addSpacing(8);
 
@@ -629,6 +694,16 @@ void MainWindow::setupUi()
     userCardLayout->addWidget(userIconLabel);
     userCardLayout->addWidget(sidebarUserLabel);
     sidebarLayout_->addWidget(sidebarUserCard);
+
+    // Create stacked widget for switching between Dashboard and Products views
+    qDebug() << "setupUi: contentStack";
+    contentStack_ = new QStackedWidget;
+    contentStack_->setStyleSheet("background: #0d1117;");
+
+    // Create Dashboard widget
+    qDebug() << "setupUi: dashboardWidget";
+    dashboardWidget_ = new DashboardWidget(contentStack_);
+    contentStack_->addWidget(dashboardWidget_);  // Index 0
 
     qDebug() << "setupUi: productsBg";
     productsBg_ = new QWidget;
@@ -1008,8 +1083,11 @@ void MainWindow::setupUi()
     toastNotifier_ = new ToastNotification(productsBg_);
     toastNotifier_->hide();
 
+    // Add products widget to stack
+    contentStack_->addWidget(productsBg_);  // Index 1
+
     root->addWidget(sidebarBox_, 0);
-    root->addWidget(productsBg_, 1);
+    root->addWidget(contentStack_, 1);  // Use stack instead of productsBg_
     cardVBox->addWidget(titleBar_);
     cardVBox->addWidget(bodyWrapper, 1);
     globalVBox_->addWidget(windowCard_, 1);
@@ -1779,6 +1857,10 @@ void MainWindow::onEditProductRequested(const QString& productId)
         logOperation("Edited", updated);
         filterAndSortProducts();
         displayProducts();
+        
+        // Update dashboard
+        QVector<Product> productsVector = QVector<Product>::fromList(allProducts_);
+        dashboardWidget_->updateData(productsVector);
     }
 }
 
@@ -1832,6 +1914,10 @@ void MainWindow::onDeleteSelectedProductsClicked()
     updateDeleteSelectedButtonState();
     filterAndSortProducts();
     displayProducts();
+    
+    // Update dashboard
+    QVector<Product> productsVector = QVector<Product>::fromList(allProducts_);
+    dashboardWidget_->updateData(productsVector);
 }
 
 void MainWindow::onAddProductClicked()
@@ -1879,6 +1965,10 @@ void MainWindow::onAddProductClicked()
         filterAndSortProducts();
         displayProducts();
         showToast(QString("Product '%1' added!").arg(newProduct.getName()), QColor("#666666"));
+        
+        // Update dashboard
+        QVector<Product> productsVector = QVector<Product>::fromList(allProducts_);
+        dashboardWidget_->updateData(productsVector);
     }
 }
 
@@ -1977,17 +2067,32 @@ void MainWindow::atualizarListaProdutosUI()
 }
 
 void MainWindow::onBtnProducts() {
+    btnDashboard_->setChecked(false);
     btnProducts_->setChecked(true);
     btnShowFavorites_->setChecked(false);
+    contentStack_->setCurrentIndex(1);  // Switch to products view
     filterAndSortProducts();
     displayProducts();
 }
 
 void MainWindow::onBtnFavorites() {
+    btnDashboard_->setChecked(false);
     btnProducts_->setChecked(false);
     btnShowFavorites_->setChecked(true);
+    contentStack_->setCurrentIndex(1);  // Stay on products view but filter favorites
     filterAndSortProducts();
     displayProducts();
+}
+
+void MainWindow::onDashboardClicked() {
+    btnDashboard_->setChecked(true);
+    btnProducts_->setChecked(false);
+    btnShowFavorites_->setChecked(false);
+    contentStack_->setCurrentIndex(0);  // Switch to dashboard view
+    
+    // Update dashboard with current product data
+    QVector<Product> productsVector = QVector<Product>::fromList(allProducts_);
+    dashboardWidget_->updateData(productsVector);
 }
 
 void MainWindow::onLogoutClicked() {

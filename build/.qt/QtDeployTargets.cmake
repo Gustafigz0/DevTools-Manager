@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_DevToolsManager_FILE /Users/brituz/Documents/GitHub/DevTools-Manager/build/DevToolsManager)
+set(__QT_DEPLOY_TARGET_DevToolsManager_TYPE EXECUTABLE)

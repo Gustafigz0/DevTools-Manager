@@ -8,6 +8,7 @@
 #include <QComboBox>
 #include <QEvent>
 #include <QColor>
+#include <QStackedWidget>
 class QPushButton;
 
 // Forward declarations
@@ -18,6 +19,7 @@ class QWidget;
 class QLabel;
 class QScrollArea;
 class ToastNotification;
+class DashboardWidget;
 
 class MainWindow : public QMainWindow
 {
@@ -39,6 +41,7 @@ private slots:
     void onExportProductsClicked();
     void onImportProductsClicked();
     void onLogoutClicked();
+    void onDashboardClicked();
 
 private:
     void setupUi();
@@ -80,12 +83,15 @@ private:
 
     QWidget* sidebarBox_;
     QVBoxLayout* sidebarLayout_;
+    QPushButton* btnDashboard_;
     QPushButton* btnProducts_;
     QPushButton* btnShowFavorites_;
     QPushButton* btnDeleteSelected_;
     QPushButton* btnExport_;
     QPushButton* btnImport_;
     QPushButton* btnLogout_ = nullptr;
+    QStackedWidget* contentStack_;
+    DashboardWidget* dashboardWidget_;
     QWidget* productsBg_;
     QVBoxLayout* productsLayout_;
     QWidget* productsContainer_;

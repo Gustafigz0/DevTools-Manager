@@ -9,6 +9,16 @@
             "password_hash": "dd22ba07f6cebab1dbc48e0cf36d6d44bcc6aaee275ce202184f4ffacce8c1a5",
             "salt": "32EGv52DVq8eNHHCmkB4WrrwQawFVoMT",
             "username": "1234"
+        },
+        {
+            "password_hash": "b2414ca119b23ade76a48e592090f859857c90318c9460cc0f85f385d59f4ea6",
+            "salt": "ITkaUzfV52rZkqPj5rNJu3x5ka4TDI2C",
+            "username": "beni"
+        },
+        {
+            "password_hash": "358a0e2aad254541500ddd0f8063f7434108f398889fbedff34b9bbc5a61a369",
+            "salt": "aVJmiy9rwfRnVetrkXqtzr1WVJMMsoNy",
+            "username": "Beni"
         }
     ]
 }
