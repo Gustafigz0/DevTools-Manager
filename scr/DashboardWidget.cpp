@@ -155,7 +155,7 @@ void DashboardWidget::createChartSection() {
     chart_->setMargins(QMargins(0, 0, 0, 0));
     chart_->setPlotAreaBackgroundVisible(false);
     chart_->legend()->setAlignment(Qt::AlignRight);
-    chart_->legend()->setFont(QFont("Segoe UI", 10));
+    chart_->legend()->setFont(QFont("Segoe UI", 14));
     chart_->legend()->setLabelColor(QColor("#8b949e"));
     chart_->legend()->setBackgroundVisible(false);
     chart_->legend()->setBorderColor(Qt::transparent);
