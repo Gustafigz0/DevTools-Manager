@@ -19,22 +19,15 @@ DevTools Manager is a lightweight **offline-first** app built to help IT teams m
   - 📝 Notes
   - 🖼 Item image (secure offline saving)
 - Low-stock visual alerts
+  <img width="1470" height="956" alt="Screenshot 2025-11-10 at 08 55 16" src="https://github.com/user-attachments/assets/6fa251cb-b0bd-49f1-9499-c3ff59cd7d4f" />
 
-### 🧾 Software License Manager
-- Add / Edit / Delete licenses
-- Fields:
-  - Software name  
-  - License key  
-  - Assigned to  
-  - Expiration date  
-  - Notes  
-- Local secure storage
 
 ### 🧠 Smart UI/UX
-- macOS Vision glass-blur style navigation
 - ✅ Sidebar navigation (Inventory / Licenses)
 - ✅ Search bar (real-time filtering)
 - ✅ Smooth form views
+  <img width="1470" height="956" alt="Screenshot 2025-11-10 at 08 55 16" src="https://github.com/user-attachments/assets/9e61960a-8b75-4b6f-b949-2624ddefbfc3" />
+
 
 ---
 
