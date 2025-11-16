@@ -192,9 +192,75 @@ void MainWindow::setupUi()
     root->addWidget(sidebarBox_, 0);
     root->addWidget(productsBg_, 1);
     setCentralWidget(central);
+<<<<<<< Updated upstream
     setWindowTitle("DevTools Manager");
     resize(1200, 770);
+=======
+    setWindowTitle("DevTools Manager"); // logical title
+    
+    // Set proper initial size
+    resize(1280, 800);
+    setMinimumSize(960, 600);
+    
+    // Apply GitHub-like window styling + clear focus outlines for keyboard navigation
+    setStyleSheet(styleSheet() + R"(
+        QMainWindow { background: transparent; }
+        QMessageBox { background: #161b22; color: #c9d1d9; }
+        QMessageBox QPushButton {
+            background: #21262d; color: #c9d1d9; border: 1px solid #30363d; border-radius: 6px; padding: 5px 16px;
+        }
+        QMessageBox QPushButton:hover { background: #30363d; }
+
+        /* Keyboard focus outlines */
+        QPushButton:focus {
+            border: 1px solid #58a6ff;
+        }
+        QLineEdit:focus {
+            border: 1px solid #58a6ff;
+            outline: none;
+        }
+        QComboBox:focus {
+            border: 1px solid #58a6ff;
+        }
+        QAbstractItemView:focus {
+            border: 1px solid #58a6ff;
+        }
+        QChartView:focus {
+            border: 1px solid #58a6ff;
+        }
+    )");
+    
+    // Add subtle drop shadow effect
+    if (windowCard_) {
+        QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
+        shadow->setBlurRadius(30);
+        shadow->setXOffset(0);
+        shadow->setYOffset(4);
+        shadow->setColor(QColor(0, 0, 0, 120));
+        windowCard_->setGraphicsEffect(shadow);
+    }
+    
+>>>>>>> Stashed changes
     qDebug() << "setupUi: FIM";
+
+    // Keyboard navigation: tab order for primary controls
+    setTabOrder(btnDashboard_, btnProducts_);
+    setTabOrder(btnProducts_, btnShowFavorites_);
+    setTabOrder(btnShowFavorites_, btnDeleteSelected_);
+    setTabOrder(btnDeleteSelected_, btnExport_);
+    setTabOrder(btnExport_, btnImport_);
+    setTabOrder(btnImport_, searchBar_);
+    setTabOrder(searchBar_, filterCategoryBox_);
+    setTabOrder(filterCategoryBox_, filterStockBox_);
+
+    // Keyboard shortcuts for quick navigation
+    auto* toDashboard = new QShortcut(QKeySequence("Alt+1"), this);
+    connect(toDashboard, &QShortcut::activated, this, [this]{ if (btnDashboard_) btnDashboard_->click(); });
+    auto* toProducts = new QShortcut(QKeySequence("Alt+2"), this);
+    connect(toProducts, &QShortcut::activated, this, [this]{ if (btnProducts_) btnProducts_->click(); });
+    // Focus search bar quickly (like many apps)
+    auto* focusSearch = new QShortcut(QKeySequence("/"), this);
+    connect(focusSearch, &QShortcut::activated, this, [this]{ if (searchBar_) { searchBar_->setFocus(); searchBar_->selectAll(); } });
 }
 
 void MainWindow::loadSampleProducts()
